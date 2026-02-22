@@ -15,11 +15,11 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
 }
-
+/* --font-nunito-sans */
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-nunito-sans), sans-serif;
+  font-family: var(--font-heading), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -30,7 +30,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-sora), sans-serif;
+  /* font-family: var(--font-sora), sans-serif; */
 }
 
 * {

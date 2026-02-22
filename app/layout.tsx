@@ -5,20 +5,21 @@ import TanStackProvider from "../components/TanStackProvider/TanStackProvider";
 
 import {} from "next/font/google";
 
-const unbounded = Unbounded({
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "600", "800"],
-  variable: "--font-heading",
+// const unbounded = Unbounded({
+//   subsets: ["latin", "cyrillic"],
+//   weight: ["400", "600", "800"],
+//   variable: "--font-heading",
+//   display: "swap",
+// });
+// ${unbounded.variable}
+
+const nunitoSans = Nunito_Sans({
+  subsets: ["cyrillic"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-nunito-sans",
   display: "swap",
 });
 
-// const nunitoSans = Nunito_Sans({
-//   subsets: ["cyrillic"],
-//   weight: ["400", "500", "600", "700", "800", "900"],
-//   variable: "--font-nunito-sans",
-//   display: "swap",
-// });
-// ${nunitoSans.variable}
 const sora = Sora({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
@@ -39,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uk">
-      <body className={`${unbounded.variable} ${sora.variable}`}>
+      <body className={`${nunitoSans.variable} ${sora.variable}`}>
         <TanStackProvider>{children}</TanStackProvider>
       </body>
     </html>

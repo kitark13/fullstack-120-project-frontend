@@ -1,0 +1,25 @@
+.joinSection {
+  /* Стилі для Join секції */
+}
+
+.joinWrapper {
+  padding: 20px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("#") center/cover no-repeat;
+  border-radius: 24px;
+
+  overflow: hidden;
+}
+.joinTitle {
+}
+.joinText {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.joinButton {
+}
+
+.

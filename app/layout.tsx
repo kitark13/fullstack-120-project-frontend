@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Nunito_Sans, Sora } from "next/font/google";
 import "./globals.css";
-import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+import TanStackProvider from "../components/TanStackProvider/TanStackProvider";
 
 const nunito = Nunito_Sans({
   subsets: ["latin", "cyrillic"],

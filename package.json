@@ -9,9 +9,18 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.90.21",
+    "@tanstack/react-query-devtools": "^5.91.3",
+    "axios": "^1.13.5",
+    "cookie": "^1.1.1",
+    "formik": "^2.4.9",
     "next": "16.1.6",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-paginate": "^8.3.0",
+    "use-debounce": "^10.1.0",
+    "yup": "^1.7.1",
+    "zustand": "^5.0.11"
   },
   "devDependencies": {
     "@types/node": "^20",

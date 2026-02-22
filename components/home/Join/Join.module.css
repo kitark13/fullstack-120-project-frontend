@@ -1,18 +1,28 @@
 .joinSection {
-  /* Стилі для Join секції */
+  padding: 32px 0;
+  overflow: hidden;
+  scroll-margin-top: 104px;
 }
 
 .joinWrapper {
   padding: 20px;
   background:
     linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url("#") center/cover no-repeat;
+    url("/images/join/join-mobile-1x.jpg") center/cover no-repeat;
   border-radius: 24px;
 
   overflow: hidden;
 }
+
 .joinTitle {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--color-text-inverse-bg);
+  margin-bottom: 16px;
 }
+
 .joinText {
   margin-top: 20px;
   font-size: 18px;
@@ -20,6 +30,133 @@
 }
 
 .joinButton {
+  font-family: var(--font-nunito-sans), sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text-inverse);
+  text-align: center;
+
+  border: 1px solid var(--color-primary);
+  border-radius: 8px;
+  padding: 6px 12px;
+  width: 100%;
+  max-width: 295px;
+  height: 48px;
+  transition: all 0.3s ease;
+  background-color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
-.
+@media only screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (max-width: 767px) and (min-resolution: 192dpi) {
+  .joinWrapper {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+      url("/images/join/join-mobile-2x.jpg") center/cover no-repeat;
+  }
+}
+
+.joinButton:hover:not([aria-disabled="true"]),
+.joinButton:focus:not([aria-disabled="true"]) {
+  background-color: var(--color-primary-hover-first);
+  color: var(--color-text-primary);
+  transform: translateY(-1px);
+}
+
+.joinButton:active:not([aria-disabled="true"]) {
+  background-color: var(--color-primary-active-first);
+  color: var(--color-text-primary);
+  transform: translateY(0);
+}
+
+.joinButton[aria-disabled="true"],
+.joinButton[aria-disabled="true"]:hover {
+  background-color: var(--color-primary);
+  opacity: 0.3;
+  border-color: transparent;
+  color: var(--color-text-inverse);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .joinWrapper {
+    padding: 32px;
+    border-radius: 24px;
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+      url("/images/join/join-tablet-1x.jpg") center/cover no-repeat;
+  }
+
+  .joinTitle {
+    font-size: 32px;
+    max-width: 500px;
+
+    margin-bottom: 8px;
+  }
+
+  .joinText {
+    font-size: 16px;
+
+    margin-bottom: 16px;
+    max-width: 558px;
+  }
+
+  .joinButton {
+    max-width: 153px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1439px) and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min-width: 768px) and (max-width: 1439px) and (min-resolution: 192dpi) {
+  .joinWrapper {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+      url("/images/join/join-tablet-2x.jpg") center/cover no-repeat;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1440px) {
+  .joinSection {
+    padding: 48px 0;
+  }
+
+  .joinWrapper {
+    padding: 78px 64px;
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+      url("/images/join/join-desktop-1x.jpg") center/cover no-repeat;
+  }
+
+  .joinTitle {
+    font-size: 48px;
+    max-width: 500px;
+
+    margin-bottom: 24px;
+  }
+
+  .joinText {
+    font-size: 20px;
+    margin-bottom: 32px;
+  }
+
+  .joinButton {
+    font-size: 18px;
+    max-width: 169px;
+  }
+}
+
+@media only screen and (min-width: 1440px) and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min-width: 1440px) and (min-resolution: 192dpi) {
+  .joinWrapper {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+      url("/images/join/join-desktop-2x.jpg") center/cover no-repeat;
+  }
+}

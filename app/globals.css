@@ -83,9 +83,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 /*  --font-heading  */
-section {
+/* section {
   padding: 64px 0;
-}
+} */
 
 /* Styles for Mobile devices */
 
@@ -109,9 +109,9 @@ section {
 /* Styles for Desktop devices */
 
 @media only screen and (min-width: 1440px) {
-  section {
+  /* section {
     padding: 72px 0;
-  }
+  } */
 
   .container {
     max-width: 1440px;

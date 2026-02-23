@@ -1,0 +1,19 @@
+.logoLink {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.logoIcon {
+  justify-content: center;
+  align-items: center;
+}
+.logoText {
+  margin-left: 1px;
+  font-size: 17px;
+  line-height: 110%;
+  letter-spacing: -0.01em;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+}

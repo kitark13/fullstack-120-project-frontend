@@ -1,0 +1,77 @@
+.authContainer {
+  display: flex;
+}
+.linkAuthRender {
+  display: none;
+}
+
+.logoutBtn {
+  display: none;
+}
+.linkRegister {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  padding: 4px 10px;
+  width: 113px;
+  height: 35px;
+  color: black;
+  background-color: #fff;
+  transition:
+    border 0.3s ease,
+    background-color 0.3s ease,
+    color 0.3s ease;
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .linkLogin,
+  .linkCreate {
+    display: flex;
+  }
+  .authContainer {
+    margin-left: auto;
+  }
+  .linkLogin {
+    display: flex;
+    align-items: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 4px 10px;
+    width: 58px;
+    height: 35px;
+
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+
+    transition:
+      border 0.3s ease,
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  .linkLogin:hover,
+  .linkLogin:focus {
+    color: black;
+    background-color: #e8eeff;
+    border: 1px solid #4169e1;
+  }
+
+  .linkRegister:hover,
+  .linkRegister:focus {
+    color: #fff;
+    background-color: #4169e1;
+    border: #4169e1;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .authContainer {
+    margin-left: 0;
+  }
+  .logoutBtn,
+  .linkAuthRender {
+    display: flex;
+  }
+}

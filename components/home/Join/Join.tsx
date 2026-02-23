@@ -4,11 +4,10 @@ import Link from "next/link";
 
 import css from "./Join.module.css";
 
-import { useAuthStore } from "@/lib/store/authStore";
+import useAuthStore from "@/lib/store/authStore";
 
 export default function Join() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const isLoading = useAuthStore((state) => state.isLoading);
 
   const href = isAuthenticated ? "/auth/profile" : "/auth/register";
   const linkText = isAuthenticated ? "Збережені" : "Зареєструватися";

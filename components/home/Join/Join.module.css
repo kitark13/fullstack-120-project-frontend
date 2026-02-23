@@ -1,17 +1,68 @@
+:root {
+  --color-scheme-1-background: var(--color-white);
+  --color-neutral-darkest: #000;
+  --color-scheme-1-border: var(--opacity-neutral-darkest-15);
+  --color-scheme-1-text: var(--color-neutral-darkest);
+  --color-neutral-lighter: #d8d8d8;
+  --color-white: #fff;
+  --color-neutral-lightest: #f2f2f2;
+  --color-neutral-light: #b2b2b2;
+  --color-neutral: #7f7f7f;
+  --color-neutral-dark: #4c4c4c;
+  --color-neutral-darker: #191919;
+  --opacity-transparent: rgba(255, 255, 255, 0);
+  --color-scheme-1-foreground: var(--color-neutral-lightest);
+  --color-scheme-1-accent: var(--color-royal-blue);
+  --opacity-white-5: rgba(255, 255, 255, 0.05);
+  --opacity-white-10: rgba(255, 255, 255, 0.1);
+  --opacity-white-15: rgba(255, 255, 255, 0.15);
+  --opacity-white-20: rgba(255, 255, 255, 0.2);
+  --opacity-white-30: rgba(255, 255, 255, 0.3);
+  --opacity-white-40: rgba(255, 255, 255, 0.4);
+  --opacity-white-50: rgba(255, 255, 255, 0.5);
+  --opacity-white-60: rgba(255, 255, 255, 0.6);
+  --opacity-neutral-darkest-5: rgba(0, 0, 0, 0.05);
+  --opacity-neutral-darkest-10: rgba(0, 0, 0, 0.1);
+  --opacity-neutral-darkest-15: rgba(0, 0, 0, 0.15);
+  --opacity-neutral-darkest-20: rgba(0, 0, 0, 0.2);
+  --opacity-neutral-darkest-30: rgba(0, 0, 0, 0.3);
+  --opacity-neutral-darkest-40: rgba(0, 0, 0, 0.4);
+  --opacity-neutral-darkest-50: rgba(0, 0, 0, 0.5);
+  --opacity-neutral-darkest-60: rgba(0, 0, 0, 0.6);
+  --color-royal-blue-lightest: #f7f9ff;
+  --color-royal-blue-lighter: #e8eeff;
+  --color-royal-blue-light: #7a96ea;
+  --color-royal-blue: #4169e1;
+  --color-royal-blue-dark: #3454b4;
+  --color-royal-blue-darker: #1a2a5a;
+  --color-royal-blue-darkest: #131f43;
+  --color-scheme-2-text: var(--color-neutral-darkest);
+  --color-scheme-2-background: var(--color-royal-blue-lightest);
+  --color-scheme-2-border: var(--opacity-neutral-darkest-15);
+  --color-scheme-2-accent: var(--color-royal-blue);
+  --color-scheme-2-foreground: var(--color-royal-blue-lighter);
+  --color-red: #b00101;
+}
+
+/* mobile */
 .joinSection {
-  padding: 32px 0;
-  overflow: hidden;
-  scroll-margin-top: 104px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 32px 20px;
 }
 
 .joinWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 0px;
   padding: 20px;
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url("/images/join/join-mobile-1x.jpg") center/cover no-repeat;
+  background: url("/images/join/join-mobile-1x.jpg") center/cover no-repeat;
   border-radius: 24px;
-
-  overflow: hidden;
+  border: 1px solid var(--color-scheme-1-border);
 }
 
 .joinTitle {
@@ -19,65 +70,67 @@
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.01em;
-  color: var(--color-text-inverse-bg);
+  color: var(--color-white);
   margin-bottom: 16px;
 }
 
 .joinText {
-  margin-top: 20px;
-  font-size: 18px;
-  color: #fff;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-white);
+  margin: 0;
 }
 
 .joinButton {
-  font-family: var(--font-nunito-sans), sans-serif;
+  text-decoration: none;
+  font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
-  color: var(--color-text-inverse);
+  color: var(--color-white);
   text-align: center;
-
-  border: 1px solid var(--color-primary);
+  border: 1px solid var(--color-royal-blue);
   border-radius: 8px;
   padding: 6px 12px;
   width: 100%;
   max-width: 295px;
   height: 48px;
-  transition: all 0.3s ease;
-  background-color: var(--color-primary);
-  display: inline-flex;
+
+  background-color: var(--color-royal-blue);
+  display: flex;
   align-items: center;
   justify-content: center;
+
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-@media only screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2),
-  only screen and (max-width: 767px) and (min-resolution: 192dpi) {
+@media (max-width: 767px) and (min-resolution: 2dppx) {
   .joinWrapper {
-    background:
-      linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-      url("/images/join/join-mobile-2x.jpg") center/cover no-repeat;
+    background: url("/images/join/join-mobile-2x.jpg") center/cover no-repeat;
   }
 }
 
-.joinButton:hover:not([aria-disabled="true"]),
-.joinButton:focus:not([aria-disabled="true"]) {
-  background-color: var(--color-primary-hover-first);
-  color: var(--color-text-primary);
+.joinButton:hover,
+.joinButton:focus {
+  background-color: var(--color-royal-blue-lighter);
+  border: 1px solid var(--color-royal-blue);
+  color: var(--color-scheme-2-text);
   transform: translateY(-1px);
 }
 
-.joinButton:active:not([aria-disabled="true"]) {
+.joinButton:active {
   background-color: var(--color-primary-active-first);
   color: var(--color-text-primary);
   transform: translateY(0);
 }
 
-.joinButton[aria-disabled="true"],
-.joinButton[aria-disabled="true"]:hover {
-  background-color: var(--color-primary);
+.joinButton,
+.joinButton:hover {
+  background-color: var(--color-royal-blue-light);
+  border: 1px solid var(--color-royal-blue);
   opacity: 0.3;
-  border-color: transparent;
   color: var(--color-text-inverse);
   cursor: not-allowed;
   transform: none;
@@ -88,14 +141,12 @@
   .joinWrapper {
     padding: 32px;
     border-radius: 24px;
-    background:
-      linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-      url("/images/join/join-tablet-1x.jpg") center/cover no-repeat;
+    background: url("/images/join/join-tablet-1x.jpg") center/cover no-repeat;
   }
 
   .joinTitle {
     font-size: 32px;
-    max-width: 500px;
+    max-width: 558px;
 
     margin-bottom: 8px;
   }
@@ -112,12 +163,9 @@
   }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1439px) and (-webkit-min-device-pixel-ratio: 2),
-  only screen and (min-width: 768px) and (max-width: 1439px) and (min-resolution: 192dpi) {
+@media (min-width: 768px) and (max-width: 1439px) and (min-resolution: 2dppx) {
   .joinWrapper {
-    background:
-      linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-      url("/images/join/join-tablet-2x.jpg") center/cover no-repeat;
+    background: url("/images/join/join-tablet-2x.jpg") center/cover no-repeat;
   }
 }
 
@@ -129,9 +177,7 @@
 
   .joinWrapper {
     padding: 78px 64px;
-    background:
-      linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-      url("/images/join/join-desktop-1x.jpg") center/cover no-repeat;
+    background: url("/images/join/join-desktop-1x.jpg") center/cover no-repeat;
   }
 
   .joinTitle {
@@ -152,11 +198,8 @@
   }
 }
 
-@media only screen and (min-width: 1440px) and (-webkit-min-device-pixel-ratio: 2),
-  only screen and (min-width: 1440px) and (min-resolution: 192dpi) {
+@media (min-width: 1440px) and (min-resolution: 2dppx) {
   .joinWrapper {
-    background:
-      linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-      url("/images/join/join-desktop-2x.jpg") center/cover no-repeat;
+    background: url("/images/join/join-desktop-2x.jpg") center/cover no-repeat;
   }
 }

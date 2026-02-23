@@ -1,5 +1,6 @@
 // import Image from "next/image";
 // import css from "./page.module.css";
+import Join from "@/components/home/Join/Join";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
           </p>
         </div>
       </section>
+      <Join />
     </main>
   );
 }

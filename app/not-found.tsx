@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 function NotFound() {
   return (
     <div>
-      <h1>404 - Page not found</h1>
-      <p>Sorry, the page you are looking for does not exist.</p>
+      <h1>Помилка 404 - сторінку не знайдено</h1>
+      <p>Вибачте. Сторінка, яку ви шукаєте, не існує</p>
     </div>
   );
 }

@@ -1,27 +1,25 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --font-body: var(--font-nunito);
-  --font-heading: var(--font-sora);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
 }
-
+/* --font-heading */
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-body);
+  font-family: var(--font-nunito-sans), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -32,7 +30,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-heading);
+  /* font-family: var(--font-sora), sans-serif; */
 }
 
 * {
@@ -46,8 +44,8 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
+} */

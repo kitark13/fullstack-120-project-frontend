@@ -3,6 +3,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useState } from "react";
 import styles from "./RegistrationForm.module.css";
 import { register } from "@/lib/api/clientApi";
@@ -52,19 +53,13 @@ export default function RegistrationForm() {
 
   return (
     <>
-      <main className={styles.container}>
+      <div className={styles.container}>
         <ul className={styles.scroll}>
-          <li className={styles.registrationItem}>
-            <p className={styles.registrationText}>Реєстраця</p>
-          </li>
-          <li>
-            <p className={styles.loginText}>Вхід</p>
+          <li className={styles.registrationText}>Реєстраця</li>
+          <li className={styles.loginText}>
+            <Link href="/auth/login">Вхід</Link>
           </li>
         </ul>
-        <h1 className={styles.title}>Реєстрація</h1>
-        <p className={styles.subtitle}>
-          Раді вас бачити у спільноті мандрівників!
-        </p>
 
         {errorMessage && (
           <div className={styles.errorMessage}>{errorMessage}</div>
@@ -75,7 +70,13 @@ export default function RegistrationForm() {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          <Form>
+          <Form className={styles.form}>
+            <div>
+              <h1 className={styles.title}>Реєстрація</h1>
+              <p className={styles.subtitle}>
+                Раді вас бачити у спільноті мандрівників!
+              </p>
+            </div>
             <fieldset className={styles.formContainer}>
               <div className={styles.informGroup}>
                 <label htmlFor="name" className={styles.label}>
@@ -88,7 +89,11 @@ export default function RegistrationForm() {
                   id="name"
                   className={styles.input}
                 />
-                <ErrorMessage name="name" component="div" className="error" />
+                <ErrorMessage
+                  name="name"
+                  component="div"
+                  className={styles.error}
+                />
               </div>
               <div className={styles.informGroup}>
                 <label htmlFor="email" className={styles.label}>
@@ -101,7 +106,11 @@ export default function RegistrationForm() {
                   id="email"
                   className={styles.input}
                 />
-                <ErrorMessage name="email" component="div" className="error" />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className={styles.error}
+                />
               </div>
               <div className={styles.informGroup}>
                 <label htmlFor="password" className={styles.label}>
@@ -117,7 +126,7 @@ export default function RegistrationForm() {
                 <ErrorMessage
                   name="password"
                   component="div"
-                  className="error"
+                  className={styles.error}
                 />
               </div>
               <button type="submit" className={styles.button}>
@@ -126,7 +135,7 @@ export default function RegistrationForm() {
             </fieldset>
           </Form>
         </Formik>
-      </main>
+      </div>
     </>
   );
 }

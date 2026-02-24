@@ -12,20 +12,23 @@ export default function MobileMenu({ isOpen, onClose }: Props) {
       {" "}
       <div className={`container ${styles.mobMenuDiv}`}>
         {" "}
-        <Logo />{" "}
-        <button
-          className={styles.btnClose}
-          type="button"
-          aria-label="Close menu"
-          onClick={onClose}
-        >
-          {" "}
-          <svg className={styles.iconClose} width="22" height="22">
+        <div className={styles.mobileHead}>
+          <Logo variant="mobMenu" />{" "}
+          <button
+            className={styles.btnClose}
+            type="button"
+            aria-label="Close menu"
+            onClick={onClose}
+          >
             {" "}
-            <use href="/menu.svg"></use>{" "}
-          </svg>{" "}
-        </button>{" "}
-        <NavList variant="footer" /> <AuthNav />
+            <svg className={styles.iconClose} width="22" height="22">
+              {" "}
+              <use href="/sprite-final-opt.svg#icon-close"></use>{" "}
+            </svg>{" "}
+          </button>{" "}
+        </div>
+        <NavList variant="mobileMenu" />
+        <AuthNav variant="mobMenu" />
       </div>{" "}
     </div>
   );

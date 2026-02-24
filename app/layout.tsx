@@ -2,9 +2,9 @@ import "modern-normalize/modern-normalize.css";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
-import TanStackProvider from "../components/TanStackProvider/TanStackProvider";
-import Header from "../components/layout/Header/Header";
-import { Footer } from "../components/layout/Footer/Footer";
+import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+import Header from "@/components/layout/Header/Header";
+import { Footer } from "@/components/layout/Footer/Footer";
 
 // Unbounded
 // const unbounded = Unbounded({

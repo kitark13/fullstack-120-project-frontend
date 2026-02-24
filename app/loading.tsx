@@ -1,5 +1,5 @@
 function Loading() {
-  return <p>Loading, please wait...</p>;
+  return <p>Завантаження сторінки, будь ласка зачекайте...</p>;
 }
 
 export default Loading;

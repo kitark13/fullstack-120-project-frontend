@@ -3,7 +3,10 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import styles from "./RegistrationForm.module.css";
+import { register } from "@/lib/api/clientApi";
+import useAuthStore from "@/lib/store/authStore";
 
 interface FormValues {
   name: string;
@@ -11,25 +14,11 @@ interface FormValues {
   password: string;
 }
 
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-}
-
-export interface RegisterPayload {
-  name: string;
-  email: string;
-  password: string;
-}
-
-export interface LoginPayload {
-  email: string;
-  password: string;
-}
-
 export default function RegistrationForm() {
   const router = useRouter();
+  const setUser = useAuthStore((state) => state.setUser);
+
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const initialValues: FormValues = {
     name: "",
@@ -52,38 +41,34 @@ export default function RegistrationForm() {
 
   const handleSubmit = async (values: FormValues) => {
     try {
-      const response = await fetch(
-        "https://fullstack-120-project-group-1-backend.onrender.com/auth/register",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
-        }
-      );
-
-      if (!response.ok) {
-        const data = await response.json();
-        alert(data.error || "Сталася помилка при реєстрації");
-        return;
-      }
+      const user = await register(values);
+      setUser(user);
       router.push("/");
-    } catch (error) {
-      alert("Сталася помилка при реєстрації");
+    } catch (error: unknown) {
       console.error(error);
+      setErrorMessage("Помилка реєстрації. Спробуйте ще раз.");
     }
   };
 
   return (
     <>
       <main className={styles.container}>
-        <div className={styles.scroll}>
-          <p className={styles.registrationText}>Реєстраця</p>
-          <p className={styles.loginText}>Вхід</p>
-        </div>
+        <ul className={styles.scroll}>
+          <li className={styles.registrationItem}>
+            <p className={styles.registrationText}>Реєстраця</p>
+          </li>
+          <li>
+            <p className={styles.loginText}>Вхід</p>
+          </li>
+        </ul>
         <h1 className={styles.title}>Реєстрація</h1>
         <p className={styles.subtitle}>
           Раді вас бачити у спільноті мандрівників!
         </p>
+
+        {errorMessage && (
+          <div className={styles.errorMessage}>{errorMessage}</div>
+        )}
 
         <Formik
           initialValues={initialValues}
@@ -91,7 +76,7 @@ export default function RegistrationForm() {
           onSubmit={handleSubmit}
         >
           <Form>
-            <fieldset className={styles.container}>
+            <fieldset className={styles.formContainer}>
               <div className={styles.informGroup}>
                 <label htmlFor="name" className={styles.label}>
                   Імʼя та Прізвище*
@@ -135,11 +120,10 @@ export default function RegistrationForm() {
                   className="error"
                 />
               </div>
+              <button type="submit" className={styles.button}>
+                Зареєструватися
+              </button>
             </fieldset>
-
-            <button type="submit" className={styles.button}>
-              Зареєструватися
-            </button>
           </Form>
         </Formik>
       </main>

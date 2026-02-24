@@ -1,8 +1,8 @@
 // import css from "./page.module.css";
-import About from '@/components/home/About/About';
-import Hero from '@/components/home/Hero/Hero';
-import Join from '@/components/home/Join/Join';
-import Istorii from '@/components/Istorii/Istorii';
+import About from "@/components/home/About/About";
+import Hero from "@/components/home/Hero/Hero";
+import Join from "@/components/home/Join/Join";
+import IstoriiAndRegister from "@/components/IstoriiAndRegister/IstoriiAndRegister";
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
       <Hero />
       <About />
       <Join />
-      <Istorii />
+      <IstoriiAndRegister />
     </main>
   );
 }

@@ -11,7 +11,7 @@
 }
 
 .heroTitle {
-  font-family: "Inter", sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   font-weight: 700;
   font-size: 32px;
   line-height: 1.1;
@@ -130,7 +130,7 @@
 
 /* ----- BUTTON STATES ----- */
 .heroButton {
-  transition: all 0.3s ease; 
+  transition: all 0.3s ease;
 }
 
 .heroButton:hover {
@@ -138,7 +138,7 @@
 }
 
 .heroButton:focus-visible {
-  outline: 2px solid #7a96ea; 
+  outline: 2px solid #7a96ea;
   outline-offset: 3px;
 }
 

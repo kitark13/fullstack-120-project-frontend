@@ -47,15 +47,13 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body className={`${nunitoSans.variable}`}>
-        <AuthProvider>
-          <TanStackProvider>
-            <div className="page">
-              <Header />
-              {children}
-              <Footer />
-            </div>
-          </TanStackProvider>
-        </AuthProvider>
+        <TanStackProvider>
+          <AuthProvider>
+            <Header />
+            {children}
+            <Footer />
+          </AuthProvider>
+        </TanStackProvider>
       </body>
     </html>
   );

@@ -1,10 +1,10 @@
-import styles from './About.module.css';
-import React from 'react';
+import styles from "./About.module.css";
+import React from "react";
 
 export default function About() {
   return (
     <section className={styles.about}>
-      <div className={styles.container}>
+      <div className={`container ${styles.container}`}>
         <div className={styles.about_container}>
           <h2 className={styles.about_title}>
             Проєкт, створений для тих, хто живе подорожами
@@ -20,7 +20,7 @@ export default function About() {
         <OurGoal>
           <li className={styles.ourGoal_section_item}>
             <svg className={styles.svg}>
-              <use href='/sprite-final-opt.svg#icon-wand-stars' />
+              <use href="/sprite-final-opt.svg#icon-wand-stars" />
             </svg>
             <h3 className={styles.ourGoal_section_item_title}>Наша місія</h3>
             <p className={styles.ourGoal_section_item_paragraf}>
@@ -30,7 +30,7 @@ export default function About() {
           </li>
           <li className={styles.ourGoal_section_item}>
             <svg className={styles.svg}>
-              <use href='/sprite-final-opt.svg#icon-travel-luggage-and-bags' />
+              <use href="/sprite-final-opt.svg#icon-travel-luggage-and-bags" />
             </svg>
             <h3 className={styles.ourGoal_section_item_title}>
               Автентичні історії
@@ -42,7 +42,7 @@ export default function About() {
           </li>
           <li className={styles.ourGoal_section_item}>
             <svg className={styles.svg}>
-              <use href='/sprite-final-opt.svg#icon-communication' />
+              <use href="/sprite-final-opt.svg#icon-communication" />
             </svg>
             <h3 className={styles.ourGoal_section_item_title}>
               Ваша спільнота

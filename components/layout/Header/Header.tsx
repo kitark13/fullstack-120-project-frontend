@@ -17,9 +17,9 @@ const Header: React.FC = () => {
   return (
     <header className={isHome ? styles.header : styles.headerDefault} id="home">
       <div className={`${styles.headerContainer} container`}>
-        <Logo />
+        <Logo variant="header" />
         <NavList variant="header" />
-        <AuthNav />
+        <AuthNav variant="header" />
 
         <button
           className={`${styles.menuBtn} ${styles.openMenu}`}
@@ -28,7 +28,7 @@ const Header: React.FC = () => {
           onClick={toggleMenu}
         >
           <svg className={styles.iconBurger} width="24" height="24">
-            <use href="/menu.svg"></use>
+            <use href="/sprite-final-opt.svg#icon-menu"></use>
           </svg>
         </button>
       </div>

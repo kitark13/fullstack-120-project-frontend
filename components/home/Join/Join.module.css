@@ -131,7 +131,7 @@
   background-color: var(--color-royal-blue-light);
   border: 1px solid var(--color-royal-blue);
   color: var(--color-text-inverse);
-  cursor: not-allowed;
+  cursor: pointer;
   transform: none;
 }
 

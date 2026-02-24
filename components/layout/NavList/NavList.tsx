@@ -14,7 +14,7 @@ const NavList = ({ variant }: NavListProps) => {
       : variant === "header"
         ? headerCss
         : mobileCss;
-  const isAuthenticated = true; // временно ручной переключатель
+  const isAuthenticated = false; // временно ручной переключатель
 
   return (
     <nav className={css.navigation}>
@@ -46,7 +46,10 @@ const NavList = ({ variant }: NavListProps) => {
             </li>
 
             <li className={css.itemNav}>
-              <Link className={css.linkNav} href="/story/create">
+              <Link
+                className={`${css.linkNav} ${css.tabLink}`}
+                href="/story/create"
+              >
                 Опублікувати історію
               </Link>
             </li>

@@ -1,3 +1,7 @@
+/* Styles for Mobile devices */
+html {
+  scroll-behavior: smooth;
+}
 .container {
   min-width: 320px;
   max-width: 375px;
@@ -16,5 +20,139 @@
   .container {
     max-width: 1440px;
     padding: 0 64px;
+  }
+}
+.logoFoot {
+  display: flex;
+  margin-bottom: 40px;
+  justify-content: center;
+  align-items: center;
+}
+.footerSoclinkList {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+.footerSoclinkItem {
+  display: flex;
+}
+
+.socialLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: black;
+}
+
+.socialLink:hover {
+  opacity: 0.8;
+}
+.socialLink:focus {
+  opacity: 0.6;
+}
+.socialIcon {
+  width: 32px;
+  height: 32px;
+  display: block;
+  fill: currentColor; /* щоб колір задавався через color */
+}
+
+.footer {
+  background-color: #e8eeff;
+  /* background-color: var(--color-scheme-2-foreground); */
+  width: 100%;
+  padding: 48px 0;
+}
+.footerContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.footerNav {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.footerMain {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+
+.footerListItem {
+  text-align: center;
+}
+.footerLogo {
+}
+.footerLogoImage {
+  width: 156px;
+  height: 40px;
+}
+
+.copyrigthContent {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.footerCopyrigthText {
+  color: #131f43;
+
+  padding-top: 32px;
+  font-size: 12px;
+  text-align: center;
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+@media screen and (min-width: 768px) {
+  .footerNav {
+    margin: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .footerLogo {
+    margin-bottom: 0;
+  }
+  .footerSoclinkList {
+    margin-top: 0;
+    margin-left: auto;
+    margin-bottom: 0;
+  }
+
+  .footerCopyrigthText {
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .footerNav nav {
+    width: auto;
+    flex-basis: auto;
+  }
+  .footerSoclinkList {
+    margin: 0;
+  }
+
+  .footerNav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: 100%;
+  }
+
+  .footerSoclinkList {
+    justify-self: center;
+  }
+  /* .footerSoclinkList {
+    justify-content: center;
+  }
+  .footerLogo {
+    justify-content: start;
+  } */
+  .footerCopyrigthText {
+    max-width: 1312px;
   }
 }

@@ -1,6 +1,11 @@
+
 export interface User {
-  id: string;
+  name: string;
   email: string;
-  username: string;
-  avatar?: string;
+  password: string;
+  avatarUrl: string;
+  description: string;
+  articlesAmount: number;
+  savedArticles: string[];
+  _id: string;
 }

@@ -1,0 +1,18 @@
+.wrapper {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.trlBtn {
+    margin-top: 48px;
+    align-self: center;
+    text-align: center;
+}

@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 import Header from "@/components/layout/Header/Header";
 import { Footer } from "@/components/layout/Footer/Footer";
 
@@ -46,13 +47,15 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body className={`${nunitoSans.variable}`}>
-        <TanStackProvider>
-          <div className="page">
-            <Header />
-            {children}
-            <Footer />
-          </div>
-        </TanStackProvider>
+        <AuthProvider>
+          <TanStackProvider>
+            <div className="page">
+              <Header />
+              {children}
+              <Footer />
+            </div>
+          </TanStackProvider>
+        </AuthProvider>
       </body>
     </html>
   );

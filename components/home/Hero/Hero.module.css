@@ -1,3 +1,147 @@
+/* ----- MOBILE ----- */
 .hero {
-  /* Стилі для Hero секції */
+  width: 100%;
+  max-width: 375px;
+  height: 812px;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+
+  background: url("/images/hero/hero-mobile-1x.jpg") center/cover no-repeat;
+}
+
+.heroTitle {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #fff;
+  margin-bottom: 24px;
+}
+
+.heroDescription {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fff;
+  margin-bottom: 32px;
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.heroButton {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: row;
+  gap: 16px;
+  border: 1px solid #4169e1;
+  border-radius: 8px;
+  padding-block: 6px;
+  padding-inline: 12px;
+  width: 100%;
+  max-width: 335px;
+  height: 39px;
+  background: #4169e1;
+
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fff;
+}
+
+/* -- Mobile retina -- */
+@media (max-width: 767px) and (min-resolution: 2dppx) {
+  .hero {
+    background: url("/images/hero/hero-mobile-2x.jpg") center/cover no-repeat;
+  }
+}
+
+/* ----- TABLET ----- */
+@media screen and (min-width: 768px) {
+  .hero {
+    max-width: 768px;
+    height: 634px;
+
+    background: url("/images/hero/hero-tablet-1x.jpg") center/cover no-repeat;
+  }
+
+  .heroTitle {
+    max-width: 600px;
+    font-size: 48px;
+  }
+
+  .heroDescription {
+    max-width: 700px;
+  }
+
+  .heroButton {
+    gap: 8px;
+    width: 115px;
+    height: 39px;
+  }
+}
+
+/* -- Tablet retina -- */
+@media screen and (min-width: 768px) and (max-width: 1439px) and (min-resolution: 2dppx) {
+  .hero {
+    background: url("/images/hero/hero-tablet-2x.jpg") center/cover no-repeat;
+  }
+}
+
+/* ----- DESKTOP ----- */
+@media screen and (min-width: 1440px) {
+  .hero {
+    max-width: 1440px;
+
+    background: url("/images/hero/hero-desktop-1x.jpg") center/cover no-repeat;
+  }
+
+  .heroTitle {
+    max-width: 759px;
+    font-size: 56px;
+  }
+
+  .heroDescription {
+    font-size: 20px;
+    max-width: 759px;
+  }
+
+  .heroButton {
+    width: 126px;
+    font-size: 18px;
+  }
+}
+
+/* -- Desktop retina -- */
+@media screen and (min-width: 1440px) and (min-resolution: 2dppx) {
+  .hero {
+    background: url("/images/hero/hero-desktop-2x.jpg") center/cover no-repeat;
+  }
+}
+
+/* ----- BUTTON STATES ----- */
+.heroButton {
+  transition: all 0.3s ease;
+}
+
+.heroButton:hover {
+  transform: translateY(-2px);
+}
+
+.heroButton:focus-visible {
+  outline: 2px solid #7a96ea;
+  outline-offset: 3px;
+}
+
+.heroButton:active {
+  transform: translateY(0);
 }

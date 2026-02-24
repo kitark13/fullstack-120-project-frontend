@@ -4,34 +4,89 @@
 .linkAuthRender {
   display: none;
 }
-
-.logoutBtn {
-  display: none;
-}
-.linkRegister {
+.mobAuthContainer {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  border: 1px solid #fff;
+  align-items: center;
+}
+.mobAuthEnter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   padding: 4px 10px;
-  width: 113px;
+  width: 100%;
   height: 35px;
-  color: black;
-  background-color: #fff;
+  margin-bottom: 16px;
+
+  color: #131f43;
+
+  background-color: rgba(0, 0, 0, 0.05);
+
   transition:
     border 0.3s ease,
     background-color 0.3s ease,
     color 0.3s ease;
+}
+.mobAuthLinkReg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #4169e1;
+  border-radius: 8px;
+  padding: 4px 10px;
+  width: 100%;
+  height: 35px;
+
+  color: #fff;
+  background-color: #4169e1;
+
+  transition:
+    border 0.3s ease,
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.btnLogout {
   display: none;
 }
+
+.mobAuthLink {
+  display: flex;
+}
 @media screen and (min-width: 768px) {
-  .linkLogin,
+  .mobAuthLink {
+    display: flex;
+  } /* .linkLogin,
   .linkCreate {
     display: flex;
-  }
-  .authContainer {
+  } */
+  /* .authContainer {
     margin-left: auto;
+  } */
+}
+@media screen and (min-width: 1440px) {
+  .linkRegister {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    padding: 4px 10px;
+    width: 113px;
+    height: 35px;
+    color: black;
+    background-color: #fff;
+    transition:
+      border 0.3s ease,
+      background-color 0.3s ease,
+      color 0.3s ease;
+    display: none;
+  }
+  .btnLogout {
+    display: flex;
   }
   .linkLogin {
     display: flex;
@@ -65,10 +120,12 @@
     background-color: #4169e1;
     border: #4169e1;
   }
-}
-@media screen and (min-width: 1440px) {
+
   .authContainer {
     margin-left: 0;
+  }
+  .linkRegister {
+    margin-left: 16px;
   }
   .logoutBtn,
   .linkAuthRender {

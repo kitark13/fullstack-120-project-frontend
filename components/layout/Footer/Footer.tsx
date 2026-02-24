@@ -11,7 +11,7 @@ export const Footer: React.FC = () => {
       <div className={`${css.footerContainer} container`}>
         <div className={css.footerMain}>
           <div className={css.footerNav}>
-            <Logo />
+            <Logo variant="footer" />
             <ul className={css.footerSoclinkList}>
               {" "}
               <li className={css.footerSoclinkItem}>

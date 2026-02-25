@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-// import RegistrationForm from "@/components/forms/RegistrationForm/RegistrationForm";
+import RegistrationForm from "@/components/forms/RegistrationForm/RegistrationForm";
 import LoginForm from "@/components/forms/LoginForm/LoginForm";
 
 export default function AuthPage() {
@@ -10,8 +10,7 @@ export default function AuthPage() {
 
   // Вибір компонента в залежності від шляху
   if (authType === "register") {
-    return;
-    //   <RegistrationForm />;
+    return <RegistrationForm />;
   } else if (authType === "login") {
     return <LoginForm />;
   } else {

@@ -21,6 +21,7 @@ export async function checkSession(): Promise<User | null> {
 }
 
 export type RegisterRequest = {
+  name: string;
   email: string;
   password: string;
 };

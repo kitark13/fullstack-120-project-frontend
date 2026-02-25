@@ -50,3 +50,32 @@ export async function removeFromFavorite(storyId: string): Promise<string[]> {
   const res = await api.delete(`/stories/${storyId}/save`);
   return res.data;
 }
+
+// отримання всіх юзерів
+
+interface GetUsersProps {
+  page?: number;
+  perPage?: number;
+}
+
+interface GetUsersResponse {
+  page: number;
+  perPage: number;
+  totalItems: number;
+  totalPages: number;
+  users: User[];
+}
+
+export async function getUsers({
+  page = 1,
+  perPage = 4,
+}: GetUsersProps): Promise<GetUsersResponse> {
+  const options = {
+    params: {
+      page,
+      perPage,
+    },
+  };
+  const response = await api.get("/users", options);
+  return response.data;
+}

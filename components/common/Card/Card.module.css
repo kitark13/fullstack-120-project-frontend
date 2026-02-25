@@ -1,0 +1,100 @@
+.card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 24px;
+  border-radius: 16px;
+  padding: 24px;
+  width: 335px;
+  height: 363px;
+  background-color: #e8eeff;
+}
+
+.photo {
+  border-radius: 50%;
+}
+
+.info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 16px;
+
+  overflow: hidden;
+}
+
+.title {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #000;
+}
+
+.description {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #000;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  min-width: 287px;
+  height: 48px;
+  background-color: rgba(0, 0, 0, 0.05);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #000;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #4169e1;
+  color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    width: 340px;
+  }
+
+  .btn {
+    min-width: 292px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .card {
+    width: 310px;
+    height: 384px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .description {
+    font-size: 18px;
+  }
+
+  .btn {
+    min-width: 262px;
+    font-size: 18px;
+  }
+}

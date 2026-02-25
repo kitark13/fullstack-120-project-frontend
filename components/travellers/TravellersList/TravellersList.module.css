@@ -1,18 +1,22 @@
-.wrapper {
-  /* margin-top: 48px; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .list {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 24px;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 48px;
 }
 
-.trlBtn {
-  margin-top: 48px;
-  align-self: center;
-  text-align: center;
+@media screen and (min-width: 768px) {
+  .list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  /* .list {
+  } */
 }

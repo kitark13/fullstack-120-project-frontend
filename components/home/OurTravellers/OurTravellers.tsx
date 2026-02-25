@@ -8,7 +8,7 @@ export default function OurTravellersPage() {
       <div className="container">
         <h2 className={styles.travellersTitle}>Наші Мандрівники</h2>
         <TravellersList />
-        <div>
+        <div className={styles.btnWrap}>
           <Link className={styles.trlBtn} href="/travellers">
             Переглянути всі
           </Link>

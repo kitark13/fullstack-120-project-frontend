@@ -1,8 +1,7 @@
 "use client";
+
 import Link from "next/link";
-import Image from "next/image";
 import styles from "./AuthNav.module.css";
-import { useState } from "react";
 import ProfileLogout from "./ProfileLogout/ProfileLogout";
 import useAuthStore from "@/lib/store/authStore";
 
@@ -11,13 +10,11 @@ type AuthNavProps = {
   closeMobileMenu?: () => void;
 };
 
-export default function AuthNav({ variant }: AuthNavProps) {
+export default function AuthNav({ variant, closeMobileMenu }: AuthNavProps) {
   const { user, isAuthenticated } = useAuthStore();
-  console.log(user);
-  console.log(isAuthenticated);
 
   return isAuthenticated ? (
-    <ProfileLogout variant={variant} />
+    <ProfileLogout variant={variant} closeMobileMenu={closeMobileMenu} />
   ) : (
     <div
       className={`${styles.authContainer} ${
@@ -25,6 +22,7 @@ export default function AuthNav({ variant }: AuthNavProps) {
       }`}
     >
       <Link
+        onClick={closeMobileMenu}
         href="/auth/login"
         className={`${styles.linkAuthRender} ${styles.linkLogin} ${
           variant === "mobMenu" ? styles.mobAuthEnter : ""
@@ -34,6 +32,7 @@ export default function AuthNav({ variant }: AuthNavProps) {
       </Link>
 
       <Link
+        onClick={closeMobileMenu}
         href="/auth/register"
         className={`${styles.linkAuthRender} ${styles.linkRegister} ${
           variant === "mobMenu" ? styles.mobAuthLinkReg : ""

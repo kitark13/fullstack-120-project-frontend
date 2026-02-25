@@ -55,7 +55,7 @@ export default function RegistrationForm() {
     <>
       <div className={styles.container}>
         <ul className={styles.scroll}>
-          <li className={styles.registrationText}>Реєстраця</li>
+          <li className={styles.registrationText}>Реєстрація</li>
           <li className={styles.loginText}>
             <Link href="/auth/login">Вхід</Link>
           </li>

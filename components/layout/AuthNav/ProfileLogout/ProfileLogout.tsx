@@ -19,20 +19,22 @@ export default function ProfileLogout({
 }: ProfileLogoutProps) {
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const router = useRouter();
   const clearIsAuthenticated = useAuthStore(
     (state) => state.clearIsAuthenticated,
   );
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
+
   const userName = user?.name || "Користувач";
   const userAvatar = user?.avatarUrl ?? "/default-avatar.png";
+
   const handleLogout = async () => {
     await logout();
     setIsModalOpen(false);
     closeMobileMenu?.();
     clearIsAuthenticated();
     router.push("/auth/login");
-    if (closeMobileMenu) closeMobileMenu();
   };
 
   return (
@@ -54,6 +56,7 @@ export default function ProfileLogout({
           height={32}
         />
       </Link>
+
       <p className={css.userName}>{userName}</p>
 
       <button
@@ -61,8 +64,8 @@ export default function ProfileLogout({
         type="button"
         aria-label="Logout"
         onClick={() => {
-          closeMobileMenu?.(); // сначала закрываем меню
-          setIsModalOpen(true); // потом открываем модалку
+          closeMobileMenu?.();
+          setIsModalOpen(true);
         }}
       >
         <svg className={css.iconLogout} width="24" height="24">

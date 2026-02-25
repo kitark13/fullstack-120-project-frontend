@@ -1,6 +1,6 @@
 "use client";
 
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik, Field, ErrorMessage, Form } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -59,56 +59,54 @@ export default function LoginForm() {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ handleSubmit: formikSubmit }) => (
-            <form className={css.form} onSubmit={formikSubmit}>
-              <h1 className={css.title}>Вхід</h1>
-              <p className={css.subtitle}>
-                Вітаємо знову у спільноті мандрівників!
-              </p>
+          <Form className={css.form}>
+            <h1 className={css.title}>Вхід</h1>
+            <p className={css.subtitle}>
+              Вітаємо знову у спільноті мандрівників!
+            </p>
 
-              <fieldset className={css.formContainer}>
-                <div className={css.formField}>
-                  <label htmlFor="email" className={css.label}>
-                    Пошта*
-                  </label>
-                  <Field
-                    type="email"
-                    name="email"
-                    placeholder="hello@podorozhnyky.ua"
-                    id="email"
-                    className={css.input}
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className={css.error}
-                  />
-                </div>
+            <fieldset className={css.formContainer}>
+              <div className={css.formField}>
+                <label htmlFor="email" className={css.label}>
+                  Пошта*
+                </label>
+                <Field
+                  type="email"
+                  name="email"
+                  placeholder="hello@podorozhnyky.ua"
+                  id="email"
+                  className={css.input}
+                />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className={css.error}
+                />
+              </div>
 
-                <div className={css.formField}>
-                  <label htmlFor="password" className={css.label}>
-                    Пароль*
-                  </label>
-                  <Field
-                    type="password"
-                    name="password"
-                    placeholder="********"
-                    id="password"
-                    className={css.input}
-                  />
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className={css.error}
-                  />
-                </div>
-              </fieldset>
+              <div className={css.formField}>
+                <label htmlFor="password" className={css.label}>
+                  Пароль*
+                </label>
+                <Field
+                  type="password"
+                  name="password"
+                  placeholder="********"
+                  id="password"
+                  className={css.input}
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className={css.error}
+                />
+              </div>
+            </fieldset>
 
-              <button type="submit" className={css.button}>
-                Увійти
-              </button>
-            </form>
-          )}
+            <button type="submit" className={css.button}>
+              Увійти
+            </button>
+          </Form>
         </Formik>
       </div>
     </>

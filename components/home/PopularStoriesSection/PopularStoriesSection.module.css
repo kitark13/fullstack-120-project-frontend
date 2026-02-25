@@ -1,3 +1,79 @@
 .popularStoriesSection {
-  /* Стилі для PopularStoriesSection */
+  padding: 72px 0;
+}
+.storiesTitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #000;
+  margin-bottom: 24px;
+}
+
+.lookAllBtn {
+  border: 1px solid #4169e1;
+  background-color: #4169e1;
+  color: white;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 48px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 12px;
+  background: #4169e1;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.2s ease; */
+}
+
+.lookAllBtn:hover {
+  background-color: #e8eeff;
+  transform: translateY(-1px);
+  color: black;
+  box-shadow: 0 4px 12px;
+}
+
+.lookAllBtn:active {
+  transform: translateY(0);
+  color: black;
+  background-color: #7a96ea;
+}
+
+.storiesSectionFooter {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+  .storiesTitle {
+    font-size: 44px;
+  }
+  .lookAllBtn {
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .storiesTitle {
+    font-size: 52px;
+    margin-bottom: 40px;
+  }
+  .lookAllBtn {
+    font-size: 18px;
+  }
 }

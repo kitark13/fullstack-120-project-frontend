@@ -4,8 +4,6 @@ import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import AuthProvider from "@/components/AuthProvider/AuthProvider";
-import Header from "@/components/layout/Header/Header";
-import { Footer } from "@/components/layout/Footer/Footer";
 
 // Unbounded
 // const unbounded = Unbounded({
@@ -48,11 +46,7 @@ export default function RootLayout({
     <html lang="uk" data-scroll-behavior="smooth">
       <body className={`${nunitoSans.variable}`}>
         <TanStackProvider>
-          <AuthProvider>
-            <Header />
-            <main>{children}</main>
-            <Footer />
-          </AuthProvider>
+          <AuthProvider>{children}</AuthProvider>
         </TanStackProvider>
       </body>
     </html>

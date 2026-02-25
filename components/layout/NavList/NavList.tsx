@@ -1,20 +1,22 @@
+"use client";
 import Link from "next/link";
 import footerCss from "./NavListFooter.module.css";
 import headerCss from "./NavListHeader.module.css";
 import mobileCss from "./NavListMobile.module.css";
+import useAuthStore from "@/lib/store/authStore";
 
 type NavListProps = {
   variant: "footer" | "header" | "mobMenu";
 };
 
 const NavList = ({ variant }: NavListProps) => {
+  const { isAuthenticated } = useAuthStore();
   const css =
     variant === "footer"
       ? footerCss
       : variant === "header"
         ? headerCss
         : mobileCss;
-  const isAuthenticated = false; // временно ручной переключатель
 
   return (
     <nav className={css.navigation}>

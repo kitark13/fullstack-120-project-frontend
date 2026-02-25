@@ -13,27 +13,34 @@
 .modal {
   background: var(--color-scheme-2-background);
   border-radius: 24px;
-  padding: 20px;
+  padding: 64px 20px 20px 20px;
   width: 335px;
   height: 338px;
   max-width: 768px;
   position: relative;
 }
 .btnClose {
+  position: absolute;
   background-color: transparent;
+  left: 283px;
+  top: 20px;
   width: 32px;
   height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
   border: none;
-  margin-left: auto;
 }
 .title {
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--color-scheme-1-text);
   display: flex;
   margin: 0 auto;
   text-align: center;
-  margin-top: 12px;
+
   max-width: 250px;
 }
 
@@ -56,7 +63,21 @@
   height: 48px;
   margin-bottom: 12px;
   background-color: var(--opacity-neutral-darkest-5);
+  transition: all 300ms;
 }
+.btnCancel:hover,
+.btnCancel:focus {
+  color: white;
+  border: 1px solid var(--opacity-transparent);
+  background: var(--color-royal-blue);
+}
+.btnConfirm:hover,
+.btnConfirm:focus {
+  color: var(--color-scheme-2-text);
+  border: 1px solid var(--color-royal-blue);
+  background: var(--color-royal-blue-lighter);
+}
+
 .btnConfirm {
   font-family: var(--font-family);
   font-weight: 500;
@@ -69,4 +90,37 @@
   line-height: 150%;
   color: var(--color-white);
   background-color: var(--color-royal-blue);
+  transition: all 300ms;
+}
+@media screen and (min-width: 768px) {
+  .modal {
+    padding: 64px 32px;
+    width: 704px;
+    height: 310px;
+    max-width: 768px;
+  }
+  .btnClose {
+    left: 656px;
+  }
+  .title {
+    max-width: 640px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 16px;
+  }
+  .btnCancel,
+  .btnConfirm {
+    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 203px;
+  }
 }

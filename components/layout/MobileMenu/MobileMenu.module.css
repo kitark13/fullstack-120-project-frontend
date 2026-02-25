@@ -55,3 +55,8 @@
   font-size: 1.2rem;
   color: #333;
 }
+@media screen and (min-width: 1440px) {
+  .mobMenu {
+    display: none;
+  }
+}

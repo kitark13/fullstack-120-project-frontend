@@ -1,36 +1,30 @@
 .about {
-  margin: 72px 0;
+  margin: 64px 0;
 }
-
 .container {
-  display: flex;
-  flex-direction: column;
-  gap: 64px;
-  /* padding: 0 64px; */
 }
 
 .about_container {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin-bottom: 64px;
 }
 
 .about_title {
-  font-family: "Nunito Sans", sans-serif;
   font-size: 28px;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.01em;
-  color: #000;
+  color: var(--color-neutral-darkest);
   max-width: 779px;
 }
 
 .about_paragraf {
-  font-family: "Nunito Sans", sans-serif;
   font-size: 16px;
   line-height: 1.5;
   font-weight: 400;
-  color: #000;
+  color: var(--color-neutral-darkest);
   width: 100%;
 }
 
@@ -53,22 +47,20 @@
 .svg {
   width: 48px;
   height: 48px;
-  fill: #000;
+  color: var(--color-neutral-darkest);
 }
 
 .ourGoal_section_item_title {
-  font-family: "Nunito Sans", sans-serif;
   font-size: 20px;
   font-weight: 700;
-  color: #000;
+  color: var(--color-neutral-darkest);
 }
 
 .ourGoal_section_item_paragraf {
-  font-family: "Nunito Sans", sans-serif;
   font-size: 16px;
   line-height: 1.5;
   font-weight: 400;
-  color: #000;
+  color: var(--color-neutral-darkest);
 }
 
 /* TABLET*/

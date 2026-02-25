@@ -17,7 +17,9 @@
   justify-content: flex-start;
   flex-direction: column;
   gap: 32px;
-  padding: 32px 20px;
+  /* padding: 32px 20px; */
+  padding-top: 64px;
+  padding-bottom: 77px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -113,7 +115,7 @@
 
 .label {
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
   color: var(--color-scheme-1-text);
 }
@@ -172,8 +174,6 @@
 @media screen and (min-width: 768px) {
   .container {
     padding: 64px 0px;
-    width: 644px;
-    height: 450px;
     max-width: 644px;
     margin: 0 auto;
   }
@@ -193,7 +193,23 @@
 
 /* Desktop styles */
 @media screen and (min-width: 1440px) {
+  .container {
+    padding: 64px 0px 214px 0px;
+  }
+
   .title {
     font-size: 52px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+  }
+
+  .input {
+    height: 43px;
+  }
+
+  .button {
+    font-size: 18px;
   }
 }

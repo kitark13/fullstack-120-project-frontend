@@ -1,0 +1,35 @@
+.authLayoutHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 0px;
+  padding: 0;
+  margin: 18px 0 0 64px;
+}
+
+.authLayoutFooter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 72px;
+  max-width: 1312px;
+  margin: 0 auto;
+}
+
+.copyright {
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--color-scheme-1-text);
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+@media screen and (min-width: 768px) {
+ .copyright {
+  font-size: 12px;}
+
+}

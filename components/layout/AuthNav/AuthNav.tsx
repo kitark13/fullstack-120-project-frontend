@@ -4,15 +4,21 @@ import Image from "next/image";
 import styles from "./AuthNav.module.css";
 import { useState } from "react";
 import ProfileLogout from "./ProfileLogout/ProfileLogout";
+import useAuthStore from "@/lib/store/authStore";
+
 type AuthNavProps = {
   variant: "header" | "mobMenu";
+  closeMobileMenu?: () => void;
 };
 
 export default function AuthNav({ variant }: AuthNavProps) {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const toggleMenu = () => setIsAuthenticated(!isAuthenticated);
+  const { user, isAuthenticated } = useAuthStore();
+  console.log(user);
+  console.log(isAuthenticated);
 
   return isAuthenticated ? (
+    <ProfileLogout variant={variant} />
+  ) : (
     <div
       className={`${styles.authContainer} ${
         variant === "mobMenu" ? styles.mobAuthContainer : ""
@@ -20,32 +26,21 @@ export default function AuthNav({ variant }: AuthNavProps) {
     >
       <Link
         href="/auth/login"
-        className={`${styles.linkAuthRender} ${styles.linkLogin}
-        ${variant === "mobMenu" ? styles.mobAuthEnter : ""}`}
+        className={`${styles.linkAuthRender} ${styles.linkLogin} ${
+          variant === "mobMenu" ? styles.mobAuthEnter : ""
+        }`}
       >
         Вхід
       </Link>
+
       <Link
         href="/auth/register"
-        className={`${styles.linkAuthRender} ${styles.linkRegister}
-         ${variant === "mobMenu" ? styles.mobAuthLinkReg : ""}`}
+        className={`${styles.linkAuthRender} ${styles.linkRegister} ${
+          variant === "mobMenu" ? styles.mobAuthLinkReg : ""
+        }`}
       >
         Реєстрація
       </Link>
     </div>
-  ) : (
-    <>
-      <ProfileLogout />
-      {/* <button
-        className={styles.btnLogout}
-        type="button"
-        aria-label="Open menu"
-        onClick={toggleMenu}
-      >
-        <svg className={styles.iconLogout} width="24" height="24">
-          <use href="/sprite-final-opt.svg#icon-logout"></use>
-        </svg>
-      </button> */}
-    </>
   );
 }

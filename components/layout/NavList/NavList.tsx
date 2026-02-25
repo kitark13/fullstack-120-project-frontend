@@ -4,7 +4,7 @@ import headerCss from "./NavListHeader.module.css";
 import mobileCss from "./NavListMobile.module.css";
 
 type NavListProps = {
-  variant: "footer" | "header" | "mobileMenu";
+  variant: "footer" | "header" | "mobMenu";
 };
 
 const NavList = ({ variant }: NavListProps) => {

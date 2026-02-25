@@ -2,49 +2,52 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import css from "./ProfileLogout.module.css";
 import useAuthStore from "@/lib/store/authStore";
+import ConfirmModal from "@/components/modals/ConfirmModal/ConfirmModal";
+import { useRouter } from "next/navigation";
 
 type ProfileLogoutProps = {
-  variant?: "header" | "mobile-menu";
+  variant?: "header" | "mobMenu";
+  closeMobileMenu?: () => void;
 };
 
-export default function ProfileLogout({ variant }: ProfileLogoutProps) {
+export default function ProfileLogout({
+  variant,
+  closeMobileMenu,
+}: ProfileLogoutProps) {
   const user = useAuthStore((state) => state.user);
-  let userName = "Ім'я";
-  if (user) {
-    if (
-      "data" in user &&
-      typeof user.data === "object" &&
-      user.data !== null &&
-      "name" in user.data
-    ) {
-      userName = (user.data as { name: string }).name;
-    } else if ("name" in user && typeof user.name === "string") {
-      userName = user.name;
-    }
-  }
-  const userAvatar =
-    user && "avatarUrl" in user && typeof user.avatarUrl === "string"
-      ? user.avatarUrl
-      : user &&
-          "data" in user &&
-          typeof user.data === "object" &&
-          user.data !== null &&
-          "avatarUrl" in user.data &&
-          typeof user.data.avatarUrl === "string"
-        ? user.data.avatarUrl
-        : undefined;
+  const logout = useAuthStore((state) => state.logout);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
+  const clearIsAuthenticated = useAuthStore(
+    (state) => state.clearIsAuthenticated,
+  );
+  const userName = user?.name || "Користувач";
+  const userAvatar = user?.avatarUrl ?? "/default-avatar.png";
+  const handleLogout = async () => {
+    await logout();
+    setIsModalOpen(false);
+    closeMobileMenu?.();
+    clearIsAuthenticated();
+    router.push("/auth/login");
+    if (closeMobileMenu) closeMobileMenu();
+  };
 
   return (
-    <div className={css.logoutContainer}>
+    <div
+      className={`${css.logoutContainer} ${
+        variant === "mobMenu" ? css.mobileMenuLog : ""
+      }`}
+    >
       <Link
-        // onClick={closeMobileMenu}
+        onClick={closeMobileMenu}
         href="/profile"
         className={css.profileLink}
       >
         <Image
-          src={userAvatar || "/default-avatar.png"}
+          src={userAvatar}
           alt={userName}
           className={css.avatar}
           width={32}
@@ -52,15 +55,30 @@ export default function ProfileLogout({ variant }: ProfileLogoutProps) {
         />
       </Link>
       <p className={css.userName}>{userName}</p>
+
       <button
         className={css.btnLogout}
         type="button"
-        aria-label="Open menu logout"
+        aria-label="Logout"
+        onClick={() => {
+          closeMobileMenu?.(); // сначала закрываем меню
+          setIsModalOpen(true); // потом открываем модалку
+        }}
       >
         <svg className={css.iconLogout} width="24" height="24">
           <use href="/sprite-final-opt.svg#icon-logout"></use>
         </svg>
       </button>
+
+      <ConfirmModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={handleLogout}
+        title="Вихід"
+        message="Ви впевнені, що хочете вийти з акаунту?"
+        confirmText="Вийти"
+        cancelText="Скасувати"
+      />
     </div>
   );
 }

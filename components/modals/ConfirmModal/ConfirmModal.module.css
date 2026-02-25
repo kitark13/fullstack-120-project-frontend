@@ -1,0 +1,72 @@
+.backdrop {
+  position: fixed; /* фіксуємо на весь екран */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal {
+  background: var(--color-scheme-2-background);
+  border-radius: 24px;
+  padding: 20px;
+  width: 335px;
+  height: 338px;
+  max-width: 768px;
+  position: relative;
+}
+.btnClose {
+  background-color: transparent;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  margin-left: auto;
+}
+.title {
+  display: flex;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 12px;
+  max-width: 250px;
+}
+
+.message {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: var(--color-scheme-1-text);
+  margin: 0 auto;
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+.btnCancel {
+  border: 1px solid var(--color-scheme-2-border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  width: 100%;
+  height: 48px;
+  margin-bottom: 12px;
+  background-color: var(--opacity-neutral-darkest-5);
+}
+.btnConfirm {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  border: 1px solid var(--color-royal-blue);
+  border-radius: 8px;
+  padding: 6px 12px;
+  width: 295px;
+  height: 48px;
+  line-height: 150%;
+  color: var(--color-white);
+  background-color: var(--color-royal-blue);
+}

@@ -1,8 +1,6 @@
 "use client";
-
 import React, { useEffect } from "react";
 import css from "./ConfirmModal.module.css";
-
 interface ConfirmModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -12,11 +10,14 @@ interface ConfirmModalProps {
   confirmText?: string;
   cancelText?: string;
 }
-
 export default function ConfirmModal({
   isOpen,
   onClose,
   onConfirm,
+  title,
+  message,
+  confirmText = "OK",
+  cancelText = "Cancel",
 }: ConfirmModalProps) {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -31,28 +32,33 @@ export default function ConfirmModal({
       window.removeEventListener("keydown", handleEsc);
     };
   }, [isOpen, onClose]);
-
   if (!isOpen) return null;
-
   return (
     <div className={css.backdrop} onClick={onClose}>
+      {" "}
       <div className={css.modal} onClick={(e) => e.stopPropagation()}>
+        {" "}
         <button className={css.btnClose} onClick={onClose} aria-label="Close">
+          {" "}
           <svg width="24" height="24">
-            <use href="/sprite-final-opt.svg#icon-close"></use>
-          </svg>
-        </button>
-        <h2 className={css.title}>{"Ви точно хочете вийти?"}</h2>
-        <p className={css.message}>{"Ми будемо сумувати за вами!"}</p>
+            {" "}
+            <use href="/sprite-final-opt.svg#icon-close"></use>{" "}
+          </svg>{" "}
+        </button>{" "}
+        <h2 className={css.title}>{title}</h2>{" "}
+        <p className={css.message}>{message}</p>{" "}
         <div className={css.actions}>
+          {" "}
           <button className={css.btnCancel} onClick={onClose}>
-            {"Відмінити"}
-          </button>
+            {" "}
+            {cancelText}{" "}
+          </button>{" "}
           <button className={css.btnConfirm} onClick={onConfirm}>
-            {"Вийти"}
-          </button>
-        </div>
-      </div>
+            {" "}
+            {confirmText}{" "}
+          </button>{" "}
+        </div>{" "}
+      </div>{" "}
     </div>
   );
 }

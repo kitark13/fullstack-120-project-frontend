@@ -2,18 +2,18 @@
 
 import { ReactNode, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import useAuthStore, { AuthState } from "@/lib/store/authStore";
+import useAuthStore from "@/lib/store/authStore";
 import { checkSession } from "@/lib/api/clientApi";
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const setUser = useAuthStore((s: AuthState) => s.setUser);
+  const setUser = useAuthStore((state) => state.setUser);
   const clearIsAuthenticated = useAuthStore(
-    (s: AuthState) => s.clearIsAuthenticated,
+    (state) => state.clearIsAuthenticated,
   );
-  const logout = useAuthStore((s: AuthState) => s.logout);
+  // const logout = useAuthStore((state) => state.logout);
   const [checking, setChecking] = useState(true);
 
   const isPrivateRoute = (p: string) =>
@@ -32,30 +32,18 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     async function verify() {
       setChecking(true);
       try {
-        const token = localStorage.getItem("token");
+        const user = await checkSession();
+        if (!mounted) return;
 
-        if (token) {
-          // Спробувати отримати юзера з сесії
-          const user = await checkSession();
-          if (!mounted) return;
+        if (user) {
+          setUser(user);
 
-          if (user) {
-            setUser(user);
-            // Якщо авторизований і на auth-сторінці — редірект на /
-            if (pathname && isAuthRoute(pathname)) {
-              router.replace("/");
-            }
-          } else {
-            // Токен вимер або невалідний
-            clearIsAuthenticated();
-            localStorage.removeItem("token");
-            if (pathname && isPrivateRoute(pathname)) {
-              router.replace("/auth/login");
-            }
+          if (pathname && isAuthRoute(pathname)) {
+            router.replace("/");
           }
         } else {
-          // Нема токена — не авторизований
           clearIsAuthenticated();
+
           if (pathname && isPrivateRoute(pathname)) {
             router.replace("/auth/login");
           }
@@ -63,7 +51,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       } catch (error) {
         console.error("Auth check failed:", error);
         clearIsAuthenticated();
-        localStorage.removeItem("token");
+
         if (pathname && isPrivateRoute(pathname)) {
           router.replace("/auth/login");
         }

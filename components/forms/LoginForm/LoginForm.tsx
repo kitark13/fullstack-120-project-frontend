@@ -6,19 +6,10 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import useAuthStore from "@/lib/store/authStore";
+import { login } from "@/lib/api/clientApi";
 import css from "./LoginForm.module.css";
 
 interface FormValues {
-  email: string;
-  password: string;
-}
-
-export interface User {
-  id: string;
-  email: string;
-}
-
-export interface LoginPayload {
   email: string;
   password: string;
 }
@@ -34,47 +25,21 @@ export default function LoginForm() {
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
-      .email("Invalid email format")
-      .required("Email is required"),
+      .email("Невірний формат email")
+      .required("Email обовʼязковий"),
     password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
+      .min(8, "Мінімум 8 символів")
+      .required("Пароль обовʼязковий"),
   });
 
   const handleSubmit = async (values: FormValues) => {
     try {
-      const response = await fetch(
-        "https://fullstack-120-project-group-1-backend.onrender.com/auth/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
-        },
-      );
-
-      if (!response.ok) {
-        const data = await response.json();
-        toast.error(data.error || "Сталася помилка при вході");
-        return;
-      }
-
-      const data = await response.json();
-
-      // Зберегти токен
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-      }
-
-      // Зберегти юзера в store
-      if (data.user) {
-        setUser(data.user);
-      }
-
-      toast.success("Ви успішно залогіні!");
-      // Редірект на головну
+      const user = await login(values);
+      setUser(user);
+      toast.success("Ви успішно увійшли!");
       router.push("/");
     } catch (error) {
-      toast.error("Сталася помилка при вході");
+      toast.error("Невірний email або пароль");
       console.error(error);
     }
   };

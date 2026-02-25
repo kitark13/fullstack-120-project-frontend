@@ -16,8 +16,18 @@ export async function logout(): Promise<void> {
 }
 
 export async function checkSession(): Promise<User | null> {
-  const res = await api.get<User | null>("/auth/session");
-  return res.data ?? null;
+  try {
+    const res = await api.get<User>("/users/me");
+    return res.data;
+  } catch {
+    try {
+      await api.post("/auth/refresh");
+      const res = await api.get<User>("/users/me");
+      return res.data;
+    } catch {
+      return null;
+    }
+  }
 }
 
 export type RegisterRequest = {

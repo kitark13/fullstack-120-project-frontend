@@ -1,25 +1,37 @@
 "use client";
 
 import { api } from "@/lib/api/api";
+import useAuthStore from "@/lib/store/authStore";
 
 export default function IstoriiAndRegister() {
+  const setUser = useAuthStore((state) => state.setUser);
+  const user = useAuthStore((state) => state.user);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   const handleRegister = async (formData: FormData) => {
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    await api.post("/auth/register", {
-      name,
-      email,
-      password,
-    });
+    try {
+      const res = await api.post("/auth/register", {
+        name,
+        email,
+        password,
+      });
 
-    alert("Користувача створено. Перевір cookies в DevTools.");
+      // ✅ тепер тип User співпадає з бекендом
+      setUser(res.data);
+      console.log(res.data);
+      console.log(setUser(res.data));
+    } catch (error) {
+      console.error("Register error:", error);
+    }
   };
 
   const handleClick = async () => {
     try {
-      const res = await api.get("/stories"); // <-- твій endpoint
+      const res = await api.get("/stories");
       console.log("Stories:", res.data);
     } catch (error) {
       console.error("Error fetching stories:", error);
@@ -38,6 +50,14 @@ export default function IstoriiAndRegister() {
       </form>
 
       <hr />
+
+      <div>
+        {isAuthenticated ? (
+          <p>Привіт, {user?.name}</p>
+        ) : (
+          <p>Ви не авторизовані</p>
+        )}
+      </div>
 
       <button onClick={handleClick}>Отримати історії</button>
     </div>

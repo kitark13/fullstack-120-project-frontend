@@ -29,15 +29,15 @@ export default function RegistrationForm() {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .min(2, "Name must be at least 2 characters")
-      .max(30, "Name is too long")
-      .required("Name is required"),
+      .min(2, "Імʼя має містити щонайменше 2 символи")
+      .max(30, "Імʼя не може бути довшим за 30 символів")
+      .required("Імʼя є обовʼязковим полем"),
     email: Yup.string()
-      .email("Invalid email format")
-      .required("Email is required"),
+      .email("Невірний формат електронної пошти")
+      .required("Електронна пошта є обовʼязковою"),
     password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
+      .min(8, "Пароль має містити щонайменше 8 символів")
+      .required("Пароль є обовʼязковим"),
   });
 
   const handleSubmit = async (values: FormValues) => {

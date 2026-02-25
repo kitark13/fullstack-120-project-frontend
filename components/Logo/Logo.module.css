@@ -25,6 +25,9 @@
 .logoMobText {
   color: #000;
 }
+.logoAuthText {
+  color: #000;
+}
 @media only screen and (min-width: 768px) {
   .logoFoot {
     justify-content: start;

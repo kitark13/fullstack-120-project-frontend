@@ -1,18 +1,18 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import styles from "./AuthNav.module.css";
-import { useState } from "react";
 import ProfileLogout from "./ProfileLogout/ProfileLogout";
+import useAuthStore from "@/lib/store/authStore";
 type AuthNavProps = {
   variant: "header" | "mobMenu";
 };
 
 export default function AuthNav({ variant }: AuthNavProps) {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const toggleMenu = () => setIsAuthenticated(!isAuthenticated);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   return isAuthenticated ? (
+    <ProfileLogout variant={variant === "mobMenu" ? "mobile-menu" : "header"} />
+  ) : (
     <div
       className={`${styles.authContainer} ${
         variant === "mobMenu" ? styles.mobAuthContainer : ""
@@ -33,19 +33,5 @@ export default function AuthNav({ variant }: AuthNavProps) {
         Реєстрація
       </Link>
     </div>
-  ) : (
-    <>
-      <ProfileLogout />
-      {/* <button
-        className={styles.btnLogout}
-        type="button"
-        aria-label="Open menu"
-        onClick={toggleMenu}
-      >
-        <svg className={styles.iconLogout} width="24" height="24">
-          <use href="/sprite-final-opt.svg#icon-logout"></use>
-        </svg>
-      </button> */}
-    </>
   );
 }

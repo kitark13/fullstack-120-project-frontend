@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import css from "./ProfileLogout.module.css";
 import useAuthStore from "@/lib/store/authStore";
+import { useRouter } from "next/navigation";
 
 type ProfileLogoutProps = {
   variant?: "header" | "mobile-menu";
@@ -11,6 +12,8 @@ type ProfileLogoutProps = {
 
 export default function ProfileLogout({ variant }: ProfileLogoutProps) {
   const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
+  const router = useRouter();
   let userName = "Ім'я";
   if (user) {
     if (
@@ -36,6 +39,11 @@ export default function ProfileLogout({ variant }: ProfileLogoutProps) {
         ? user.data.avatarUrl
         : undefined;
 
+  const handleLogout = async () => {
+    await logout();
+    router.replace("/auth/login");
+  };
+
   return (
     <div className={css.logoutContainer}>
       <Link
@@ -56,6 +64,7 @@ export default function ProfileLogout({ variant }: ProfileLogoutProps) {
         className={css.btnLogout}
         type="button"
         aria-label="Open menu logout"
+        onClick={handleLogout}
       >
         <svg className={css.iconLogout} width="24" height="24">
           <use href="/sprite-final-opt.svg#icon-logout"></use>

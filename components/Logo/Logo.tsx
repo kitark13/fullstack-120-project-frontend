@@ -3,7 +3,7 @@ import Link from "next/link";
 import css from "./Logo.module.css";
 
 interface LogoProps {
-  variant: "footer" | "header" | "mobMenu";
+  variant: "footer" | "header" | "mobMenu" | "auth";
 }
 const Logo = ({ variant }: LogoProps) => {
   return (
@@ -11,6 +11,7 @@ const Logo = ({ variant }: LogoProps) => {
       href="/"
       className={`${css.logoLink} ${variant === "footer" ? css.logoFoot : ""}
       ${variant === "mobMenu" ? css.logoMob : ""}
+      ${variant === "auth" ? css.logoAuth : ""}
       `}
     >
       <Image
@@ -22,7 +23,8 @@ const Logo = ({ variant }: LogoProps) => {
       />
       <span
         className={`${css.logoText} ${variant === "footer" ? css.logoFootText : ""}
-        ${variant === "mobMenu" ? css.logoMobText : ""}`}
+        ${variant === "mobMenu" ? css.logoMobText : ""}
+        ${variant === "auth" ? css.logoAuthText : ""}`}
       >
         Подорожники
       </span>

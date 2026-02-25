@@ -1,17 +1,22 @@
 import { getTopStoriesServer } from '@/lib/api/serverApi';
-
-//import styles from './PopularStories.module.css';
-
 import { PopularStoriesClient } from '@/components/stories/PopularStories/PopularStories.client';
 
-export type Author = {
-  _id: string;
-  name: string;
-  avatarUrl: string;
-};
-
 export async function PopularStories() {
-  const { data } = await getTopStoriesServer(4);
+  let isError = false;
+  let data = null;
+  try {
+    data = await getTopStoriesServer(4);
+  } catch (error) {
+    console.error('Failed to load stories:', error);
+    isError = true;
+  }
 
-  return <PopularStoriesClient stories={data}></PopularStoriesClient>;
+  return (
+    <>
+      {isError && <p>Failed to load stories...</p>}
+      {data && (
+        <PopularStoriesClient stories={data.data}></PopularStoriesClient>
+      )}
+    </>
+  );
 }

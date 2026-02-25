@@ -2,26 +2,28 @@
 
 import Image from 'next/image';
 import styles from './TravellersStoriesItem.module.css';
-import { Author } from '@/components/stories/PopularStories/PopularStories';
 import { Story } from '@/types/index';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { addToFavorite, removeFromFavorite } from '@/lib/api/clientApi';
-
-// interface ButtonProp {
-//   children: React.ReactNode;
-//   className: string;
-// }
+import { string } from 'yup';
 
 interface TravellersStoriesItemProps {
   story: Story;
-  isAuthenticated: string | null;
+  isAuthenticated: boolean;
 }
 interface StoryAuthorProps {
   author: Author;
   date: string;
   savedNumber: number;
 }
+
+export type Author = {
+  _id: string;
+  name: string;
+  avatarUrl: string;
+};
 
 export function TravellersStoriesItem({
   story,
@@ -32,17 +34,50 @@ export function TravellersStoriesItem({
     story.favoriteCount,
   );
 
-  async function handleToggleLike() {
-    if (!!isAuthenticated) {
-      const prevSaved = isSaved;
-      setIsSaved((isSaved) => !isSaved);
+  const mutationAdd = useMutation({
+    mutationFn: (storyId: string) => addToFavorite(storyId),
+    onMutate: async () => {
+      setIsSaved(true);
+      setFavoriteCount((prev) => prev + 1);
+    },
+    onError: () => {
+      //  якщо щось з базою пішло не так, повертаємо ui як було
+      setIsSaved(false);
+      setFavoriteCount((prev) => prev - 1);
+      alert(
+        'Упсс...Збереження до улюблених НЕ пройшло успішно. Спробуйте ще раз',
+      );
+    },
+    onSuccess: () => {
+      console.log('Story was added to favorite successfully');
+    },
+  });
 
-      if (!prevSaved) {
-        await addToFavorite(story._id); //додавання до улюблених
-        setFavoriteCount((prev) => prev + 1);
+  const mutationRemove = useMutation({
+    mutationFn: (storyId: string) => removeFromFavorite(storyId),
+    onMutate: async () => {
+      setIsSaved(false);
+      setFavoriteCount((prev) => prev - 1);
+    },
+    onError: () => {
+      setIsSaved(true);
+      setFavoriteCount((prev) => prev + 1);
+      alert(
+        'Упсс...Видалення з улюблених НЕ пройшло успішно. Спробуйте ще раз',
+      );
+    },
+    onSuccess: () => {
+      console.log('Story was removed from favorite successfully');
+    },
+  });
+
+  function handleToggleLike() {
+    if (isAuthenticated) {
+      if (!isSaved) {
+        //якщо до цього було не збережено
+        mutationAdd.mutate(story._id);
       } else {
-        await removeFromFavorite(story._id); //видалення з улюблених
-        setFavoriteCount((prev) => prev - 1);
+        mutationRemove.mutate(story._id);
       }
     } else {
       alert(
@@ -50,6 +85,8 @@ export function TravellersStoriesItem({
       );
     }
   }
+
+  const isLoading = mutationAdd.isPending || mutationRemove.isPending;
 
   return (
     <li className={styles.storyCard}>
@@ -79,7 +116,8 @@ export function TravellersStoriesItem({
 
           <button
             className={isSaved ? styles.likeBtnSaved : styles.likeBtnNotSaved}
-            onClick={handleToggleLike}>
+            onClick={handleToggleLike}
+            disabled={isLoading}>
             <svg
               className={isSaved ? styles.iconSaved : styles.iconNotSaved}
               width={24}

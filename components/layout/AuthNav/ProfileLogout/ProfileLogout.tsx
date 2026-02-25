@@ -76,10 +76,10 @@ export default function ProfileLogout({
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onConfirm={handleLogout}
-        title="Вихід"
-        message="Ви впевнені, що хочете вийти з акаунту?"
+        title="Ви точно хочете вийти?"
+        message="Ми будемо сумувати за вами!"
         confirmText="Вийти"
-        cancelText="Скасувати"
+        cancelText="Відмінити"
       />
     </div>
   );

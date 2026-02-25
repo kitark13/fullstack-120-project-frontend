@@ -1,9 +1,9 @@
 // import css from "./page.module.css";
-import About from '@/components/home/About/About';
-import Hero from '@/components/home/Hero/Hero';
-import Join from '@/components/home/Join/Join';
-import PopularStoriesSection from '@/components/home/PopularStoriesSection/PopularStoriesSection';
-import IstoriiAndRegister from '@/components/IstoriiAndRegister/IstoriiAndRegister';
+import Hero from "@/components/home/Hero/Hero";
+import About from "@/components/home/About/About";
+import PopularStoriesSection from "@/components/home/PopularStoriesSection/PopularStoriesSection";
+import OurTravellers from "@/components/home/OurTravellers/OurTravellers";
+import Join from "@/components/home/Join/Join";
 
 export default function Home() {
   return (
@@ -11,8 +11,8 @@ export default function Home() {
       <Hero />
       <About />
       <PopularStoriesSection />
+      <OurTravellers />
       <Join />
-      <IstoriiAndRegister />
     </main>
   );
 }

@@ -1,5 +1,21 @@
+.avatar {
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.userName {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  color: var(--color-scheme-2-text);
+}
 .logoutContainer {
   display: none;
+}
+.mobileMenuLog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .btnLogout {
   display: flex;
@@ -10,11 +26,15 @@
 
   padding: 4px;
 }
+
 .iconLogout {
 }
 @media screen and (min-width: 768px) {
 }
 @media screen and (min-width: 1440px) {
+  .userName {
+    color: #fff;
+  }
   .logoutContainer {
     color: #fff;
   }
@@ -32,5 +52,8 @@
   }
   .logoutContainer {
     display: flex;
+
+    justify-content: center;
+    align-items: center;
   }
 }

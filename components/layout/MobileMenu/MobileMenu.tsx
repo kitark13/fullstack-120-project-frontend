@@ -1,14 +1,39 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./MobileMenu.module.css";
 
 import NavList from "../NavList/NavList";
 import AuthNav from "../AuthNav/AuthNav";
 import Logo from "../../Logo/Logo";
+import ProfileLogout from "../AuthNav/ProfileLogout/ProfileLogout";
+
 type Props = { isOpen: boolean; onClose: () => void };
+
 export default function MobileMenu({ isOpen, onClose }: Props) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  const handleLinkClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.closest("a")) {
+      onClose();
+    }
+  };
+
   return (
-    <div className={`${styles.mobMenu} ${isOpen ? styles.open : ""}`}>
+    <div
+      className={`${styles.mobMenu} ${isOpen ? styles.open : ""}`}
+      onClick={handleLinkClick}
+    >
       {" "}
       <div className={`container ${styles.mobMenuDiv}`}>
         {" "}
@@ -27,7 +52,7 @@ export default function MobileMenu({ isOpen, onClose }: Props) {
             </svg>{" "}
           </button>{" "}
         </div>
-        <NavList variant="mobileMenu" />
+        <NavList variant="mobMenu" />
         <AuthNav variant="mobMenu" />
       </div>{" "}
     </div>

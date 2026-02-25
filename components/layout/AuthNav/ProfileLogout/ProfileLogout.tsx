@@ -55,9 +55,8 @@ export default function ProfileLogout({
           width={32}
           height={32}
         />
+        <p className={css.userName}>{userName}</p>
       </Link>
-
-      <p className={css.userName}>{userName}</p>
 
       <button
         className={css.btnLogout}

@@ -24,12 +24,22 @@
 }
 .linkNav:hover {
   opacity: 0.8;
+  border: 1px solid var(--color-white);
+  border-radius: 8px;
+  padding: 0px 8px;
 }
 .linkNav:focus {
   opacity: 0.3;
+  border: 1px solid var(--color-white);
+  border-radius: 8px;
+  padding: 0px 8px;
 }
 .linkNav:active {
   opacity: 0.3;
+  border: 1px solid var(--color-white);
+  border-radius: 8px;
+  padding: 0px 8px;
+  background: var(--color-neutral-lighter);
 }
 .linkNav:focus:not(:active):not(:hover) {
   opacity: initial;
@@ -54,6 +64,7 @@
   .tabLink {
     display: inline-flex;
     margin-left: auto;
+    box-sizing: border-box;
     border-radius: 8px;
     padding: 4px 10px;
     width: 182px;

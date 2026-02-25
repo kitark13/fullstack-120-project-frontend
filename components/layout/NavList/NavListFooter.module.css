@@ -4,6 +4,9 @@
   justify-content: center;
   align-items: center;
 }
+.tabLink {
+  display: none;
+}
 .listNav {
   list-style: none;
   display: flex;
@@ -26,16 +29,26 @@
   line-height: 1.5;
   line-height: 150%;
   font-size: 16px;
-  transition: 250ms ease-in;
+  transition: all 250ms ease-in;
 }
 .linkNav:hover {
   opacity: 0.8;
+  border: 1px solid var(--color-scheme-1-text);
+  border-radius: 8px;
+  padding: 0px 8px;
 }
 .linkNav:focus {
   opacity: 0.3;
+  border: 1px solid var(--color-scheme-1-text);
+  border-radius: 8px;
+  padding: 0px 8px;
 }
 .linkNav:active {
   opacity: 0.3;
+  border: 1px solid var(--color-scheme-1-text);
+  border-radius: 8px;
+  padding: 0px 8px;
+  background: var(--color-neutral-lighter);
 }
 .linkNav:focus:not(:active):not(:hover) {
   opacity: initial;
@@ -55,6 +68,9 @@
   }
 }
 @media screen and (min-width: 1440px) {
+  .tabLink {
+    display: none;
+  }
   .navigation {
     gap: 36px;
     margin: 0;

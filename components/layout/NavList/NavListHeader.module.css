@@ -19,31 +19,58 @@
   font-weight: 400;
   line-height: 1.5;
   line-height: 150%;
-  font-size: 16px;
+  font-size: 18px;
   transition: 250ms ease-in;
+  border-radius: 8px;
 }
 .linkNav:hover {
   opacity: 0.8;
-  border: 1px solid var(--color-white);
-  border-radius: 8px;
-  padding: 0px 8px;
+
+  outline: 2px solid var(--color-scheme-1-background);
+  outline-offset: 8px;
 }
 .linkNav:focus {
   opacity: 0.3;
-  border: 1px solid var(--color-white);
+  outline: 2px solid var(--color-royal-blue);
+  outline-offset: 2px;
   border-radius: 8px;
-  padding: 0px 8px;
 }
 .linkNav:active {
   opacity: 0.3;
-  border: 1px solid var(--color-white);
-  border-radius: 8px;
-  padding: 0px 8px;
+  outline: 2px solid var(--color-royal-blue);
+  outline-offset: 2px;
   background: var(--color-neutral-lighter);
 }
 .linkNav:focus:not(:active):not(:hover) {
   opacity: initial;
 }
+.tabLink {
+  font-size: 16px;
+}
+.notHomeLink {
+  color: var(--color-scheme-2-text);
+}
+.notHomeLink:hover,
+.notHomeLink:focus {
+  color: var(--color-scheme-2-text);
+  outline: 1px solid var(--color-scheme-2-text);
+  outline-offset: 8px;
+}
+.tabLink:hover,
+.tabLink:focus {
+  outline: none;
+}
+.tabLink.notHomeLink {
+  outline: none;
+
+  background-color: #4169e1;
+  color: #fff;
+}
+.tabLink.notHomeLink:hover,
+.tabLink.notHomeLink:focus {
+  background-color: #3152bc;
+}
+
 @media screen and (min-width: 768px) {
   .navigation {
     display: flex;
@@ -61,12 +88,18 @@
     color: #fff;
   }
 
+  .linkNav.notHomeLink {
+    display: flex;
+  }
+
   .tabLink {
     display: inline-flex;
     margin-left: auto;
     box-sizing: border-box;
     border-radius: 8px;
-    padding: 4px 10px;
+    /* padding: 4px 10px; */
+    justify-content: center;
+    align-items: center;
     width: 182px;
     height: 32px;
     background-color: #fff;
@@ -81,6 +114,15 @@
     color: #fff;
     background-color: #7f7f7f;
   }
+  .notHomeLink {
+    color: var(--color-scheme-2-text);
+  }
+  .notHomeLink:hover,
+  .notHomeLink:focus {
+    color: var(--color-scheme-2-text);
+    outline: 1px solid var(--color-scheme-2-text);
+    outline-offset: 8px;
+  }
 }
 @media screen and (min-width: 1440px) {
   .navigation {
@@ -88,6 +130,10 @@
     justify-content: center;
     align-items: center;
     margin-left: auto;
+  }
+  .tabLink {
+    font-size: 18px;
+    width: 202px;
   }
   .linkNav {
     display: flex;

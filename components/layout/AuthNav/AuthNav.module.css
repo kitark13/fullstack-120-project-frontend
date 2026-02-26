@@ -121,6 +121,25 @@
     border: #4169e1;
   }
 
+  .linkLoginDefault {
+    color: #030a06;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .linkLoginDefault:hover,
+  .linkLoginDefault:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid #4169e1;
+    color: #030a06;
+  }
+
+  .linkRegisterDefault {
+    background-color: #4169e1;
+    color: #fff;
+    border: 1px solid #4169e1;
+  }
+
   .authContainer {
     margin-left: 0;
   }

@@ -9,12 +9,43 @@
   line-height: 150%;
   color: var(--color-scheme-2-text);
 }
+.userNameDefault {
+  color: #030a06;
+}
 .profileLink {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   border-right: #fff;
+  padding: 4px 8px;
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.profileLink:hover,
+.profileLink:focus {
+  transform: translateY(-2px);
+  background-color: rgba(255, 255, 255, 0.15);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+}
+
+.userNameDefault + .profileLink:hover,
+:global(.theme-default) .profileLink:hover,
+.profileLink:has(.userNameDefault):hover {
+  background-color: rgba(65, 105, 225, 0.08);
+  filter: drop-shadow(0 0 8px rgba(65, 105, 225, 0.3));
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background-color: #030a06;
+  margin: 0 12px;
+}
+.dividerDefault {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 .logoutContainer {
   display: none;
@@ -30,17 +61,49 @@
   justify-content: center;
   border: none;
   background-color: transparent;
+  padding: 6px;
+  border-radius: 50%;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  outline: none;
+}
 
-  padding: 4px;
+.btnLogout:hover,
+.btnLogout:focus {
+  transform: rotate(15deg) scale(1.15);
+  background-color: rgba(255, 255, 255, 0.15);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.btnLogoutDefault:hover,
+.btnLogoutDefault:focus {
+  background-color: rgba(65, 105, 225, 0.1);
+  filter: drop-shadow(0 0 10px rgba(65, 105, 225, 0.4));
+}
+
+.btnLogoutDefault .iconLogout {
+  fill: #030a06;
 }
 
 .iconLogout {
+  fill: #030a06;
+  transition: fill 0.4s ease;
 }
+
 @media screen and (min-width: 768px) {
 }
 @media screen and (min-width: 1440px) {
+  .divider {
+    background-color: #fff;
+  }
+  .dividerDefault {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
   .userName {
     color: #fff;
+  }
+  .userNameDefault {
+    color: #030a06;
   }
   .logoutContainer {
     color: #fff;
@@ -51,11 +114,13 @@
     justify-content: center;
     border: none;
     background-color: transparent;
-
-    padding: 4px;
+    padding: 6px;
   }
   .iconLogout {
     fill: #fff;
+  }
+  .btnLogoutDefault .iconLogout {
+    fill: #030a06;
   }
   .logoutContainer {
     display: flex;

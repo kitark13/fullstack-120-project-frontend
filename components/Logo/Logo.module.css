@@ -28,6 +28,9 @@
 .logoAuthText {
   color: #000;
 }
+.logoHeaderTextDefault {
+  color: #030a06;
+}
 @media only screen and (min-width: 768px) {
   .logoFoot {
     justify-content: start;

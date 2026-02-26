@@ -10,11 +10,13 @@ import { useRouter } from "next/navigation";
 
 type ProfileLogoutProps = {
   variant?: "header" | "mobMenu";
+  theme?: "home" | "default";
   closeMobileMenu?: () => void;
 };
 
 export default function ProfileLogout({
   variant,
+  theme = "home",
   closeMobileMenu,
 }: ProfileLogoutProps) {
   const user = useAuthStore((state) => state.user);
@@ -25,6 +27,8 @@ export default function ProfileLogout({
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
+
+  const isDefaultTheme = variant === "header" && theme === "default";
 
   const userName = user?.name || "Користувач";
   const userAvatar = user?.avatarUrl ?? "/default-avatar.png";
@@ -55,11 +59,17 @@ export default function ProfileLogout({
           width={32}
           height={32}
         />
-        <p className={css.userName}>{userName}</p>
+        <p
+          className={`${css.userName} ${isDefaultTheme ? css.userNameDefault : ""}`}
+        >
+          {userName}
+        </p>
       </Link>
-
+      <div
+        className={`${css.divider} ${variant === "header" ? css.dividerMainPage : ""} ${isDefaultTheme ? css.dividerDefault : ""}`}
+      ></div>
       <button
-        className={css.btnLogout}
+        className={`${css.btnLogout} ${isDefaultTheme ? css.btnLogoutDefault : ""}`}
         type="button"
         aria-label="Logout"
         onClick={() => {

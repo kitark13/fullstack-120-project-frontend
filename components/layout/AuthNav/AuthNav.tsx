@@ -7,14 +7,25 @@ import useAuthStore from "@/lib/store/authStore";
 
 type AuthNavProps = {
   variant: "header" | "mobMenu";
+  theme?: "home" | "default";
   closeMobileMenu?: () => void;
 };
 
-export default function AuthNav({ variant, closeMobileMenu }: AuthNavProps) {
+export default function AuthNav({
+  variant,
+  theme = "home",
+  closeMobileMenu,
+}: AuthNavProps) {
   const { user, isAuthenticated } = useAuthStore();
 
+  const isDefaultTheme = variant === "header" && theme === "default";
+
   return isAuthenticated ? (
-    <ProfileLogout variant={variant} closeMobileMenu={closeMobileMenu} />
+    <ProfileLogout
+      variant={variant}
+      theme={theme}
+      closeMobileMenu={closeMobileMenu}
+    />
   ) : (
     <div
       className={`${styles.authContainer} ${
@@ -26,7 +37,7 @@ export default function AuthNav({ variant, closeMobileMenu }: AuthNavProps) {
         href="/auth/login"
         className={`${styles.linkAuthRender} ${styles.linkLogin} ${
           variant === "mobMenu" ? styles.mobAuthEnter : ""
-        }`}
+        } ${isDefaultTheme ? styles.linkLoginDefault : ""}`}
       >
         Вхід
       </Link>
@@ -36,7 +47,7 @@ export default function AuthNav({ variant, closeMobileMenu }: AuthNavProps) {
         href="/auth/register"
         className={`${styles.linkAuthRender} ${styles.linkRegister} ${
           variant === "mobMenu" ? styles.mobAuthLinkReg : ""
-        }`}
+        } ${isDefaultTheme ? styles.linkRegisterDefault : ""}`}
       >
         Реєстрація
       </Link>

@@ -4,8 +4,9 @@ import css from "./Logo.module.css";
 
 interface LogoProps {
   variant: "footer" | "header" | "mobMenu" | "auth";
+  theme?: "home" | "default";
 }
-const Logo = ({ variant }: LogoProps) => {
+const Logo = ({ variant, theme = "home" }: LogoProps) => {
   return (
     <Link
       href="/"
@@ -24,7 +25,9 @@ const Logo = ({ variant }: LogoProps) => {
       <span
         className={`${css.logoText} ${variant === "footer" ? css.logoFootText : ""}
         ${variant === "mobMenu" ? css.logoMobText : ""}
-        ${variant === "auth" ? css.logoAuthText : ""}`}
+        ${variant === "auth" ? css.logoAuthText : ""}
+        ${variant === "header" && theme === "default" ? css.logoHeaderTextDefault : ""}
+        `}
       >
         Подорожники
       </span>

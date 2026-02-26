@@ -1,5 +1,5 @@
-import { getTopStoriesServer } from '@/lib/api/serverApi';
-import { PopularStoriesClient } from '@/components/stories/PopularStories/PopularStories.client';
+import { getTopStoriesServer } from "@/lib/api/serverApi";
+import { PopularStoriesClient } from "@/components/stories/PopularStories/PopularStories.client";
 
 export async function PopularStories() {
   let isError = false;
@@ -7,7 +7,7 @@ export async function PopularStories() {
   try {
     data = await getTopStoriesServer(4);
   } catch (error) {
-    console.error('Failed to load stories:', error);
+    console.error("Failed to load stories:", error);
     isError = true;
   }
 

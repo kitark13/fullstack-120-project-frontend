@@ -30,15 +30,16 @@ export const getTopStoriesServer = async (limit = 3) => {
   return res.data;
 };
 
-type GetUsersResponse = {
+export type GetUsersResponse = {
   data: User[];
   pagination: { total: number; page: number; limit: number; pages: number };
 };
 
-export async function getUsersServer(limit = 4): Promise<User[]> {
+export async function getUsersServer(page = 1, limit = 3) {
   const res = await apiServer.get<GetUsersResponse>("/users", {
-    params: { page: 1, limit },
+    params: { page, limit },
   });
 
-  return res.data.data ?? [];
+  // return res.data.data ?? [];
+  return res.data;
 }

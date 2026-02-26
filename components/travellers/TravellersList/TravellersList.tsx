@@ -1,9 +1,30 @@
-import type { User } from "@/types/user";
 import { getUsersServer } from "@/lib/api/serverApi";
-import { TravellersListClient } from "./TravellersList.client";
+import { TravellersListClient } from "@/components/travellers/TravellersList/TravellersList.client";
 
 export async function TravellersList() {
-  const users: User[] = await getUsersServer(4); // рівно 4
+  let isError = false;
+  let data = null;
 
-  return <TravellersListClient users={users} />;
+  try {
+    data = await getUsersServer(4);
+  } catch (error) {
+    console.error("Failed to load travellers:", error);
+    isError = true;
+  }
+
+  if (isError) return <p>Failed to load travellers...</p>;
+  if (!data) return null;
+
+  return (
+    <>
+      <TravellersListClient
+        initialUsers={data.data}
+        totalPages={data.pagination.total}
+      />
+    </>
+  );
 }
+
+// const users: User[] = await getUsersServer(4);
+
+// return <TravellersListClient users={users} />;

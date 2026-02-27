@@ -1,34 +1,14 @@
-/* .list {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 48px;
-}
-
-@media screen and (min-width: 768px) {
-  .list {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: stretch;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  /* .list {
-  } */
-
 .our__travellers {
   padding: 64px 0;
 }
 
 .travellers__title {
+  font-family: "Nunito Sans", sans-serif;
   font-weight: 700;
   font-size: 28px;
   line-height: 1.2;
   letter-spacing: -0.01em;
+  color: #000;
   margin-bottom: 48px;
 }
 
@@ -39,12 +19,16 @@
 }
 
 .travellers__item {
-  /* width: 335px; */
   width: 100%;
   min-width: 250px;
   padding: 24px;
   border-radius: 16px;
   background: var(--color-bg-popular);
+}
+
+.btnWrap {
+  display: flex;
+  justify-content: center;
 }
 
 .traveller__btn {
@@ -64,22 +48,22 @@
 }
 
 .traveller__btn__more {
-  position: static;
-  display: block;
-  border: 1px solid var(--color-primary);
+  border: 1px solid #4169e1;
+  background-color: #4169e1;
+  color: white;
   border-radius: 8px;
   padding: 6px 12px;
-  width: 158px;
+  cursor: pointer;
+  min-width: 156px;
   height: 48px;
-  background-color: var(--color-primary);
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
-  color: var(--color-text-inverse);
-  margin: 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* ======== BUTTON HOVER / FOCUS ======== */
 .traveller__btn,
 .traveller__btn__more {
   transition: all 0.3s ease;
@@ -108,16 +92,16 @@
 
 .traveller__btn__more:hover,
 .traveller__btn__more:focus {
-  background-color: var(--color-primary-hover-first);
+  background-color: #e8eeff;
   transform: translateY(-1px);
-  color: var(--color-text-primary);
-  box-shadow: 0 4px 12px var(--box-shadow);
+  color: black;
+  box-shadow: 0 4px 12px;
 }
 
 .traveller__btn__more:active {
   transform: translateY(0);
-  color: var(--color-text-primary);
-  background-color: var(--color-primary-active-first);
+  color: black;
+  background-color: #7a96ea;
 }
 
 .traveller__btn__more:disabled {
@@ -156,5 +140,6 @@
 
   .traveller__btn__more {
     width: 173px;
+    font-size: 18px;
   }
 }

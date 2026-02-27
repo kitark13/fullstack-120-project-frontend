@@ -1,12 +1,22 @@
 import { getUsersServer } from "@/lib/api/serverApi";
 import { TravellersListClient } from "@/components/travellers/TravellersList/TravellersList.client";
 
-export async function TravellersList() {
+interface TravellersListProps {
+  showLoadMore?: boolean;
+  variant?: "page" | "section";
+}
+
+export async function TravellersList({
+  showLoadMore = true,
+  variant = "page",
+}: TravellersListProps) {
   let isError = false;
   let data = null;
 
+  const initialLimit = variant === "section" ? 4 : 12;
+
   try {
-    data = await getUsersServer(4);
+    data = await getUsersServer(1, initialLimit);
   } catch (error) {
     console.error("Failed to load travellers:", error);
     isError = true;
@@ -20,11 +30,9 @@ export async function TravellersList() {
       <TravellersListClient
         initialUsers={data.data}
         totalPages={data.pagination.total}
+        showLoadMore={showLoadMore}
+        variant={variant}
       />
     </>
   );
 }
-
-// const users: User[] = await getUsersServer(4);
-
-// return <TravellersListClient users={users} />;

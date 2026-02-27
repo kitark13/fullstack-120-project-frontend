@@ -7,7 +7,7 @@ export default function OurTravellersPage() {
     <section className={styles.travellersSection}>
       <div className="container">
         <h2 className={styles.travellersTitle}>Наші Мандрівники</h2>
-        <TravellersList />
+        <TravellersList showLoadMore={false} variant="section" />
         <div className={styles.btnWrap}>
           <Link className={styles.trlBtn} href="/travellers">
             Переглянути всі

@@ -6,12 +6,7 @@ export default function TravellersPage() {
     <section className={styles.travellers}>
       <div className="container">
         <h2 className={styles.travellers__title}>Мандрівники</h2>
-        <TravellersList
-        //   initialPerPage={12}
-        //   loadMorePerPage={4}
-        //   showLoadMoreOnMobile={true}
-        //   customStyles={styles}
-        />
+        <TravellersList />
       </div>
     </section>
   );

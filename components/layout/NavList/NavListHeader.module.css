@@ -69,6 +69,7 @@
 .tabLink.notHomeLink:hover,
 .tabLink.notHomeLink:focus {
   background-color: #3152bc;
+  outline: none;
 }
 
 @media screen and (min-width: 768px) {
@@ -123,6 +124,12 @@
     outline: 1px solid var(--color-scheme-2-text);
     outline-offset: 8px;
   }
+  .linkNav.notHomeLink {
+    display: none;
+  }
+  .tabLink.notHomeLink {
+    display: flex;
+  }
 }
 @media screen and (min-width: 1440px) {
   .navigation {
@@ -130,6 +137,9 @@
     justify-content: center;
     align-items: center;
     margin-left: auto;
+  }
+  .linkNav.notHomeLink {
+    display: flex;
   }
   .tabLink {
     font-size: 18px;

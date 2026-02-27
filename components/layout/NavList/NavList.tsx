@@ -35,7 +35,7 @@ const NavList = ({ variant, theme = "home" }: NavListProps) => {
             className={`${css.linkNav} ${
               isDefaultTheme ? headerCss.notHomeLink : ""
             }`}
-            href="/#home"
+            href="/"
           >
             Головна
           </Link>

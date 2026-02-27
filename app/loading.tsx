@@ -1,5 +1,7 @@
+import GlobalLoader from "@/components/common/GlobalLoader/GlobalLoader";
+
 function Loading() {
-  return <p>Завантаження сторінки, будь ласка зачекайте...</p>;
+  return <GlobalLoader />;
 }
 
 export default Loading;

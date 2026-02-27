@@ -1,10 +1,8 @@
 import { Story } from "@/types/index";
 import { User } from "@/types/user";
-// import { api } from '@/lib/api/api';
 import axios from "axios";
 
 export const apiServer = axios.create({
-  //   baseURL: "http://localhost:3000",
   baseURL: "https://fullstack-120-project-group-1-backend.onrender.com", //process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
 });
@@ -35,11 +33,26 @@ export type GetUsersResponse = {
   pagination: { total: number; page: number; limit: number; pages: number };
 };
 
-export async function getUsersServer(page = 1, limit = 3) {
+export async function getUsersServer(page = 1, limit = 4) {
   const res = await apiServer.get<GetUsersResponse>("/users", {
-    params: { page, limit },
+    params: {
+      page,
+      limit,
+    },
   });
 
-  // return res.data.data ?? [];
   return res.data;
+}
+
+export interface StoryDetailResponse {
+  data: Story;
+  isSaved: boolean;
+}
+
+export async function getStoryByIdServer(storyId: string) {
+  const { data } = await apiServer.get<StoryDetailResponse>(
+    `/stories/${storyId}`,
+  );
+
+  return data;
 }

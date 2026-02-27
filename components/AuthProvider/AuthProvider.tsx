@@ -4,6 +4,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import useAuthStore from "@/lib/store/authStore";
 import { checkSession } from "@/lib/api/clientApi";
+import GlobalLoader from "../common/GlobalLoader/GlobalLoader";
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -68,18 +69,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   }, [pathname, setUser, clearIsAuthenticated, router]);
 
   if (checking) {
-    return (
-      <div
-        style={{
-          minHeight: "200px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <span>Завантаження...</span>
-      </div>
-    );
+    return <GlobalLoader />;
   }
 
   return <>{children}</>;

@@ -42,6 +42,68 @@
   --color-scheme-2-accent: var(--color-royal-blue);
   --color-scheme-2-foreground: var(--color-royal-blue-lighter);
   --color-red: #b00101;
+
+  /* ********************************** */
+  /* BUTTON */
+  /* --- 1. ПАЛІТРА (Base Colors) --- */
+
+  --color-blue-primary: #4169e1;
+  --color-blue-soft: #e8eeff;
+  --color-blue-medium: #7a96ea;
+  --color-blue-dark: #1a2a5a;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Напівпрозорі кольори (Alpha) */
+  --color-black-a05: rgba(0, 0, 0, 0.05);
+  --color-black-a15: rgba(0, 0, 0, 0.15);
+  --color-white-a0: rgba(255, 255, 255, 0);
+
+  /* --- 2. КНОПКИ (Button Semantic Tokens) --- */
+
+  /* Загальні параметри */
+  --btn-radius: 8px;
+  --btn-border-width: 1px;
+  --btn-border-style: solid;
+  --btn-disabled-opacity: 0.3;
+
+  /* Відступи для кнопок з текстом */
+  --btn-pd-l: 6px 12px; /* Велика (L) */
+  --btn-pd-s: 4px 10px; /* Мала (S) */
+
+  /* Відступи для кнопок-іконок (щоб були квадратними) */
+  --btn-pd-icon-l: 6px;
+  --btn-pd-icon-s: 4px;
+
+  /* Primary (Синя) */
+
+  --btn-primary-bg: var(--color-blue-primary);
+  --btn-primary-text: var(--color-white);
+  --btn-primary-border: var(--color-blue-primary);
+
+  --btn-primary-hover-bg: var(--color-blue-soft);
+  --btn-primary-hover-text: var(--color-black);
+
+  --btn-primary-active-bg: var(--color-blue-medium);
+  --btn-primary-active-text: var(--color-black);
+
+  /* Secondary (Сіра з бордером) */
+  --btn-secondary-bg: var(--color-black-a05);
+  --btn-secondary-text: var(--color-black);
+  --btn-secondary-border: var(--color-black-a15);
+
+  /* Secondary Hover  */
+  --btn-secondary-hover-bg: var(--color-blue-primary);
+  --btn-secondary-hover-text: var(--color-white);
+  --btn-secondary-hover-border: var(--color-white-a0);
+
+  /* Secondary Active  */
+  --btn-secondary-active-bg: var(--color-blue-dark);
+  --btn-secondary-active-text: var(--color-white);
+  --btn-secondary-active-border: var(--color-white-a0);
+
+  /* *********************************** */
 }
 
 /* @media (prefers-color-scheme: dark) {

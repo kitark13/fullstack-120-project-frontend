@@ -43,3 +43,16 @@ export async function getUsersServer(page = 1, limit = 4) {
 
   return res.data;
 }
+
+export interface StoryDetailResponse {
+  data: Story;
+  isSaved: boolean;
+}
+
+export async function getStoryByIdServer(storyId: string) {
+  const { data } = await apiServer.get<StoryDetailResponse>(
+    `/stories/${storyId}`,
+  );
+
+  return data;
+}

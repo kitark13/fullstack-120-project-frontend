@@ -1,0 +1,165 @@
+.article {
+  padding-top: 32px;
+}
+
+.title {
+  margin-bottom: 32px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #000;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  padding-bottom: 32px;
+}
+
+.metaInfoInner {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.infoGroup {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.metaItem {
+  display: flex;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.metaItemStrong {
+  font-weight: 700;
+}
+
+.metaItemGeneral {
+  font-weight: 400;
+}
+
+.categoryBadge {
+  align-self: self-start;
+  padding: 4px 10px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.5;
+  border: 1px solid var(--opacity-transparent);
+  border-radius: 6px;
+  background-color: var(--opacity-white-5);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.5;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.mainImage {
+  object-fit: cover;
+}
+
+.contentGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px 0;
+}
+
+.textBlock {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  white-space: pre-line; /* Зберігає абзаци тексту */
+}
+
+.saveAside {
+  padding: 32px 20px;
+  border: 0px solid var(--opacity-white-15);
+  border-radius: 24px;
+  background-color: var(--color-neutral-lightest);
+}
+
+.saveCard {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.saveTitle {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.saveButton {
+  padding: 12px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-white);
+  border: 1px solid var(--color-royal-blue);
+  border-radius: 8px;
+  background-color: var(--color-royal-blue);
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+
+  .metaInfoInner {
+    flex-direction: row;
+    justify-content: space-between;
+    row-gap: 0;
+  }
+
+  .infoGroup {
+    display: flex;
+    flex-direction: row;
+    row-gap: 0;
+    column-gap: 48px;
+  }
+
+  .saveAside {
+    max-width: 418px;
+    padding: 32px 32px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .article {
+    padding-top: 48px;
+  }
+
+  .title {
+    font-size: 56px;
+  }
+
+  .meta {
+    padding-bottom: 48px;
+  }
+
+  .contentGrid {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    padding: 48px 0;
+  }
+
+  .saveAside {
+    width: 418px;
+    flex-shrink: 0;
+  }
+}

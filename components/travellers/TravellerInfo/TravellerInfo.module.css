@@ -1,0 +1,167 @@
+.travellerInfoWrapper {
+  padding: 20px;
+}
+
+.travellerInfoContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.userBlock {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.infoContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.userName {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #030a06;
+  line-height: 1.2;
+}
+
+.userDescription {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.editButton {
+  padding: 8px 16px;
+  border: 1px solid #4169e1;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #4169e1;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+.editButton:hover {
+  background-color: #4169e1;
+  color: #fff;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 32px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modalContent h2 {
+  margin: 0 0 16px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #030a06;
+}
+
+.modalContent button {
+  padding: 8px 16px;
+  border: 1px solid #4169e1;
+  border-radius: 8px;
+  background-color: #4169e1;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 16px;
+}
+
+.modalContent button:hover {
+  background-color: #2e52c0;
+}
+
+@media screen and (min-width: 768px) {
+  .travellerInfoWrapper {
+    padding: 32px;
+  }
+
+  .userBlock {
+    gap: 32px;
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+  }
+
+  .userName {
+    font-size: 32px;
+  }
+
+  .userDescription {
+    font-size: 16px;
+  }
+
+  .editButton {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  .modalContent {
+    max-width: 600px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .travellerInfoWrapper {
+    padding: 40px;
+  }
+
+  .userBlock {
+    gap: 40px;
+  }
+
+  .avatar {
+    width: 150px;
+    height: 150px;
+  }
+
+  .userName {
+    font-size: 40px;
+  }
+
+  .userDescription {
+    font-size: 16px;
+  }
+
+  .editButton {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+}

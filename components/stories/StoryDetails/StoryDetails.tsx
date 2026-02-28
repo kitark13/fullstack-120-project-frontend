@@ -5,11 +5,11 @@ import Button from "@/components/common/Button/Button";
 
 interface StoryDetailsProps {
   story: Story;
-  // isSaved: boolean;
+  isSaved: boolean;
 }
 
 // export default function StoryDetails({ story, isSaved }:
-export default function StoryDetails({ story }: StoryDetailsProps) {
+export default function StoryDetails({ story, isSaved }: StoryDetailsProps) {
   if (!story || !story.img) return null;
 
   return (
@@ -59,7 +59,7 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
               </p>
 
               <Button type="button" variant="primary">
-                Зберегти
+                {isSaved ? "Збережено" : "Зберегти"}
               </Button>
             </div>
           </aside>

@@ -74,6 +74,13 @@
   border-color: var(--btn-secondary-active-border);
 }
 
+/* ================= SAVED ================= */
+.saved {
+  background: var(--btn-secondary-active-bg);
+  color: var(--btn-secondary-active-text);
+  border-color: var(--btn-secondary-active-border);
+}
+
 /* ================= DISABLED ================= */
 
 .button:disabled {

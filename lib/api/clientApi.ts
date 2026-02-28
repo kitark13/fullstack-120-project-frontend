@@ -1,5 +1,6 @@
 import { api } from "./api";
 import { User } from "@/types/user";
+import { Story } from "@/types/index";
 
 export type LoginRequest = { email: string; password: string };
 
@@ -78,4 +79,24 @@ export async function getUsers({
   };
   const response = await api.get("/users", options);
   return response.data;
+}
+
+// створення історії
+
+export async function createStory(payload: FormData): Promise<Story> {
+  const res = await api.post<{ data: Story }>("/stories", payload);
+  return res.data.data;
+}
+
+// отримання всіх категорій
+
+export interface Category {
+  _id: string;
+  name: string;
+}
+
+export async function getCategories(): Promise<Category[]> {
+  const res = await api.get<{ data: Category[] }>("/categories");
+  // якщо вертає масив - .data
+  return res.data.data;
 }

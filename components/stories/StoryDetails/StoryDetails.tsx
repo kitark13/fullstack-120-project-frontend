@@ -1,14 +1,14 @@
 import Image from "next/image";
 import { Story } from "@/types";
 import styles from "./StoryDetails.module.css";
-import Button from "@/components/common/Button/Button";
+// import Button from "@/components/common/Button/Button";
+import SaveButton from "./SaveButton.client";
 
 interface StoryDetailsProps {
   story: Story;
   isSaved: boolean;
 }
 
-// export default function StoryDetails({ story, isSaved }:
 export default function StoryDetails({ story, isSaved }: StoryDetailsProps) {
   if (!story || !story.img) return null;
 
@@ -58,9 +58,10 @@ export default function StoryDetails({ story, isSaved }: StoryDetailsProps) {
                 Вона буде доступна у вашому профілі у розділі збережене
               </p>
 
-              <Button type="button" variant="primary">
+              {/* <Button type="button" variant="primary">
                 {isSaved ? "Збережено" : "Зберегти"}
-              </Button>
+              </Button> */}
+              <SaveButton storyId={story._id} initialIsSaved={isSaved} />
             </div>
           </aside>
         </div>

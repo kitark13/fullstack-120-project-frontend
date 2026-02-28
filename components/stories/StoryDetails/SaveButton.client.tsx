@@ -24,8 +24,10 @@ export default function SaveButton({
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const handleSave = async () => {
+    // console.log("Клік по кнопці! Статус авторизації:", isAuthenticated); //прибрати
     // Перевірка авторизації
     if (!isAuthenticated) {
+      alert("Ви не авторизовані! Тут має відкритися модалка."); //  Тимчасовий alert
       // openAuthModal(); //
       toast.error("Будь ласка, увійдіть у систему");
       return;

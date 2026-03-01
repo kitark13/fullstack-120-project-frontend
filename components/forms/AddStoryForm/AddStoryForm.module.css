@@ -1,0 +1,296 @@
+/* Центрування лоадера під час завантаження категорій */
+.fullPageLoading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  width: 100%;
+}
+
+/* Оверлей поверх всієї форми під час збереження */
+.overlayLoading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+}
+
+.addStoryForm {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 40px;
+}
+
+/* Основний контейнер форми */
+.addStoryForm {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 72px;
+}
+
+.inputsSide {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.charCounter {
+  margin-top: 8px;
+}
+
+.hiddenInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Контейнер для фото та кнопки */
+.imageLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: pointer;
+  width: 100%;
+}
+
+.imagePlaceholder {
+  position: relative;
+  width: 335px;
+  height: 213px;
+  background-color: #f3f3f3;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+  object-fit: cover;
+  transition: border-color 0.2s;
+}
+
+.uploadBtn {
+  margin-top: 24px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background: #e5e7eb;
+  font-weight: 500;
+  font-size: 16px;
+  transition: background 0.2s;
+}
+
+.uploadBtn:hover {
+  background: #d1d5db;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  font-size: 16px;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 8px;
+  transition: border-color 0.2s;
+  padding: 12px;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: #5d66d0;
+}
+
+.textarea {
+  min-height: 180px;
+  resize: none;
+}
+
+/* Права колонка з кнопками */
+.actionsSide {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 24px;
+}
+
+.btnSave {
+  padding: 16px;
+  border: 1px solid #4169e1;
+  background-color: #4169e1;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btnSave:hover,
+.btnSave:focus {
+  background-color: #e8eeff;
+  color: #000;
+}
+
+.btnSave:disabled {
+  background-color: #b0b5e8;
+  cursor: not-allowed;
+}
+
+.btnCancel {
+  padding: 16px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btnCancel:hover {
+    background-color: #4169e1;
+}
+
+.error {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.selectWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select {
+  width: 100%;
+  padding: 14px;
+  padding-right: 44px; 
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  background: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  appearance: none; 
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.select:focus {
+  border-color: #5d66d0;
+}
+
+.selectIcon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px; /* Налаштуй розмір під свій дизайн */
+  height: 20px;
+  pointer-events: none; /* Щоб клік по іконці відкривав список */
+  fill: #333; /* Колір стрілки */
+  transition: all 0.2s ease;
+}
+
+.fullPageLoading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  width: 100%;
+}
+
+.overlayLoading {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+}
+
+.addStoryForm {
+  position: relative; /* Обов'язково для overlayLoading */
+}
+
+/* Червона рамка для помилок */
+.inputError {
+  border-color: #ef4444 !important;
+}
+
+.errorText {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (min-width: 768px) {
+  .addStoryForm {
+    margin-bottom: 64px;
+  }
+
+  .imagePlaceholder {
+    width: 704px;
+    height: 469px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .addStoryForm {
+    display: grid;
+    grid-template-columns: 1fr 423px;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .imagePlaceholder {
+    width: 865px;
+    height: 576px;
+  }
+
+  .label {
+    font-size: 18px;
+  }
+
+  .actionsSide {
+    margin-top: 35px;
+  }
+}

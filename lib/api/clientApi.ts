@@ -1,6 +1,7 @@
 import { api } from './api';
 import { User } from '@/types/user';
 import { Story } from '@/types/index';
+import { Category } from '@/types/category';
 
 export type LoginRequest = { email: string; password: string };
 
@@ -90,10 +91,10 @@ export async function createStory(payload: FormData): Promise<Story> {
 
 // отримання всіх категорій
 
-export interface Category {
-  _id: string;
-  name: string;
-}
+// export interface Category {
+//   _id: string;
+//   name: string;
+// }
 
 export async function getCategories(): Promise<Category[]> {
   const res = await api.get<{ data: Category[] }>('/categories');
@@ -126,3 +127,30 @@ export async function getStoriesTraveller({
 
   return res.data;
 }
+
+export type StoriesListResponse = {
+  data: Story[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+};
+
+interface GetStoriesByCategoryProps {
+  limit?: number;
+  category?: string | null;
+  page: number;
+}
+
+export const getStoriesByCategory = async ({
+  limit = 9,
+  category,
+  page = 1,
+}: GetStoriesByCategoryProps) => {
+  const res = await api.get<StoriesListResponse>('/stories', {
+    params: { page, limit, sortBy: 'popular', category },
+  });
+  return res.data;
+};

@@ -78,3 +78,19 @@ export async function getStoriesTravellerServer(
 
   return res.data;
 }
+interface GetStoriesByCategoryProps {
+  limit?: number;
+  category?: string | null;
+  page: number;
+}
+
+export const getStoriesByCategoryServer = async ({
+  limit = 9,
+  category,
+  page = 1,
+}: GetStoriesByCategoryProps) => {
+  const res = await apiServer.get<StoriesListResponse>('/stories', {
+    params: { page, limit, sortBy: 'popular', category },
+  });
+  return res.data;
+};

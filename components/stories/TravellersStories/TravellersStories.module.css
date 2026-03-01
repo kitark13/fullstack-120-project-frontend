@@ -1,0 +1,26 @@
+/* Список історій */
+.allStoriesList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin-bottom: 24px;
+  padding: 0;
+  list-style: none;
+}
+
+/* ≥768px — 2 карточки */
+@media screen and (min-width: 768px) {
+  .allStoriesList {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* ≥1440px — 3 карточки */
+@media screen and (min-width: 1440px) {
+  .allStoriesList {
+    margin-bottom: 40px;
+  }
+}

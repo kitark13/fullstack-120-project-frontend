@@ -1,0 +1,214 @@
+.travellersStoriesSection {
+  padding-top: 32px;
+  padding-bottom: 64px;
+}
+
+@media screen and (min-width: 1440px) {
+  .travellersStoriesSection {
+    padding-top: 46px;
+    padding-bottom: 72px;
+  }
+}
+
+.storiesTitle {
+  font-weight: 700;
+  line-height: 110%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--color-scheme-1-text);
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+@media screen and (min-width: 768px) {
+  .storiesTitle {
+    font-size: 48px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .storiesTitle {
+    font-size: 56px;
+  }
+}
+
+.categoryList {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  padding: 0;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.categoryItemBtn {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  /* height: 36px; */
+  padding: 6px 12px;
+  border-radius: 8px;
+
+  border: none;
+  background: transparent;
+  color: var(--color-scheme-1-text);
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+.categoryItemBtn:hover {
+  background-color: var(--color-scheme-1-foreground);
+}
+
+.categoryItemBtnActive {
+  background-color: var(--color-scheme-1-foreground);
+}
+
+@media screen and (min-width: 1440px) {
+  .categoryList {
+    margin-bottom: 40px;
+  }
+}
+
+/* Список історій
+.allStoriesList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin-bottom: 24px;
+  padding: 0;
+  list-style: none;
+} */
+
+/* ≥768px — 2 карточки */
+@media screen and (min-width: 768px) {
+  /* .allStoriesList {
+    flex-direction: row;
+    flex-wrap: wrap;
+  } */
+
+  .allStoriesList > li {
+    width: calc((100% - 24px) / 2);
+  }
+}
+
+/* ≥1440px — 3 карточки */
+@media screen and (min-width: 1440px) {
+  /* .allStoriesList {
+    margin-bottom: 40px;
+  } */
+
+  .allStoriesList > li {
+    width: calc((100% - 48px) / 3);
+  }
+}
+
+.storiesLoadMore {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid var(--color-royal-blue);
+  background-color: var(--color-royal-blue);
+  color: var(--color-white);
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 48px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.storiesLoadMore:hover {
+  background-color: var(--color-royal-blue-lighter);
+  transform: translateY(-1px);
+  color: var(--color-neutral-darkest);
+  box-shadow: 0 4px 12px;
+}
+
+.storiesLoadMore:active {
+  transform: translateY(0);
+  color: var(--color-neutral-darkest);
+  background-color: var(--color-royal-blue-light);
+}
+
+/* Dropdown меню для тел версії */
+
+.mobileCategoryWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.mobileCategoryLabel {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-scheme-1-text);
+}
+
+.dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.dropdownTrigger {
+  width: 100%;
+  /* padding: 14px 16px; */
+  background-color: var(--opacity-transparent);
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  border: 1px solid var(--opacity-neutral-darkest-15);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.dropdownTrigger:hover,
+.dropdownTrigger:focus {
+  border: 1px solid var(--color-royal-blue-light);
+}
+
+.arrow {
+  width: 24px;
+  height: 24px;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  background: white;
+  overflow: hidden;
+  z-index: 10;
+
+  border-bottom: 1px solid var(--color-royal-blue-light);
+  border-left: 1px solid var(--color-royal-blue-light);
+  border-right: 1px solid var(--color-royal-blue-light);
+  border-radius: 0 0 8px 8px;
+  padding: 12px 8px;
+}
+
+.dropdownItem {
+  font-size: 15px;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dropdownItem:hover {
+  background-color: var(--color-neutral-lightest);
+}

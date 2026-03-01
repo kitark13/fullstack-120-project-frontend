@@ -1,0 +1,176 @@
+.backdrop {
+  position: fixed; /* фіксуємо на весь екран */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 300ms ease-out forwards;
+}
+.modal {
+  background: var(--color-scheme-2-background);
+  border-radius: 24px;
+  padding: 64px 20px 20px 20px;
+  width: 335px;
+  height: 338px;
+  max-width: 768px;
+  position: relative;
+  animation: modalScale 300ms ease-out forwards;
+}
+
+.backdrop.closing {
+  animation: fadeOut 300ms ease-in forwards;
+}
+
+.modal.closing {
+  animation: modalScaleOut 300ms ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modalScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modalScaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+.btnClose {
+  position: absolute;
+  background-color: transparent;
+  left: 283px;
+  top: 20px;
+  width: 32px;
+  height: 32px;
+
+  border: none;
+}
+.title {
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--color-scheme-1-text);
+  display: flex;
+  margin: 0 auto;
+  text-align: center;
+
+  max-width: 250px;
+}
+
+.message {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: var(--color-scheme-1-text);
+  margin: 0 auto;
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+.btnLogin {
+  border: 1px solid var(--color-scheme-2-border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  width: 100%;
+  height: 48px;
+  margin-bottom: 12px;
+  background-color: var(--opacity-neutral-darkest-5);
+  transition: all 300ms;
+}
+.btnLogin:hover,
+.btnLogin:focus {
+  color: white;
+  border: 1px solid var(--opacity-transparent);
+  background: var(--color-royal-blue);
+}
+.btnRegister:hover,
+.btnRegister:focus {
+  color: var(--color-scheme-2-text);
+  border: 1px solid var(--color-royal-blue);
+  background: var(--color-royal-blue-lighter);
+}
+
+.btnRegister {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  border: 1px solid var(--color-royal-blue);
+  border-radius: 8px;
+  padding: 6px 12px;
+  width: 295px;
+  height: 48px;
+  line-height: 150%;
+  color: var(--color-white);
+  background-color: var(--color-royal-blue);
+  transition: all 300ms;
+}
+@media screen and (min-width: 768px) {
+  .modal {
+    padding: 64px 32px;
+    width: 704px;
+    height: 310px;
+    max-width: 768px;
+  }
+  .btnClose {
+    left: 656px;
+  }
+  .title {
+    max-width: 640px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 16px;
+  }
+  .btnLogin,
+  .btnRegister {
+    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 203px;
+  }
+}

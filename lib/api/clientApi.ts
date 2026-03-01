@@ -79,3 +79,21 @@ export async function getUsers({
   const response = await api.get("/users", options);
   return response.data;
 }
+
+export type UpdateUserRequest = {
+  name?: string;
+  description?: string;
+};
+
+export async function updateUser(payload: UpdateUserRequest): Promise<User> {
+  const res = await api.patch<{ user: User }>("/users/me/update", payload);
+  return res.data.user;
+}
+
+export async function updateUserAvatar(file: File): Promise<string> {
+  const formData = new FormData();
+  formData.append("avatar", file);
+
+  const res = await api.patch<{ url: string }>("/users/me/avatar", formData);
+  return res.data.url;
+}

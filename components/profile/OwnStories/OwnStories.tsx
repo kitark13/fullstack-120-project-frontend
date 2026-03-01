@@ -8,9 +8,12 @@ import { api } from "@/lib/api/api";
 import Image from "next/image";
 import Link from "next/link";
 
+const ITEMS_PER_PAGE = 6;
+
 export default function OwnStories() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const [stories, setStories] = useState<Story[]>([]);
+  const [allStories, setAllStories] = useState<Story[]>([]);
+  const [displayCount, setDisplayCount] = useState(ITEMS_PER_PAGE);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,12 +22,13 @@ export default function OwnStories() {
       try {
         setLoading(true);
         const res = await api.get<{ data: Story[] }>("/stories/my");
-        setStories(res.data.data || []);
+        setAllStories(res.data.data || []);
+        setDisplayCount(ITEMS_PER_PAGE);
         setError(null);
       } catch (err) {
         console.error("Failed to load own stories:", err);
         setError("Не вдалося завантажити ваші історії");
-        setStories([]);
+        setAllStories([]);
       } finally {
         setLoading(false);
       }
@@ -35,6 +39,13 @@ export default function OwnStories() {
     }
   }, [isAuthenticated]);
 
+  const handleShowMore = () => {
+    setDisplayCount((prev) => prev + ITEMS_PER_PAGE);
+  };
+
+  const displayedStories = allStories.slice(0, displayCount);
+  const hasMore = displayCount < allStories.length;
+
   if (loading) {
     return <div className={css.message}>Завантаження...</div>;
   }
@@ -43,7 +54,7 @@ export default function OwnStories() {
     return <div className={css.message}>{error}</div>;
   }
 
-  if (stories.length === 0) {
+  if (allStories.length === 0) {
     return (
       <div className={css.emptyState}>
         <h2 className={css.emptyStateTitle}>
@@ -58,11 +69,18 @@ export default function OwnStories() {
   }
 
   return (
-    <ul className={css.storiesList}>
-      {stories.map((story) => (
-        <OwnStoryCard key={story._id} story={story} />
-      ))}
-    </ul>
+    <div>
+      <ul className={css.storiesList}>
+        {displayedStories.map((story) => (
+          <OwnStoryCard key={story._id} story={story} />
+        ))}
+      </ul>
+      {hasMore && (
+        <button className={css.showMoreButton} onClick={handleShowMore}>
+          Показати ще
+        </button>
+      )}
+    </div>
   );
 }
 

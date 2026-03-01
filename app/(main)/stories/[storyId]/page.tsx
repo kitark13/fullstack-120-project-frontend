@@ -19,8 +19,7 @@ export default async function StoryPage({ params }: Props) {
 
   return (
     <>
-      <StoryDetails story={storyRes.data} />
-      {/* <StoryDetails story={storyRes.data} isSaved={storyRes.isSaved} /> */}
+      <StoryDetails story={storyRes.data} initialIsSaved={storyRes.isSaved} />
       <section className={styles.popularStories}>
         <div className="container">
           <PopularStories />

@@ -1,15 +1,26 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { Story } from "@/types";
 import styles from "./StoryDetails.module.css";
-import Button from "@/components/common/Button/Button";
+import SaveButton from "./SaveButton.client";
 
 interface StoryDetailsProps {
   story: Story;
-  // isSaved: boolean;
+  initialIsSaved: boolean;
 }
 
-// export default function StoryDetails({ story, isSaved }:
-export default function StoryDetails({ story }: StoryDetailsProps) {
+export default function StoryDetails({
+  story,
+  initialIsSaved,
+}: StoryDetailsProps) {
+  const [isSaved, setIsSaved] = useState(initialIsSaved);
+
+  useEffect(() => {
+    setIsSaved(initialIsSaved);
+  }, [initialIsSaved]);
+
   if (!story || !story.img) return null;
 
   return (
@@ -39,7 +50,7 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
               src={story.img}
               alt={story.title}
               fill
-              priority
+              // priority
               sizes="(max-width: 767px) calc(100vw - 40px), 
          (max-width: 1439px) calc(100vw - 64px), 
          1312px"
@@ -58,9 +69,11 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
                 Вона буде доступна у вашому профілі у розділі збережене
               </p>
 
-              <Button type="button" variant="primary">
-                Зберегти
-              </Button>
+              <SaveButton
+                storyId={story._id}
+                isSaved={isSaved}
+                setIsSaved={setIsSaved}
+              />
             </div>
           </aside>
         </div>

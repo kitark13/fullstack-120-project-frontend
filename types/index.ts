@@ -15,6 +15,6 @@ export type Story = {
   date: string;
   favoriteCount: number;
   isSaved: boolean;
-  // createdAt: string;
-  // updatedAt: string;
+  createdAt: string;
+  updatedAt: string;
 };

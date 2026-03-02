@@ -1,10 +1,10 @@
-import TravellerInfo from '@/components/travellers/TravellerInfo/TravellerInfo';
 import { getStoriesTravellerServer } from '@/lib/api/serverApi';
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
+import TravellerPublicClient from './TravellerPublic.client';
 
 type Props = {
   params: Promise<{ travellerId: string }>;
@@ -31,7 +31,7 @@ export default async function TravellerDetails({ params }: Props) {
   });
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <TravellerInfo travellerId={travellerId} />
+      <TravellerPublicClient travellerId={travellerId} />
     </HydrationBoundary>
   );
 

@@ -101,6 +101,32 @@ export async function getCategories(): Promise<Category[]> {
   // якщо вертає масив - .data
   return res.data.data;
 }
+interface PropsGetStories {
+  user: User;
+  stories: Story[];
+  pagination: {
+    page: number;
+    totalPages: number;
+    perPage: number;
+  };
+}
+
+interface getStoriesTravellerProps {
+  travellerId: string;
+  page: number;
+  perPage: number | undefined;
+}
+export async function getStoriesTraveller({
+  travellerId,
+  page,
+  perPage = 4,
+}: getStoriesTravellerProps): Promise<PropsGetStories> {
+  const res = await api.get(`/users/${travellerId}`, {
+    params: { page, perPage },
+  });
+
+  return res.data;
+}
 
 export type StoriesListResponse = {
   data: Story[];

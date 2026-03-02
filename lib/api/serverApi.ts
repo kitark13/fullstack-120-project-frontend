@@ -57,6 +57,27 @@ export async function getStoryByIdServer(storyId: string) {
   return data;
 }
 
+interface PropsGetStories {
+  user: User;
+  stories: Story[];
+  pagination: {
+    page: number;
+    totalPages: number;
+    perPage: number;
+  };
+}
+
+export async function getStoriesTravellerServer(
+  travellerId: string,
+  page: number,
+  perPage: number,
+) {
+  const res = await apiServer.get<PropsGetStories>(`/users/${travellerId}`, {
+    params: { page, perPage },
+  });
+
+  return res.data;
+}
 interface GetStoriesByCategoryProps {
   limit?: number;
   category?: string | null;

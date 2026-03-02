@@ -130,15 +130,17 @@
   transition: all 0.3s ease;
 }
 
-.heroButton:hover {
-  transform: translateY(-2px);
-}
-
-.heroButton:focus-visible {
-  outline: 2px solid #7a96ea;
-  outline-offset: 3px;
+/* ----- BUTTON STATES ----- */
+.heroButton:hover,
+.heroButton:focus {
+  background-color: #7a96ea; 
+  border: 1px solid #4169e1;
+  color: #000000;
+  transform: translateY(-1px);
 }
 
 .heroButton:active {
-  transform: translateY(0);
+  background-color: #3454b4;  
+  color: #ffffff;          
+  transform: translateY(0);  
 }

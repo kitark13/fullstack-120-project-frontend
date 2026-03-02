@@ -98,6 +98,8 @@ export function StoriesClient() {
       : allStories;
   }, [stories, isAuthenticated, user]);
 
+  console.log('AAAAAAAAAAAAA', storiesWithFlag);
+
   return (
     <section className={styles.travellersStoriesSection}>
       <div className="container">
@@ -110,6 +112,7 @@ export function StoriesClient() {
             chosenCategory={chosenCategory}
           />
         )}
+
         {
           <TravellersStories
             stories={storiesWithFlag}

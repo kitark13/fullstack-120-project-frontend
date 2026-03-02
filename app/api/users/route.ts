@@ -1,15 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
-import { api } from "../../api";
+import { api } from "../api";
 import { isAxiosError } from "axios";
-import { logErrorResponse } from "../../_utils/utils";
-import { getCookieHeaderForBackend } from "../../_utils/cookies";
+import { logErrorResponse } from "../_utils/utils";
 
 export async function GET(req: NextRequest) {
   try {
-    const cookieHeader = await getCookieHeaderForBackend();
+    const { searchParams } = new URL(req.url);
 
-    const apiRes = await api.get("/users/me", {
-      headers: { cookie: cookieHeader },
+    const page = searchParams.get("page") ?? "1";
+    const perPage = searchParams.get("perPage"); // щоб не ламати фронт
+    const limit = searchParams.get("limit"); // щоб не ламати фронт
+
+    const apiRes = await api.get("/users", {
+      params: {
+        page,
+        limit: limit ?? perPage ?? "4", // <-- головне
+      },
     });
 
     return NextResponse.json(apiRes.data, { status: apiRes.status });
@@ -21,7 +27,6 @@ export async function GET(req: NextRequest) {
         { status: error.response?.status ?? 500 },
       );
     }
-
     logErrorResponse({ message: (error as Error).message });
     return NextResponse.json(
       { error: "Internal Server Error" },

@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import { api } from "../../api";
+import { api } from "../../../api";
 import { isAxiosError } from "axios";
-import { logErrorResponse } from "../../_utils/utils";
-import { getCookieHeaderForBackend } from "../../_utils/cookies";
+import { logErrorResponse } from "../../../_utils/utils";
+import { getCookieHeaderForBackend } from "../../../_utils/cookies";
 
-export async function GET(req: NextRequest) {
+export async function PATCH(req: NextRequest) {
   try {
     const cookieHeader = await getCookieHeaderForBackend();
+    const body = await req.json();
 
-    const apiRes = await api.get("/users/me", {
+    const apiRes = await api.patch("/users/me/update", body, {
       headers: { cookie: cookieHeader },
     });
 
@@ -21,7 +22,6 @@ export async function GET(req: NextRequest) {
         { status: error.response?.status ?? 500 },
       );
     }
-
     logErrorResponse({ message: (error as Error).message });
     return NextResponse.json(
       { error: "Internal Server Error" },

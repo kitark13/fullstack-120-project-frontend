@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Story } from "@/types/index";
 import { TravellersStoriesItem } from "@/components/stories/TravellersStoriesItem/TravellersStoriesItem";
 import useAuthStore from "@/lib/store/authStore";
@@ -8,22 +8,76 @@ import css from "./SavedStories.module.css";
 import { api } from "@/lib/api/api";
 import Link from "next/link";
 
-const ITEMS_PER_PAGE = 6;
-
 export default function SavedStories() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const hasLoadedRef = useRef(false);
   const [allStories, setAllStories] = useState<Story[]>([]);
-  const [displayCount, setDisplayCount] = useState(ITEMS_PER_PAGE);
+  const [displayCount, setDisplayCount] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.innerWidth >= 1440 ? 6 : 4;
+    }
+    return 6;
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Визначаємо к-ть карточок залежно від розміру екрану
+  const getItemsPerPage = () => {
+    if (typeof window !== "undefined") {
+      return window.innerWidth >= 1440 ? 6 : 4;
+    }
+    return 6;
+  };
+
+  // Одночасно відстежуємо resize і завантажуємо дані
+  useEffect(() => {
+    const handleResize = () => {
+      const itemsPerPage = getItemsPerPage();
+      setDisplayCount(itemsPerPage);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const fetchSavedStories = async () => {
       try {
         setLoading(true);
-        const res = await api.get<{ data: Story[] }>("/stories/saved");
-        setAllStories(res.data.data || []);
-        setDisplayCount(ITEMS_PER_PAGE);
+        let allStoriesData: Story[] = [];
+        let page = 1;
+        let hasMore = true;
+
+        // Завантажуємо всі сторінки по 50 (макс лімітт на беку)
+        while (hasMore) {
+          const res = await api.get<{
+            data: Story[];
+            pagination?: { totalPages: number };
+          }>(`/stories/saved?page=${page}&limit=50`);
+          const stories = res.data.data || [];
+
+          if (stories.length === 0) {
+            hasMore = false;
+            break;
+          }
+
+          allStoriesData = [...allStoriesData, ...stories];
+
+          // Перевіряємо чи є ще сторінки
+          const totalPages = res.data.pagination?.totalPages || 1;
+          if (page >= totalPages) {
+            hasMore = false;
+          } else {
+            page++;
+          }
+        }
+
+        // Встановлюємо isSaved=true для всіх історій
+        const storiesWithSavedFlag = allStoriesData.map((story) => ({
+          ...story,
+          isSaved: true,
+        }));
+        setAllStories(storiesWithSavedFlag);
         setError(null);
       } catch (err) {
         console.error("Failed to load saved stories:", err);
@@ -34,17 +88,27 @@ export default function SavedStories() {
       }
     };
 
-    if (isAuthenticated) {
+    // Завантажуємо лише один раз, коли користувач залогінений
+    if (isAuthenticated && !hasLoadedRef.current) {
+      hasLoadedRef.current = true;
       fetchSavedStories();
+    } else if (!isAuthenticated) {
+      // Скидаємо flag коли користувач вийшов
+      hasLoadedRef.current = false;
     }
   }, [isAuthenticated]);
 
   const handleShowMore = () => {
-    setDisplayCount((prev) => prev + ITEMS_PER_PAGE);
+    const itemsPerPage = getItemsPerPage();
+    setDisplayCount((prev) => prev + itemsPerPage);
   };
 
   const displayedStories = allStories.slice(0, displayCount);
   const hasMore = displayCount < allStories.length;
+
+  const handleStoryRemoved = (storyId: string) => {
+    setAllStories((prev) => prev.filter((story) => story._id !== storyId));
+  };
 
   if (loading) {
     return <div className={css.message}>Завантаження...</div>;
@@ -69,13 +133,14 @@ export default function SavedStories() {
   }
 
   return (
-    <div>
+    <div className={css.wrapper}>
       <ul className={css.storiesList}>
         {displayedStories.map((story) => (
           <TravellersStoriesItem
             key={story._id}
             story={story}
             isAuthenticated={isAuthenticated}
+            onStoryRemoved={handleStoryRemoved}
           />
         ))}
       </ul>

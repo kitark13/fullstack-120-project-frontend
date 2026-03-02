@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import useAuthStore from "@/lib/store/authStore";
 import PageToggle from "@/components/profile/PageToggle/PageToggle";
+import { updateUser, updateUserAvatar } from "@/lib/api/clientApi";
 import css from "./TravellerInfo.module.css";
 
 export default function TravellerInfo() {
   const user = useAuthStore((state) => state.user);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  let userName = "Мандрівник";
+  let userName = "";
   let userDescription = "";
   if (user) {
     if (
@@ -152,9 +153,6 @@ function EditProfileModal({
     setIsLoading(true);
 
     try {
-      const { updateUser, updateUserAvatar } =
-        await import("@/lib/api/clientApi");
-
       // Спочатку оновлюємо аватарку якщо вибрана
       if (avatarFile) {
         await updateUserAvatar(avatarFile);

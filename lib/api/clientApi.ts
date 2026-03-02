@@ -1,5 +1,7 @@
 import { api } from "./api";
 import { User } from "@/types/user";
+import { Story } from "@/types/index";
+import { Category } from "@/types/category";
 
 export type LoginRequest = { email: string; password: string };
 
@@ -80,20 +82,64 @@ export async function getUsers({
   return response.data;
 }
 
-export type UpdateUserRequest = {
-  name?: string;
-  description?: string;
-};
+// створення історії
 
-export async function updateUser(payload: UpdateUserRequest): Promise<User> {
-  const res = await api.patch<{ user: User }>("/users/me/update", payload);
-  return res.data.user;
+export async function createStory(payload: FormData): Promise<Story> {
+  const res = await api.post<{ data: Story }>("/stories", payload);
+  return res.data.data;
 }
 
-export async function updateUserAvatar(file: File): Promise<string> {
+// отримання всіх категорій
+
+// export interface Category {
+//   _id: string;
+//   name: string;
+// }
+
+export async function getCategories(): Promise<Category[]> {
+  const res = await api.get<{ data: Category[] }>("/categories");
+  // якщо вертає масив - .data
+  return res.data.data;
+}
+
+export type StoriesListResponse = {
+  data: Story[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+};
+
+interface GetStoriesByCategoryProps {
+  limit?: number;
+  category?: string | null;
+  page: number;
+}
+
+export const getStoriesByCategory = async ({
+  limit = 9,
+  category,
+  page = 1,
+}: GetStoriesByCategoryProps) => {
+  const res = await api.get<StoriesListResponse>("/stories", {
+    params: { page, limit, sortBy: "popular", category },
+  });
+  return res.data;
+};
+
+export async function updateUser(payload: {
+  name?: string;
+  description?: string;
+}): Promise<User> {
+  const res = await api.patch<User>("/users/me/update", payload);
+  return res.data;
+}
+
+export async function updateUserAvatar(file: File): Promise<User> {
   const formData = new FormData();
   formData.append("avatar", file);
-
-  const res = await api.patch<{ url: string }>("/users/me/avatar", formData);
-  return res.data.url;
+  const res = await api.patch<User>("/users/me/avatar", formData);
+  return res.data;
 }

@@ -1,5 +1,6 @@
 .travellerInfoWrapper {
-  padding: 20px;
+  margin-top: 32px;
+  margin-bottom: 32px;
 }
 
 .travellerInfoContent {
@@ -41,10 +42,11 @@
 }
 
 .userDescription {
-  margin: 8px 0 0;
-  font-size: 14px;
-  color: #666;
+  font-size: 400px;
+  font-size: 16px;
+  color: var(--color-scheme-2-text);
   line-height: 1.4;
+  max-width: 311px;
 }
 
 .editButton {
@@ -245,10 +247,6 @@
 }
 
 @media screen and (min-width: 768px) {
-  .travellerInfoWrapper {
-    padding: 32px;
-  }
-
   .travellerInfoContent {
     flex-direction: column;
     gap: 24px;
@@ -271,10 +269,11 @@
   }
 
   .userDescription {
-    font-size: 16px;
+    max-width: 367px;
   }
 
   .editButton {
+    margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
     align-self: flex-start;
@@ -288,7 +287,8 @@
 
 @media screen and (min-width: 1440px) {
   .travellerInfoWrapper {
-    padding: 40px;
+    margin-top: 48px;
+    margin-bottom: 48px;
   }
 
   .userBlock {
@@ -305,7 +305,7 @@
   }
 
   .userDescription {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .editButton {

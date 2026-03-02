@@ -7,11 +7,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { addToFavorite, removeFromFavorite } from "@/lib/api/clientApi";
-import { string } from "yup";
+import AuthNavModal from "@/components/modals/AuthNavModal/AuthNavModal";
+
+import { useRouter } from "next/navigation";
 
 interface TravellersStoriesItemProps {
   story: Story;
   isAuthenticated: boolean;
+  onStoryRemoved?: (storyId: string) => void;
 }
 interface StoryAuthorProps {
   author: Author;
@@ -28,11 +31,14 @@ export type Author = {
 export function TravellersStoriesItem({
   story,
   isAuthenticated,
+  onStoryRemoved,
 }: TravellersStoriesItemProps) {
   const [isSaved, setIsSaved] = useState<boolean>(story.isSaved);
   const [favoriteCount, setFavoriteCount] = useState<number>(
     story.favoriteCount,
   );
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const router = useRouter();
 
   const mutationAdd = useMutation({
     mutationFn: (storyId: string) => addToFavorite(storyId),
@@ -68,6 +74,9 @@ export function TravellersStoriesItem({
     },
     onSuccess: () => {
       console.log("Story was removed from favorite successfully");
+      if (onStoryRemoved) {
+        onStoryRemoved(story._id);
+      }
     },
   });
 
@@ -80,55 +89,81 @@ export function TravellersStoriesItem({
         mutationRemove.mutate(story._id);
       }
     } else {
-      alert(
-        "Щоб зберегти статтю вам треба увійти, якщо ще немає облікового запису — зареєструйтесь.",
-      );
+      setIsModalOpen(true);
+      // alert(
+      //   'Щоб зберегти статтю вам треба увійти, якщо ще немає облікового запису — зареєструйтесь.',
+      // );
     }
   }
 
   const isLoading = mutationAdd.isPending || mutationRemove.isPending;
 
-  return (
-    <li className={styles.storyCard}>
-      <Image
-        src={story.img}
-        alt={story.title}
-        className={styles.storyImg}
-        width={400}
-        height={200}
-      ></Image>
-      <div className={styles.storyContent}>
-        <div className={styles.content}>
-          <span className={styles.storyRegion}>{story.category.name}</span>
-          <h3>{story.title}</h3>
-          <p className={styles.storyArticle}>{story.article}</p>
-        </div>
-        <StoryAuthor
-          author={story.ownerId}
-          date={new Date(story.date).toLocaleDateString("uk-UA")}
-          savedNumber={favoriteCount}
-        />
-        <div className={styles.cardActions}>
-          <Link className={styles.storyViewBtn} href={`/stories/${story._id}`}>
-            Переглянути статтю
-          </Link>
+  const handleLogIn = async () => {
+    setIsModalOpen(false);
+    router.push("/auth/login");
+  };
 
-          <button
-            className={isSaved ? styles.likeBtnSaved : styles.likeBtnNotSaved}
-            onClick={handleToggleLike}
-            disabled={isLoading}
-          >
-            <svg
-              className={isSaved ? styles.iconSaved : styles.iconNotSaved}
-              width={24}
-              height={24}
+  const handleRegister = async () => {
+    setIsModalOpen(false);
+    router.push("/auth/register");
+  };
+
+  return (
+    <>
+      <li className={styles.storyCard}>
+        <Image
+          src={story.img}
+          alt={story.title}
+          className={styles.storyImg}
+          width={400}
+          height={200}
+        ></Image>
+        <div className={styles.storyContent}>
+          <div className={styles.content}>
+            <span className={styles.storyRegion}>{story.category.name}</span>
+            <h3>{story.title}</h3>
+            <p className={styles.storyArticle}>{story.article}</p>
+          </div>
+          <StoryAuthor
+            author={story.ownerId}
+            date={new Date(story.date).toLocaleDateString("uk-UA")}
+            savedNumber={favoriteCount}
+          />
+          <div className={styles.cardActions}>
+            <Link
+              className={styles.storyViewBtn}
+              href={`/stories/${story._id}`}
             >
-              <use href="/sprite-final-opt.svg#icon-bookmark" />
-            </svg>
-          </button>
+              Переглянути статтю
+            </Link>
+
+            <button
+              className={isSaved ? styles.likeBtnSaved : styles.likeBtnNotSaved}
+              onClick={handleToggleLike}
+              disabled={isLoading}
+            >
+              <svg
+                className={isSaved ? styles.iconSaved : styles.iconNotSaved}
+                width={24}
+                height={24}
+              >
+                <use href="/sprite-final-opt.svg#icon-bookmark" />
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
-    </li>
+      </li>
+      <AuthNavModal
+        isOpen={isModalOpen}
+        onLogIn={handleLogIn}
+        onRegister={handleRegister}
+        onClose={() => setIsModalOpen(false)}
+        title="Помилка під час збереження"
+        message="Щоб зберегти статтю вам треба увійти, якщо ще немає облікового запису зареєструйтесь"
+        LoginText="Увійти"
+        RegisterText="Зареєструватись"
+      />
+    </>
   );
 }
 

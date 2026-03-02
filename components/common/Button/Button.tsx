@@ -2,7 +2,7 @@ import clsx from "clsx";
 import styles from "./Button.module.css";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "saved";
   size?: "large" | "small";
   iconOnly?: boolean;
 }

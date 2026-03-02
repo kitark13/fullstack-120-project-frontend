@@ -69,7 +69,7 @@ export default function OwnStories() {
   }
 
   return (
-    <div>
+    <div className={css.wrapper}>
       <ul className={css.storiesList}>
         {displayedStories.map((story) => (
           <OwnStoryCard key={story._id} story={story} />

@@ -32,6 +32,7 @@ export async function TravellersList({
         totalPages={data.pagination.total}
         showLoadMore={showLoadMore}
         variant={variant}
+        limit={initialLimit}
       />
     </>
   );

@@ -10,6 +10,7 @@ interface TravellersListClientProps {
   totalPages: number;
   showLoadMore?: boolean;
   variant?: "page" | "section";
+  limit: number;
 }
 
 export function TravellersListClient({
@@ -17,35 +18,30 @@ export function TravellersListClient({
   totalPages,
   showLoadMore = true,
   variant = "page",
+  limit,
 }: TravellersListClientProps) {
   const [users, setUsers] = useState<User[]>(initialUsers);
-  const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(initialUsers.length);
+  const [visibleCount, setVisibleCount] = useState<number>(initialUsers.length);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const updatePerPage = () => {
-      if (variant === "section") {
-        setPerPage(4);
-        return;
-      }
-
-      if (window.innerWidth >= 1024) {
-        setPerPage(12);
-      } else if (window.innerWidth >= 768) {
-        setPerPage(8);
-      } else {
-        setPerPage(6);
-      }
-    };
-
-    updatePerPage();
-    window.addEventListener("resize", updatePerPage);
-
-    return () => window.removeEventListener("resize", updatePerPage);
-  }, [variant]);
+    // Initial visibility based on screen width for "page" variant
+    if (variant === "page") {
+      const initialVisible = window.innerWidth < 1440 ? 8 : 12;
+      setVisibleCount(initialVisible);
+    } else {
+      setVisibleCount(limit);
+    }
+  }, [variant, limit]);
 
   const loadMore = async () => {
+    // 1. If we have already loaded users that are not visible yet, show them first
+    if (visibleCount < users.length) {
+      setVisibleCount((prev) => Math.min(prev + 4, users.length));
+      return;
+    }
+
+    // 2. If we need to fetch more from the server
     if (!process.env.NEXT_PUBLIC_API_URL) {
       console.error("API URL not defined");
       return;
@@ -54,10 +50,13 @@ export function TravellersListClient({
     try {
       setLoading(true);
 
-      const nextPage = page + 1;
+      const fetchLimit = 4;
+      // Calculate the next page for fetching 4 users at a time.
+      // skip = (page - 1) * limit => users.length = (nextPage - 1) * 4 => nextPage = (users.length / 4) + 1
+      const nextPage = users.length / fetchLimit + 1;
 
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/users?page=${nextPage}&limit=4`,
+        `${process.env.NEXT_PUBLIC_API_URL}/users?page=${nextPage}&limit=${fetchLimit}`,
       );
 
       if (!res.ok) {
@@ -66,8 +65,13 @@ export function TravellersListClient({
 
       const data = await res.json();
 
-      setUsers((prev) => [...prev, ...data.data]);
-      setPage(nextPage);
+      setUsers((prev) => {
+        const existingIds = new Set(prev.map((u) => u._id));
+        const newUsers = data.data.filter((u: User) => !existingIds.has(u._id));
+        return [...prev, ...newUsers];
+      });
+
+      setVisibleCount((prev) => prev + fetchLimit);
     } catch (error) {
       console.error("Failed to load more travellers:", error);
     } finally {
@@ -75,12 +79,13 @@ export function TravellersListClient({
     }
   };
 
-  const hasMore = users.length < totalPages;
+  const visibleUsers = users.slice(0, visibleCount);
+  const hasMore = users.length < totalPages || visibleCount < users.length;
 
   return (
     <>
       <ul className={styles.travellers__list}>
-        {users.slice(0, perPage + (page - 1) * 4).map((user) => (
+        {visibleUsers.map((user) => (
           <li key={user._id}>
             <Card user={user} />
           </li>

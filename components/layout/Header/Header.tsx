@@ -26,6 +26,7 @@ const Header: React.FC<HeaderProps> = ({ theme: propsTheme }) => {
         className={`container ${isHome ? styles.headerContainer : styles.headerContainerDefault}`}
       >
         <Logo variant="header" theme={theme} />
+
         <NavList variant="header" theme={theme} />
         <AuthNav variant="header" theme={theme} />
 

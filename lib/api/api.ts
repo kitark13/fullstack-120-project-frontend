@@ -7,3 +7,4 @@ export const api = axios.create({
   // baseURL: "https://fullstack-120-project-group-1-backend.onrender.com/",
   withCredentials: true,
 });
+// `${process.env.NEXT_PUBLIC_API_URL}+ /api`;

@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     url: "https://fullstack-120-project-frontend.vercel.app",
     images: [
       {
-        url: "/public/images/hero/hero-desktop-1x.jpg",
+        url: "/images/hero/hero-desktop-1x.jpg",
         width: 1200,
         height: 630,
         alt: "Подорожники — додаток для мандрівників",

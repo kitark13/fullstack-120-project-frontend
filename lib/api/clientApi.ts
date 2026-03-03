@@ -178,19 +178,3 @@ export async function updateUserAvatar(file: File): Promise<User> {
   const res = await api.patch<User>("/users/me/avatar", formData);
   return res.data;
 }
-
-// export async function updateStoryJson(
-//   storyId: string,
-//   payload: { title?: string; article?: string; category?: string },
-// ): Promise<Story> {
-//   const res = await api.patch<{ data: Story }>(`/stories/${storyId}`, payload);
-//   return res.data.data;
-// }
-
-// export async function updateStoryWithImage(
-//   storyId: string,
-//   payload: FormData,
-// ): Promise<Story> {
-//   const res = await api.patch<{ data: Story }>(`/stories/${storyId}`, payload);
-//   return res.data.data;
-// }

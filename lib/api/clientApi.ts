@@ -89,6 +89,14 @@ export async function createStory(payload: FormData): Promise<Story> {
   return res.data.data;
 }
 
+export async function updateStory(
+  storyId: string,
+  payload: FormData,
+): Promise<Story> {
+  const res = await api.patch<{ data: Story }>(`/stories/${storyId}`, payload);
+  return res.data.data;
+}
+
 // отримання всіх категорій
 
 // export interface Category {
@@ -101,6 +109,7 @@ export async function getCategories(): Promise<Category[]> {
   // якщо вертає масив - .data
   return res.data.data;
 }
+
 interface PropsGetStories {
   user: User;
   stories: Story[];
@@ -169,3 +178,19 @@ export async function updateUserAvatar(file: File): Promise<User> {
   const res = await api.patch<User>("/users/me/avatar", formData);
   return res.data;
 }
+
+// export async function updateStoryJson(
+//   storyId: string,
+//   payload: { title?: string; article?: string; category?: string },
+// ): Promise<Story> {
+//   const res = await api.patch<{ data: Story }>(`/stories/${storyId}`, payload);
+//   return res.data.data;
+// }
+
+// export async function updateStoryWithImage(
+//   storyId: string,
+//   payload: FormData,
+// ): Promise<Story> {
+//   const res = await api.patch<{ data: Story }>(`/stories/${storyId}`, payload);
+//   return res.data.data;
+// }

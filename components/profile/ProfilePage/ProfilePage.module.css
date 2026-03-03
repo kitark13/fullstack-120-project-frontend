@@ -1,0 +1,45 @@
+.editButton {
+  background: var(--color-white);
+  border: 1px solid var(--opacity-neutral-darkest-15);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--color-neutral-darkest);
+  transition: all 0.2s ease;
+  margin: 32px auto;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  box-shadow: 0 2px 8px var(--opacity-neutral-darkest-10);
+}
+
+.editButton:hover {
+  background: var(--color-royal-blue-lighter);
+  border-color: var(--color-royal-blue);
+  color: var(--color-royal-blue-dark);
+  box-shadow: 0 4px 12px rgba(65, 105, 225, 0.2);
+  transform: translateY(-2px);
+}
+
+.editButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px var(--opacity-neutral-darkest-10);
+}
+
+.editButton svg {
+  transition: transform 0.2s ease;
+}
+
+.editButton:hover svg {
+  transform: rotate(-12deg) scale(1.1);
+}
+
+@media screen and (min-width: 768px) {
+  .editButton {
+    margin: 32px auto 32px 0;
+  }
+}

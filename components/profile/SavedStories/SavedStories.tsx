@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Story } from "@/types/index";
-import { TravellersStoriesItem } from "@/components/stories/TravellersStoriesItem/TravellersStoriesItem";
+import { TravellersStories } from "@/components/stories/TravellersStories/TravellersStories";
 import useAuthStore from "@/lib/store/authStore";
 import css from "./SavedStories.module.css";
 import { api } from "@/lib/api/api";
@@ -20,6 +20,14 @@ export default function SavedStories() {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const prefetchOwnStories = async () => {
+    try {
+      await api.get("/stories/my");
+    } catch {
+      // noop
+    }
+  };
 
   // Визначаємо к-ть карточок залежно від розміру екрану
   const getItemsPerPage = () => {
@@ -92,9 +100,12 @@ export default function SavedStories() {
     if (isAuthenticated && !hasLoadedRef.current) {
       hasLoadedRef.current = true;
       fetchSavedStories();
+      prefetchOwnStories();
     } else if (!isAuthenticated) {
       // Скидаємо flag коли користувач вийшов
       hasLoadedRef.current = false;
+      setLoading(false);
+      setAllStories([]);
     }
   }, [isAuthenticated]);
 
@@ -105,10 +116,6 @@ export default function SavedStories() {
 
   const displayedStories = allStories.slice(0, displayCount);
   const hasMore = displayCount < allStories.length;
-
-  const handleStoryRemoved = (storyId: string) => {
-    setAllStories((prev) => prev.filter((story) => story._id !== storyId));
-  };
 
   if (loading) {
     return <div className={css.message}>Завантаження...</div>;
@@ -134,16 +141,10 @@ export default function SavedStories() {
 
   return (
     <div className={css.wrapper}>
-      <ul className={css.storiesList}>
-        {displayedStories.map((story) => (
-          <TravellersStoriesItem
-            key={story._id}
-            story={story}
-            isAuthenticated={isAuthenticated}
-            onStoryRemoved={handleStoryRemoved}
-          />
-        ))}
-      </ul>
+      <TravellersStories
+        stories={displayedStories}
+        isAuthenticated={isAuthenticated}
+      />
       {hasMore && (
         <button className={css.showMoreButton} onClick={handleShowMore}>
           Показати ще

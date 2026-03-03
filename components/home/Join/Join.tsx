@@ -9,7 +9,7 @@ import useAuthStore from "@/lib/store/authStore";
 export default function Join() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-  const href = isAuthenticated ? "/auth/profile" : "/auth/register";
+  const href = isAuthenticated ? "/profile/saved" : "/auth/register";
   const linkText = isAuthenticated ? "Збережені" : "Зареєструватися";
 
   return (

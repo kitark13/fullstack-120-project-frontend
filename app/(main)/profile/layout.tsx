@@ -1,4 +1,7 @@
-import TravellerInfo from "@/components/travellers/TravellerInfo/TravellerInfo";
+"use client";
+
+import ProfilePage from "@/components/profile/ProfilePage/ProfilePage";
+import PageToggle from "@/components/profile/PageToggle/PageToggle";
 
 export default function ProfileLayout({
   children,
@@ -11,7 +14,8 @@ export default function ProfileLayout({
 }) {
   return (
     <div className="container">
-      <TravellerInfo />
+      <ProfilePage />
+      <PageToggle />
       {children || saved || own}
     </div>
   );

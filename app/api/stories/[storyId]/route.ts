@@ -21,6 +21,23 @@ export async function GET(_req: NextRequest, ctx: Ctx) {
 export async function PATCH(req: NextRequest, ctx: Ctx) {
   try {
     const { storyId } = await ctx.params;
+
+    const contentType = req.headers.get("content-type") || "";
+
+    // 1) multipart/form-data (коли є файл)
+    if (contentType.includes("multipart/form-data")) {
+      const formData = await req.formData();
+
+      const apiRes = await backendRequest({
+        method: "PATCH",
+        url: `/stories/${storyId}`,
+        data: formData,
+      });
+
+      return NextResponse.json(apiRes.data, { status: apiRes.status });
+    }
+
+    // 2) application/json (коли без файлу)
     const body = await req.json();
 
     const apiRes = await backendRequest({

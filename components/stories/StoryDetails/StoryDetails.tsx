@@ -39,7 +39,9 @@ export default function StoryDetails({
               </p>
               <p className={styles.metaItem}>
                 <span className={styles.metaItemStrong}>Опубліковано:</span>
-                <span className={styles.metaItemGeneral}>{story.date}</span>
+                <span className={styles.metaItemGeneral}>
+                  {new Date(story.date).toLocaleDateString("sv-SE")}
+                </span>
               </p>
             </div>
             <span className={styles.categoryBadge}>{story.category?.name}</span>

@@ -1,39 +1,37 @@
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
 import { getUsersServer } from "@/lib/api/serverApi";
-import { TravellersListClient } from "@/components/travellers/TravellersList/TravellersList.client";
+import TravellersGrid from "./TravellersGrid.client";
 
 interface TravellersListProps {
+  limit?: number;
   showLoadMore?: boolean;
-  variant?: "page" | "section";
 }
 
-export async function TravellersList({
+/**
+ * Універсальний компонент списку мандрівників.
+ * @param limit - скільки завантажити спочатку (за замовчуванням 8)
+ * @param showLoadMore - чи показувати кнопку пагінації (за замовчуванням true)
+ */
+export default async function TravellersList({
+  limit = 8,
   showLoadMore = true,
-  variant = "page",
 }: TravellersListProps) {
-  let isError = false;
-  let data = null;
+  const queryClient = new QueryClient();
 
-  const initialLimit = variant === "section" ? 4 : 12;
-
-  try {
-    data = await getUsersServer(1, initialLimit);
-  } catch (error) {
-    console.error("Failed to load travellers:", error);
-    isError = true;
-  }
-
-  if (isError) return <p>Failed to load travellers...</p>;
-  if (!data) return null;
+  // Префетчимо дані з вказаним лімітом
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ["travellers", limit],
+    initialPageParam: 1,
+    queryFn: ({ pageParam = 1 }) => getUsersServer(pageParam, limit),
+  });
 
   return (
-    <>
-      <TravellersListClient
-        initialUsers={data.data}
-        totalPages={data.pagination.total}
-        showLoadMore={showLoadMore}
-        variant={variant}
-        limit={initialLimit}
-      />
-    </>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <TravellersGrid initialLimit={limit} showLoadMore={showLoadMore} />
+    </HydrationBoundary>
   );
 }

@@ -54,18 +54,19 @@ export async function removeFromFavorite(storyId: string): Promise<string[]> {
 }
 
 // отримання всіх юзерів
-
 interface GetUsersProps {
   page?: number;
   perPage?: number;
 }
 
 interface GetUsersResponse {
-  page: number;
-  perPage: number;
-  totalItems: number;
-  totalPages: number;
-  users: User[];
+  data: User[];
+  pagination: {
+    total: number;
+    page: number;
+    limit: number;
+    pages: number;
+  };
 }
 
 export async function getUsers({

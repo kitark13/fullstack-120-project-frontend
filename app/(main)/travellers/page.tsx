@@ -1,4 +1,4 @@
-import { TravellersList } from "@/components/travellers/TravellersList/TravellersList";
+import TravellersList from "@/components/travellers/TravellersList/TravellersList";
 import styles from "./TravellersPage.module.css";
 
 export default function TravellersPage() {

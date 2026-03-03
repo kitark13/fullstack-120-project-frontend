@@ -2,26 +2,30 @@ import { NextRequest, NextResponse } from "next/server";
 import { api } from "../../api";
 import { isAxiosError } from "axios";
 import { logErrorResponse } from "../../_utils/utils";
-import {
-  getCookieHeaderForBackend,
-  setCookiesFromAxiosResponse,
-} from "../../_utils/cookies";
+
+function forwardSetCookie(
+  res: NextResponse,
+  setCookie: string[] | string | undefined,
+) {
+  if (!setCookie) return;
+  const arr = Array.isArray(setCookie) ? setCookie : [setCookie];
+  for (const c of arr) res.headers.append("set-cookie", c);
+}
 
 export async function POST(req: NextRequest) {
-  try {
-    const cookieHeader = await getCookieHeaderForBackend();
+  const cookieHeader = req.headers.get("cookie") ?? "";
 
+  try {
     const apiRes = await api.post(
       "/auth/refresh",
       {},
       { headers: { cookie: cookieHeader } },
     );
 
-    const ok = await setCookiesFromAxiosResponse(apiRes.headers["set-cookie"]);
-    if (!ok)
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const res = NextResponse.json(apiRes.data, { status: apiRes.status });
+    forwardSetCookie(res, apiRes.headers["set-cookie"]);
 
-    return NextResponse.json(apiRes.data, { status: apiRes.status });
+    return res;
   } catch (error) {
     if (isAxiosError(error)) {
       logErrorResponse(error.response?.data);

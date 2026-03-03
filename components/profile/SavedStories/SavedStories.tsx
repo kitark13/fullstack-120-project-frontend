@@ -111,6 +111,12 @@ export default function SavedStories() {
   // }, [isAuthenticated]);
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      setLoading(false);
+      setAllStories([]);
+      return;
+    }
+
     const fetchSavedStories = async () => {
       try {
         setLoading(true);
@@ -155,7 +161,7 @@ export default function SavedStories() {
 
     fetchSavedStories();
     prefetchOwnStories();
-  }, []);
+  }, [isAuthenticated]);
 
   const handleShowMore = () => {
     const itemsPerPage = getItemsPerPage();

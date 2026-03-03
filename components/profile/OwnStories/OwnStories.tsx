@@ -53,6 +53,12 @@ export default function OwnStories() {
   // }, [isAuthenticated]);
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      setLoading(false);
+      setAllStories([]);
+      return;
+    }
+
     const fetchOwnStories = async () => {
       try {
         setLoading(true);
@@ -81,7 +87,7 @@ export default function OwnStories() {
 
     fetchOwnStories();
     prefetchSavedStories();
-  }, []);
+  }, [isAuthenticated]);
 
   const handleShowMore = () => {
     setDisplayCount((prev) => prev + ITEMS_PER_PAGE);
@@ -151,7 +157,7 @@ function OwnStoryCard({ story }: { story: Story }) {
 
           <Link className={css.editBtn} href={`/stories/${story._id}/edit`}>
             <svg width={24} height={24}>
-              <use href="/sprite-final-opt.svg#icon-pencil" />
+              <use href="/sprite-final-opt.svg#icon-edit" />
             </svg>
           </Link>
         </div>

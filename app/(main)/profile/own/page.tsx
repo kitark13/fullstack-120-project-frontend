@@ -1,9 +1,5 @@
-import OwnStories from "@/components/profile/OwnStories/OwnStories";
+export const metadata = { title: "Мої історії" };
 
-export const metadata = {
-  title: "Мої історії",
-};
-
-export default function OwnPage() {
-  return <OwnStories />;
+export default function OwnTabPage({ own }: { own: React.ReactNode }) {
+  return <>{own}</>;
 }

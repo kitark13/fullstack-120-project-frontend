@@ -7,6 +7,7 @@ import css from "./OwnStories.module.css";
 import { api } from "@/lib/api/api";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -25,6 +26,32 @@ export default function OwnStories() {
     }
   };
 
+  // useEffect(() => {
+  //   const fetchOwnStories = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const res = await api.get<{ data: Story[] }>("/stories/my");
+  //       setAllStories(res.data.data || []);
+  //       setDisplayCount(ITEMS_PER_PAGE);
+  //       setError(null);
+  //     } catch (err) {
+  //       console.error("Failed to load own stories:", err);
+  //       setError("Не вдалося завантажити ваші історії");
+  //       setAllStories([]);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   if (isAuthenticated) {
+  //     fetchOwnStories();
+  //     prefetchSavedStories();
+  //   } else {
+  //     setLoading(false);
+  //     setAllStories([]);
+  //   }
+  // }, [isAuthenticated]);
+
   useEffect(() => {
     const fetchOwnStories = async () => {
       try {
@@ -33,23 +60,28 @@ export default function OwnStories() {
         setAllStories(res.data.data || []);
         setDisplayCount(ITEMS_PER_PAGE);
         setError(null);
-      } catch (err) {
-        console.error("Failed to load own stories:", err);
-        setError("Не вдалося завантажити ваші історії");
+      } catch (err: unknown) {
+        let status: number | undefined;
+
+        if (axios.isAxiosError(err)) {
+          status = err.response?.status;
+        }
+
+        setError(
+          status === 401
+            ? "Увійдіть, щоб переглянути ваші історії"
+            : "Не вдалося завантажити ваші історії",
+        );
+
         setAllStories([]);
       } finally {
         setLoading(false);
       }
     };
 
-    if (isAuthenticated) {
-      fetchOwnStories();
-      prefetchSavedStories();
-    } else {
-      setLoading(false);
-      setAllStories([]);
-    }
-  }, [isAuthenticated]);
+    fetchOwnStories();
+    prefetchSavedStories();
+  }, []);
 
   const handleShowMore = () => {
     setDisplayCount((prev) => prev + ITEMS_PER_PAGE);

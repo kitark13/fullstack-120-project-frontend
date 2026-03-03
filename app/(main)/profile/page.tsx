@@ -1,9 +1,9 @@
-import SavedStories from "@/components/profile/SavedStories/SavedStories";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Мій профіль",
 };
 
 export default function ProfilePage() {
-  return <SavedStories />;
+  redirect("/profile/saved");
 }

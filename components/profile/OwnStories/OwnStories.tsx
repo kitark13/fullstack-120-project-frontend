@@ -17,6 +17,14 @@ export default function OwnStories() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const prefetchSavedStories = async () => {
+    try {
+      await api.get("/stories/saved?page=1&limit=50");
+    } catch {
+      // noop
+    }
+  };
+
   useEffect(() => {
     const fetchOwnStories = async () => {
       try {
@@ -36,6 +44,10 @@ export default function OwnStories() {
 
     if (isAuthenticated) {
       fetchOwnStories();
+      prefetchSavedStories();
+    } else {
+      setLoading(false);
+      setAllStories([]);
     }
   }, [isAuthenticated]);
 

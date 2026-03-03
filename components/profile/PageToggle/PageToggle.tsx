@@ -16,12 +16,14 @@ export default function PageToggle() {
     <div className={css.toggleNav}>
       <Link
         href="/profile/saved"
+        prefetch
         className={`${css.toggleLink} ${isSaved ? css.active : ""}`}
       >
         Збережені історії
       </Link>
       <Link
         href="/profile/own"
+        prefetch
         className={`${css.toggleLink} ${isOwn ? css.active : ""}`}
       >
         Мої історії

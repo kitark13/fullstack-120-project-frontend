@@ -31,10 +31,12 @@ const nunitoSans = Nunito_Sans({
 // ${sora.variable}
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://fullstack-120-project-frontend.vercel.app"),
   title: "Подорожники",
   description:
     "Подорожники — додаток для збереження та перегляду ваших подорожей",
   openGraph: {
+    type: "website",
     title: "Подорожники",
     description:
       "Подорожники — додаток для збереження та перегляду ваших подорожей",

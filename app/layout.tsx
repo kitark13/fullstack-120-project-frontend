@@ -34,6 +34,20 @@ export const metadata: Metadata = {
   title: "Подорожники",
   description:
     "Подорожники — додаток для збереження та перегляду ваших подорожей",
+  openGraph: {
+    title: "Подорожники",
+    description:
+      "Подорожники — додаток для збереження та перегляду ваших подорожей",
+    url: "https://fullstack-120-project-frontend.vercel.app",
+    images: [
+      {
+        url: "/public/images/hero/hero-desktop-1x.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Подорожники — додаток для мандрівників",
+      },
+    ],
+  },
   icons: { icon: "/favicon-opt.svg" },
 };
 

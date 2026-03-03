@@ -1,6 +1,5 @@
 import SavedStories from "@/components/profile/SavedStories/SavedStories";
 
-export default function SavedSlot() {
-  console.log("✅ @saved slot mounted");
+export default function SavedSlotPage() {
   return <SavedStories />;
 }

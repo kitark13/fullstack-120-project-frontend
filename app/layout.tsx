@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     url: "https://fullstack-120-project-frontend.vercel.app",
     images: [
       {
-        url: "/opengraph-img.jpg",
+        url: "https://fullstack-120-project-frontend.vercel.app/opengraph-img.jpg",
         width: 1200,
         height: 630,
         alt: "Подорожники — додаток для мандрівників",

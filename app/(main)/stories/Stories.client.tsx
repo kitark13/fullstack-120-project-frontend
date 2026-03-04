@@ -1,19 +1,19 @@
-'use client';
-import styles from './Stories.module.css';
-import { getCategories, getStoriesByCategory } from '@/lib/api/clientApi';
-import { Category } from '@/types/category';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { TravellersStories } from '@/components/stories/TravellersStories/TravellersStories';
-import useAuthStore from '@/lib/store/authStore';
-import Button from '@/components/common/Button/Button';
+"use client";
+import styles from "./Stories.module.css";
+import { getCategories, getStoriesByCategory } from "@/lib/api/clientApi";
+import { Category } from "@/types/category";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { TravellersStories } from "@/components/stories/TravellersStories/TravellersStories";
+import useAuthStore from "@/lib/store/authStore";
+import Button from "@/components/common/Button/Button";
 
 export function StoriesClient() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [chosenCategory, setChosenCategory] = useState<{
     id: string;
     name: string;
-  }>({ id: 'all', name: 'Всі історії' });
+  }>({ id: "all", name: "Всі історії" });
   //   const [storiesWithFlag, setStoriesWithFlag] = useState<undefined | Story[]>(
   //     undefined,
   //   );
@@ -33,8 +33,8 @@ export function StoriesClient() {
     };
 
     setSize();
-    window.addEventListener('resize', setSize);
-    return () => window.removeEventListener('resize', setSize);
+    window.addEventListener("resize", setSize);
+    return () => window.removeEventListener("resize", setSize);
   }, []);
 
   const {
@@ -43,13 +43,13 @@ export function StoriesClient() {
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ['stories', chosenCategory.id, limit],
+    queryKey: ["stories", chosenCategory.id, limit],
 
     queryFn: ({ pageParam = 1 }) =>
       getStoriesByCategory({
         limit,
         page: pageParam,
-        category: chosenCategory.id === 'all' ? null : chosenCategory.id,
+        category: chosenCategory.id === "all" ? null : chosenCategory.id,
       }),
 
     getNextPageParam: (lastPage) => {
@@ -75,7 +75,7 @@ export function StoriesClient() {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ['categories'],
+    queryKey: ["categories"],
     queryFn: getCategories,
   });
 
@@ -98,7 +98,7 @@ export function StoriesClient() {
       : allStories;
   }, [stories, isAuthenticated, user]);
 
-  console.log('AAAAAAAAAAAAA', storiesWithFlag);
+  // console.log('AAAAAAAAAAAAA', storiesWithFlag);
 
   return (
     <section className={styles.travellersStoriesSection}>
@@ -123,8 +123,9 @@ export function StoriesClient() {
           <button
             className={styles.storiesLoadMore}
             onClick={() => fetchNextPage()}
-            disabled={isFetchingNextPage}>
-            {isFetchingNextPage ? 'Завантаження...' : 'Показати ще'}
+            disabled={isFetchingNextPage}
+          >
+            {isFetchingNextPage ? "Завантаження..." : "Показати ще"}
           </button>
         )}
       </div>
@@ -149,7 +150,7 @@ export function CategoryList({
   chosenCategory,
   setCategory,
 }: CategoryListProps) {
-  console.log('Categories', categories);
+  // console.log('Categories', categories);
   return (
     <>
       {isMobile && (
@@ -161,16 +162,15 @@ export function CategoryList({
       )}
       {!isMobile && (
         <ul className={styles.categoryList}>
-          <li
-            className={styles.categoryItem}
-            key={'all'}>
+          <li className={styles.categoryItem} key={"all"}>
             <button
               className={`${styles.categoryItemBtn} ${
-                chosenCategory.id === 'all' ? styles.categoryItemBtnActive : ''
+                chosenCategory.id === "all" ? styles.categoryItemBtnActive : ""
               }`}
               onClick={() => {
-                setCategory({ id: 'all', name: 'Всі історії' });
-              }}>
+                setCategory({ id: "all", name: "Всі історії" });
+              }}
+            >
               Всі історії
             </button>
           </li>
@@ -181,11 +181,12 @@ export function CategoryList({
                   className={`${styles.categoryItemBtn} ${
                     chosenCategory.id === category._id
                       ? styles.categoryItemBtnActive
-                      : ''
+                      : ""
                   }`}
                   onClick={() => {
                     setCategory({ id: category._id, name: category.name });
-                  }}>
+                  }}
+                >
                   {category.name}
                 </button>
               </li>
@@ -222,8 +223,8 @@ export default function MobileCategorySelect({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const handleSelect = (id: string, name: string) => {
@@ -235,15 +236,14 @@ export default function MobileCategorySelect({
     <div className={styles.mobileCategoryWrapper}>
       <label className={styles.mobileCategoryLabel}>Категорії</label>
 
-      <div
-        className={styles.dropdown}
-        ref={wrapperRef}>
+      <div className={styles.dropdown} ref={wrapperRef}>
         <button
           type="button"
           className={styles.dropdownTrigger}
-          onClick={() => setIsOpen((prev) => !prev)}>
+          onClick={() => setIsOpen((prev) => !prev)}
+        >
           <span>{chosenCategory.name}</span>
-          <span className={`${styles.arrow} ${isOpen ? styles.arrowOpen : ''}`}>
+          <span className={`${styles.arrow} ${isOpen ? styles.arrowOpen : ""}`}>
             {
               <svg className={styles.arrow}>
                 {!isOpen ? (
@@ -260,7 +260,8 @@ export default function MobileCategorySelect({
           <div className={styles.dropdownMenu}>
             <div
               className={styles.dropdownItem}
-              onClick={() => handleSelect('all', 'Всі історії')}>
+              onClick={() => handleSelect("all", "Всі історії")}
+            >
               Всі історії
             </div>
 
@@ -268,7 +269,8 @@ export default function MobileCategorySelect({
               <div
                 key={category._id}
                 className={styles.dropdownItem}
-                onClick={() => handleSelect(category._id, category.name)}>
+                onClick={() => handleSelect(category._id, category.name)}
+              >
                 {category.name}
               </div>
             ))}

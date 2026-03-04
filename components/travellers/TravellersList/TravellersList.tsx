@@ -1,37 +1,26 @@
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from "@tanstack/react-query";
-import { getUsersServer } from "@/lib/api/serverApi";
-import TravellersGrid from "./TravellersGrid.client";
+'use client';
+
+import { User } from '@/types/user';
+import Card from '@/components/common/Card/Card';
+import styles from './TravellersList.module.css';
 
 interface TravellersListProps {
-  limit?: number;
-  showLoadMore?: boolean;
+  users: User[];
 }
 
-/**
- * Універсальний компонент списку мандрівників.
- * @param limit - скільки завантажити спочатку (за замовчуванням 8)
- * @param showLoadMore - чи показувати кнопку пагінації (за замовчуванням true)
- */
-export default async function TravellersList({
-  limit = 8,
-  showLoadMore = true,
-}: TravellersListProps) {
-  const queryClient = new QueryClient();
-
-  // Префетчимо дані з вказаним лімітом
-  await queryClient.prefetchInfiniteQuery({
-    queryKey: ["travellers", limit],
-    initialPageParam: 1,
-    queryFn: ({ pageParam = 1 }) => getUsersServer(pageParam, limit),
-  });
-
+export default function TravellersList({ users }: TravellersListProps) {
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <TravellersGrid initialLimit={limit} showLoadMore={showLoadMore} />
-    </HydrationBoundary>
+    <ul className={styles.travellers__list}>
+      {users &&
+        users.map((user) => {
+          return (
+            <li
+              className={styles.travellers__item}
+              key={user._id}>
+              <Card user={user} />
+            </li>
+          );
+        })}
+    </ul>
   );
 }

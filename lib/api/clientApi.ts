@@ -56,7 +56,7 @@ export async function removeFromFavorite(storyId: string): Promise<string[]> {
 // отримання всіх юзерів
 interface GetUsersProps {
   page?: number;
-  perPage?: number;
+  limit?: number;
 }
 
 interface GetUsersResponse {
@@ -71,12 +71,12 @@ interface GetUsersResponse {
 
 export async function getUsers({
   page = 1,
-  perPage = 4,
+  limit = 4,
 }: GetUsersProps): Promise<GetUsersResponse> {
   const options = {
     params: {
       page,
-      perPage,
+      limit,
     },
   };
   const response = await api.get("/users", options);

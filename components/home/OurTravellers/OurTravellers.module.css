@@ -19,39 +19,42 @@
 }
 
 .trlBtn {
-  border: 1px solid #4169e1;
-  background-color: #4169e1;
-  color: white;
-  border-radius: 8px;
-  padding: 6px 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  min-width: 156px;
-  height: 48px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: none;
 }
-
-.trlBtn:hover {
-  background-color: #e8eeff;
-  transform: translateY(-1px);
-  color: black;
-  box-shadow: 0 4px 12px;
-}
-
-.trlBtn:active {
-  transform: translateY(0);
-  color: black;
-  background-color: #7a96ea;
-}
-
 @media screen and (min-width: 768px) {
   .travellersTitle {
     font-size: 44px;
+  }
+  .trlBtn {
+    border: 1px solid #4169e1;
+    background-color: #4169e1;
+    color: white;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 156px;
+    height: 48px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 48px;
+  }
+
+  .trlBtn:hover {
+    background-color: #e8eeff;
+    transform: translateY(-1px);
+    color: black;
+    box-shadow: 0 4px 12px;
+  }
+
+  .trlBtn:active {
+    transform: translateY(0);
+    color: black;
+    background-color: #7a96ea;
   }
 }
 

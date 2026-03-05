@@ -7,12 +7,12 @@ import Join from "@/components/home/Join/Join";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Hero />
       <About />
       <PopularStoriesSection />
       <OurTravellers />
       <Join />
-    </main>
+    </>
   );
 }

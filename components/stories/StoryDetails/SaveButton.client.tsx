@@ -5,20 +5,20 @@ import { addToFavorite, removeFromFavorite } from "@/lib/api/clientApi";
 import useAuthStore from "@/lib/store/authStore";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface SaveButtonProps {
   storyId: string;
-  isSaved: boolean;
-  setIsSaved: React.Dispatch<React.SetStateAction<boolean>>;
+  initialIsSaved: boolean;
 }
 
 export default function SaveButton({
   storyId,
-  isSaved,
-  setIsSaved,
+  initialIsSaved,
 }: SaveButtonProps) {
   const router = useRouter();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const [isSaved, setIsSaved] = useState(initialIsSaved);
 
   const mutation = useMutation({
     mutationFn: (shouldSave: boolean) =>

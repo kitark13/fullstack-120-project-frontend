@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { Story } from "@/types";
 import styles from "./StoryDetails.module.css";
 import SaveButton from "./SaveButton.client";
+import useAuthStore from "@/lib/store/authStore";
 
 interface StoryDetailsProps {
   story: Story;
@@ -15,11 +15,12 @@ export default function StoryDetails({
   story,
   initialIsSaved,
 }: StoryDetailsProps) {
-  const [isSaved, setIsSaved] = useState(initialIsSaved);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const user = useAuthStore((state) => state.user);
 
-  useEffect(() => {
-    setIsSaved(initialIsSaved);
-  }, [initialIsSaved]);
+  const isSaved = isAuthenticated
+    ? Boolean(user?.savedStories?.includes(story._id) || initialIsSaved)
+    : false;
 
   if (!story || !story.img) return null;
 
@@ -71,11 +72,7 @@ export default function StoryDetails({
                 Вона буде доступна у вашому профілі у розділі збережене
               </p>
 
-              <SaveButton
-                storyId={story._id}
-                isSaved={isSaved}
-                setIsSaved={setIsSaved}
-              />
+              <SaveButton storyId={story._id} initialIsSaved={isSaved} />
             </div>
           </aside>
         </div>

@@ -21,6 +21,12 @@ export default function SavedStories() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const handleStoryRemoved = (storyId: string) => {
+    setTimeout(() => {
+      setAllStories((prev) => prev.filter((story) => story._id !== storyId));
+    }, 2000);
+  };
+
   const prefetchOwnStories = async () => {
     try {
       await api.get("/stories/my");
@@ -144,6 +150,7 @@ export default function SavedStories() {
       <TravellersStories
         stories={displayedStories}
         isAuthenticated={isAuthenticated}
+        onStoryRemoved={handleStoryRemoved}
       />
       {hasMore && (
         <button className={css.showMoreButton} onClick={handleShowMore}>

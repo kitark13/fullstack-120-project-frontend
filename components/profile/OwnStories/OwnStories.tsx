@@ -12,6 +12,7 @@ const ITEMS_PER_PAGE = 6;
 
 export default function OwnStories() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const authUser = useAuthStore((state) => state.user);
   const [allStories, setAllStories] = useState<Story[]>([]);
   const [displayCount, setDisplayCount] = useState(ITEMS_PER_PAGE);
   const [loading, setLoading] = useState(true);
@@ -84,7 +85,7 @@ export default function OwnStories() {
     <div className={css.wrapper}>
       <ul className={css.storiesList}>
         {displayedStories.map((story) => (
-          <OwnStoryCard key={story._id} story={story} />
+          <OwnStoryCard key={story._id} story={story} authUser={authUser} />
         ))}
       </ul>
       {hasMore && (
@@ -96,34 +97,111 @@ export default function OwnStories() {
   );
 }
 
-function OwnStoryCard({ story }: { story: Story }) {
+interface StoryAuthorProps {
+  author: Author;
+  date: string;
+  savedNumber: number;
+}
+
+export type Author = {
+  _id: string;
+  name: string;
+  avatarUrl: string;
+};
+
+function OwnStoryCard({
+  story,
+  authUser,
+}: {
+  story: Story;
+  authUser: ReturnType<typeof useAuthStore.getState>["user"];
+}) {
+  const storyOwner =
+    story.ownerId && typeof story.ownerId === "object" ? story.ownerId : null;
+
+  const author: Author = {
+    _id: storyOwner?._id || authUser?._id || "",
+    name: storyOwner?.name || authUser?.name || "Unknown",
+    avatarUrl:
+      storyOwner?.avatarUrl ||
+      authUser?.avatarUrl ||
+      "https://ac.goit.global/fullstack/react/default-avatar.jpg",
+  };
+
   return (
     <li className={css.storyCard}>
       <Image
-        src={story.img}
+        src={
+          story.img ||
+          "https://ac.goit.global/fullstack/react/default-avatar.jpg"
+        }
         alt={story.title}
         className={css.storyImg}
         width={400}
-        height={200}
+        height={223}
       />
       <div className={css.storyContent}>
         <div className={css.content}>
-          <span className={css.storyRegion}>{story.category.name}</span>
+          <span className={css.storyRegion}>
+            {story.category?.name || "Без категорії"}
+          </span>
           <h3>{story.title}</h3>
           <p className={css.storyArticle}>{story.article}</p>
         </div>
+        <StoryAuthor
+          author={author}
+          date={new Date(story.date).toLocaleDateString("uk-UA")}
+          savedNumber={story.favoriteCount || 0}
+        />
         <div className={css.cardActions}>
           <Link className={css.storyViewBtn} href={`/stories/${story._id}`}>
             Переглянути статтю
           </Link>
 
-          <Link className={css.editBtn} href={`/stories/${story._id}/edit`}>
-            <svg width={24} height={24}>
-              <use href="/sprite-final-opt.svg#icon-pencil" />
+          <Link
+            className={css.editBtn}
+            title="Редагувати"
+            href={`/stories/${story._id}/edit`}
+          >
+            <svg
+              width={20}
+              height={20}
+              className={css.editIcon}
+              fill="currentColor"
+            >
+              <use href="/sprite-final-opt.svg#icon-edit" />
             </svg>
           </Link>
         </div>
       </div>
     </li>
+  );
+}
+
+function StoryAuthor({ author, date, savedNumber }: StoryAuthorProps) {
+  return (
+    <div className={css.storyMeta}>
+      <Image
+        src={
+          author?.avatarUrl ||
+          "https://ac.goit.global/fullstack/react/default-avatar.jpg"
+        }
+        alt={author?.name || "Unknown"}
+        width={48}
+        height={48}
+        className={css.avatar}
+      />
+      <div>
+        <h6 className={css.author}>{author?.name || "Unknown"}</h6>
+        <div className={css.meta}>
+          <span className={css.favoriteCount}>{date}</span>
+          <span className={css.point}>●</span>
+          <span className={css.savedNumber}>{savedNumber}</span>
+          <svg width={24} height={24}>
+            <use href="/sprite-final-opt.svg#icon-bookmark" />
+          </svg>
+        </div>
+      </div>
+    </div>
   );
 }

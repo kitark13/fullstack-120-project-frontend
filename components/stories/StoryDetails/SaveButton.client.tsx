@@ -10,17 +10,16 @@ import AuthNavModal from "@/components/modals/AuthNavModal/AuthNavModal";
 
 interface SaveButtonProps {
   storyId: string;
-  isSaved: boolean;
-  setIsSaved: React.Dispatch<React.SetStateAction<boolean>>;
+  initialIsSaved: boolean;
 }
 
 export default function SaveButton({
   storyId,
-  isSaved,
-  setIsSaved,
+  initialIsSaved,
 }: SaveButtonProps) {
   const router = useRouter();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const [isSaved, setIsSaved] = useState(initialIsSaved);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const mutation = useMutation({

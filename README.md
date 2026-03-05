@@ -8,9 +8,9 @@
 
 ## 🚀 Live Demo
 
-🔗 Frontend: https://fullstack-120-project-frontend.vercel.app  
-🔗 Backend API: https://fullstack-120-project-group-1-backend.onrender.com  
-📘 Swagger: https://fullstack-120-project-group-1-backend.onrender.com/api-docs
+- 🔗 Frontend: https://fullstack-120-project-frontend.vercel.app
+- 🔗 Backend API: https://fullstack-120-project-group-1-backend.onrender.com
+- 📘 Swagger: https://fullstack-120-project-group-1-backend.onrender.com/api-docs
 
 ---
 
@@ -105,19 +105,19 @@
 
 ### Frontend Repository
 
-Next.js App Router
-components/
-app/
-lib/
-types/
+- Next.js App Router
+- components/
+- app/
+- lib/
+- types/
 
 ### Backend Repository
 
-routes/
-controllers/
-models/
-middleware/
-db/
+- routes/
+- controllers/
+- models/
+- middleware/
+- db/
 
 ---
 

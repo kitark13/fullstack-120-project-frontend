@@ -1,39 +1,26 @@
-import { getUsersServer } from "@/lib/api/serverApi";
-import { TravellersListClient } from "@/components/travellers/TravellersList/TravellersList.client";
+'use client';
+
+import { User } from '@/types/user';
+import Card from '@/components/common/Card/Card';
+import styles from './TravellersList.module.css';
 
 interface TravellersListProps {
-  showLoadMore?: boolean;
-  variant?: "page" | "section";
+  users: User[];
 }
 
-export async function TravellersList({
-  showLoadMore = true,
-  variant = "page",
-}: TravellersListProps) {
-  let isError = false;
-  let data = null;
-
-  const initialLimit = variant === "section" ? 4 : 12;
-
-  try {
-    data = await getUsersServer(1, initialLimit);
-  } catch (error) {
-    console.error("Failed to load travellers:", error);
-    isError = true;
-  }
-
-  if (isError) return <p>Failed to load travellers...</p>;
-  if (!data) return null;
-
+export default function TravellersList({ users }: TravellersListProps) {
   return (
-    <>
-      <TravellersListClient
-        initialUsers={data.data}
-        totalPages={data.pagination.total}
-        showLoadMore={showLoadMore}
-        variant={variant}
-        limit={initialLimit}
-      />
-    </>
+    <ul className={styles.travellers__list}>
+      {users &&
+        users.map((user) => {
+          return (
+            <li
+              className={styles.travellers__item}
+              key={user._id}>
+              <Card user={user} />
+            </li>
+          );
+        })}
+    </ul>
   );
 }

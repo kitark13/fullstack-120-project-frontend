@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import styles from './TravellersStoriesItem.module.css';
-import { Story } from '@/types/index';
-import Link from 'next/link';
-import { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { addToFavorite, removeFromFavorite } from '@/lib/api/clientApi';
-import AuthNavModal from '@/components/modals/AuthNavModal/AuthNavModal';
+import Image from "next/image";
+import styles from "./TravellersStoriesItem.module.css";
+import { Story } from "@/types/index";
+import Link from "next/link";
+import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { addToFavorite, removeFromFavorite } from "@/lib/api/clientApi";
+import AuthNavModal from "@/components/modals/AuthNavModal/AuthNavModal";
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 interface TravellersStoriesItemProps {
   story: Story;
@@ -51,11 +51,11 @@ export function TravellersStoriesItem({
       setIsSaved(false);
       setFavoriteCount((prev) => prev - 1);
       alert(
-        'Упсс...Збереження до улюблених НЕ пройшло успішно. Спробуйте ще раз',
+        "Упсс...Збереження до улюблених НЕ пройшло успішно. Спробуйте ще раз",
       );
     },
     onSuccess: () => {
-      console.log('Story was added to favorite successfully');
+      console.log("Story was added to favorite successfully");
     },
   });
 
@@ -69,11 +69,11 @@ export function TravellersStoriesItem({
       setIsSaved(true);
       setFavoriteCount((prev) => prev + 1);
       alert(
-        'Упсс...Видалення з улюблених НЕ пройшло успішно. Спробуйте ще раз',
+        "Упсс...Видалення з улюблених НЕ пройшло успішно. Спробуйте ще раз",
       );
     },
     onSuccess: () => {
-      console.log('Story was removed from favorite successfully');
+      console.log("Story was removed from favorite successfully");
       if (onStoryRemoved) {
         onStoryRemoved(story._id);
       }
@@ -100,12 +100,12 @@ export function TravellersStoriesItem({
 
   const handleLogIn = async () => {
     setIsModalOpen(false);
-    router.push('/auth/login');
+    router.push("/auth/login");
   };
 
   const handleRegister = async () => {
     setIsModalOpen(false);
-    router.push('/auth/register');
+    router.push("/auth/register");
   };
 
   return (
@@ -114,42 +114,46 @@ export function TravellersStoriesItem({
         <Image
           src={
             story?.img ??
-            'https://ac.goit.global/fullstack/react/default-avatar.jpg'
+            "https://ac.goit.global/fullstack/react/default-avatar.jpg"
           }
           alt={story.title}
           className={styles.storyImg}
           width={400}
-          height={200}></Image>
+          height={200}
+        ></Image>
         <div className={styles.storyContent}>
           <div className={styles.content}>
             <span className={styles.storyRegion}>
-              {story.category?.name ?? 'Без категорії 😱'}
+              {story.category?.name ?? "Без категорії 😱"}
             </span>
-            <h3>{story?.title ?? 'Назви ще немає 🥲'}</h3>
+            <h3>{story?.title ?? "Назви ще немає 🥲"}</h3>
             <p className={styles.storyArticle}>
-              {story?.article ?? 'Опису поки не додали 🤨'}
+              {story?.article ?? "Опису поки не додали 🤨"}
             </p>
           </div>
           <StoryAuthor
             author={story.ownerId}
-            date={new Date(story.date).toLocaleDateString('uk-UA')}
+            date={new Date(story.date).toLocaleDateString("uk-UA")}
             savedNumber={favoriteCount}
           />
           <div className={styles.cardActions}>
             <Link
               className={styles.storyViewBtn}
-              href={`/stories/${story._id}`}>
+              href={`/stories/${story._id}`}
+            >
               Переглянути статтю
             </Link>
 
             <button
               className={isSaved ? styles.likeBtnSaved : styles.likeBtnNotSaved}
               onClick={handleToggleLike}
-              disabled={isLoading}>
+              disabled={isLoading}
+            >
               <svg
                 className={isSaved ? styles.iconSaved : styles.iconNotSaved}
                 width={24}
-                height={24}>
+                height={24}
+              >
                 <use href="/sprite-final-opt.svg#icon-bookmark" />
               </svg>
             </button>
@@ -171,27 +175,26 @@ export function TravellersStoriesItem({
 }
 
 function StoryAuthor({ author, date, savedNumber }: StoryAuthorProps) {
-  console.log('aaaaaa', author);
+  // console.log('aaaaaa', author);
   return (
     <div className={styles.storyMeta}>
       <Image
         src={
           author?.avatarUrl ??
-          'https://ac.goit.global/fullstack/react/default-avatar.jpg'
+          "https://ac.goit.global/fullstack/react/default-avatar.jpg"
         }
-        alt={author?.name ?? 'Uknown 😱'}
+        alt={author?.name ?? "Uknown 😱"}
         width={48}
         height={48}
-        className={styles.avatar}></Image>
+        className={styles.avatar}
+      ></Image>
       <div>
-        <h6 className={styles.author}>{author?.name ?? 'Uknown 😱'}</h6>
+        <h6 className={styles.author}>{author?.name ?? "Uknown 😱"}</h6>
         <div className={styles.meta}>
           <span className={styles.favoriteCount}>{date}</span>
           <span className={styles.point}>●</span>
           <span className={styles.savedNumber}>{savedNumber}</span>
-          <svg
-            width={24}
-            height={24}>
+          <svg width={24} height={24}>
             <use href="/sprite-final-opt.svg#icon-bookmark" />
           </svg>
         </div>

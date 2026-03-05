@@ -194,14 +194,18 @@ body {
   padding: 64px 0;
 } */
 
-/* Styles for Mobile devices */
-
 .container {
   width: 100%;
-  min-width: 320px;
-  max-width: 375px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+/* Styles for Mobile devices */
+
+@media (min-width: 375px) {
+  .container {
+    max-width: 375px;
+  }
 }
 
 /* Styles for Tablet devices */

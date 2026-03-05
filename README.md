@@ -1,36 +1,205 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌍 Подорожники
 
-## Getting Started
+**Подорожники** — багатосторінковий веб-додаток для збереження, перегляду та керування історіями подорожей.
 
-First, run the development server:
+Проєкт реалізований як fullstack-рішення з окремим фронтендом та бекендом.
+
+---
+
+## 🚀 Live Demo
+
+- 🔗 Frontend: https://fullstack-120-project-frontend.vercel.app
+- 🔗 Backend API: https://fullstack-120-project-group-1-backend.onrender.com
+- 📘 Swagger: https://fullstack-120-project-group-1-backend.onrender.com/api-docs
+
+---
+
+## 📌 Опис проєкту
+
+Подорожники — це адаптивний багатосторінковий сайт (десктоп / планшет / мобільна версія), який дозволяє:
+
+- Переглядати історії інших користувачів
+- Створювати власні історії
+- Редагувати свої історії
+- Додавати історії до збережених
+- Переглядати популярні історії
+- Фільтрувати історії за категоріями частин світу
+- Переглядати список користувачів
+- Переглядати історії конкретного користувача
+- Керувати власним профілем
+
+---
+
+## 🛠 Технології
+
+### 🎨 Frontend
+
+- Next.js 16
+- React 19
+- TypeScript
+- Axios
+- TanStack React Query
+- Zustand
+- Formik
+- Yup
+- CSS Modules
+
+### ⚙ Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT (авторизація)
+- Celebrate / Joi (валідація)
+- Swagger
+
+### ☁ Деплой
+
+- Frontend: Vercel
+- Backend: Render
+
+---
+
+## 🔐 Авторизація
+
+- Реєстрація користувача
+- Логін
+- Logout
+- JWT access + refresh token
+- Захищені маршрути
+- Авторизація через cookies
+
+---
+
+## 📂 Основний функціонал
+
+### 📖 Історії
+
+- Створення історії
+- Редагування власної історії
+- Видалення історії
+- Перегляд всіх історій
+- Пагінація
+- Сортування за популярністю (кількість збережень)
+- Фільтрація за категоріями
+- Перегляд історій конкретного користувача
+
+### ⭐ Збережені історії
+
+- Додавання до збережених
+- Видалення із збережених
+- Перегляд власних збережених історій
+
+### 👤 Користувачі
+
+- Список користувачів
+- Перегляд профілю користувача
+- Перегляд історій користувача
+
+---
+
+## 🧩 Структура проєкту
+
+Проєкт складається з двох окремих репозиторіїв:
+
+### Frontend Repository
+
+- Next.js App Router
+- components/
+- app/
+- lib/
+- types/
+
+### Backend Repository
+
+- routes/
+- controllers/
+- models/
+- middleware/
+- db/
+
+---
+
+## ⚙ Локальний запуск
+
+### 1️⃣ Backend
+
+```bash
+git clone <backend-repo>
+cd backend
+npm install
+```
+
+#### Створити .env файл:
+
+```bash
+PORT=3000
+MONGO_URL=your_mongodb_connection
+JWT_SECRET=your_secret
+REFRESH_SECRET=your_refresh_secret
+```
+
+#### Запуск:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2️⃣ Frontend
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+git clone <frontend-repo>
+cd frontend
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+#### Створити .env.local:
 
-## Learn More
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:3000
+NEXT_PUBLIC_APP_ORIGIN=http://localhost:3000
+```
 
-To learn more about Next.js, take a look at the following resources:
+#### Запуск:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+### 📱 Адаптивність
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Сайт адаптований під:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 🖥 Desktop
+- 📱 Tablet
+- 📲 Mobile
+
+### 📊 API Документація
+
+Проєкт має Swagger-документацію:
+/api-docs
+
+### 🧠 Архітектурні рішення
+
+- Розділення frontend / backend
+- REST API
+- JWT авторизація через cookies
+- Server API layer в Next.js
+- Client API layer через Axios
+- Global state management через Zustand
+- Data fetching та кешування через React Query
+
+### 👨‍💻 Команда
+
+Проєкт реалізований як fullstack розробка (frontend + backend).
+
+### 📌 Майбутні покращення
+
+- Лайки
+- Коментарі
+- Пошук історій
+- Завантаження декількох зображень
+- Role-based доступ

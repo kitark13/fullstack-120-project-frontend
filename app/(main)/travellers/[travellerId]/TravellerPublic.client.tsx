@@ -16,7 +16,7 @@ interface Props {
 
 export default function TravellerPublicClient({ travellerId }: Props) {
   const [perPage, setPerPage] = useState<number | undefined>(undefined);
-  const userAuth = useAuthStore((state) => state.user);
+  const userAuth = useAuthStore(state => state.user);
   const userId = userAuth?._id || null;
   const isAuthenticated = !!userId;
 
@@ -46,16 +46,16 @@ export default function TravellerPublicClient({ travellerId }: Props) {
       initialPageParam: 1,
       refetchOnWindowFocus: false,
 
-      getNextPageParam: (lastPage) => {
+      getNextPageParam: lastPage => {
         const currentPage = Number(lastPage.pagination.page);
         const totalPages = Number(lastPage.pagination.totalPages);
         console.log('aaaaaaaaaa', lastPage.pagination);
 
         return currentPage < totalPages ? currentPage + 1 : undefined;
       },
-      select: (data) => ({
+      select: data => ({
         ...data,
-        stories: data.pages.flatMap((page) => page.stories),
+        stories: data.pages.flatMap(page => page.stories),
         user: data.pages[0]?.user,
       }),
       enabled: perPage !== undefined,
@@ -64,7 +64,7 @@ export default function TravellerPublicClient({ travellerId }: Props) {
   const stories = data?.stories ?? [];
   const user = data?.user;
 
-  const storiesWithUser = stories.map((story) => ({
+  const storiesWithUser = stories.map(story => ({
     ...story,
     ownerId: {
       _id: user?._id ?? '',
@@ -78,7 +78,7 @@ export default function TravellerPublicClient({ travellerId }: Props) {
 
   return (
     <section className={styles.stories_traveller}>
-      <div className="container">
+      <div className='container'>
         {user && (
           <>
             {' '}
@@ -108,17 +108,18 @@ export default function TravellerPublicClient({ travellerId }: Props) {
                   <p className={styles.empty_text}>
                     Цей користувач ще не публікував історій
                   </p>
-                  <Link href="/travellers">
+                  <Link href='/travellers'>
                     <Button
-                      variant="primary"
-                      size="large">
-                      Назад до історій
+                      variant='primary'
+                      size='large'
+                    >
+                      Назад до мандрівників
                     </Button>
                   </Link>
                 </div>
               ) : (
                 <ul className={styles.traveller_stories_list}>
-                  {storiesWithUser.map((story) => (
+                  {storiesWithUser.map(story => (
                     <TravellersStoriesItem
                       key={story._id}
                       isAuthenticated={isAuthenticated}
@@ -132,8 +133,9 @@ export default function TravellerPublicClient({ travellerId }: Props) {
                   <Button
                     onClick={() => fetchNextPage()}
                     disabled={isFetchingNextPage}
-                    variant="primary"
-                    size="large">
+                    variant='primary'
+                    size='large'
+                  >
                     {isFetchingNextPage ? 'Завантаження...' : 'Показати ще'}
                   </Button>
                 </div>

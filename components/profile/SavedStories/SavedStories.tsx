@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Story } from "@/types/index";
 import { TravellersStories } from "@/components/stories/TravellersStories/TravellersStories";
 import useAuthStore from "@/lib/store/authStore";
 import css from "./SavedStories.module.css";
 import { api } from "@/lib/api/api";
 import Link from "next/link";
+import axios from "axios";
 
 export default function SavedStories() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const hasLoadedRef = useRef(false);
   const [allStories, setAllStories] = useState<Story[]>([]);
   const [displayCount, setDisplayCount] = useState(() => {
     if (typeof window !== "undefined") {
@@ -55,64 +55,56 @@ export default function SavedStories() {
   }, []);
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      setLoading(false);
+      setAllStories([]);
+      return;
+    }
+
     const fetchSavedStories = async () => {
       try {
         setLoading(true);
+
         let allStoriesData: Story[] = [];
         let page = 1;
-        let hasMore = true;
+        let hasMorePages = true;
 
-        // Завантажуємо всі сторінки по 50 (макс лімітт на беку)
-        while (hasMore) {
+        while (hasMorePages) {
           const res = await api.get<{
             data: Story[];
             pagination?: { totalPages: number };
           }>(`/stories/saved?page=${page}&limit=50`);
-          const stories = res.data.data || [];
 
-          if (stories.length === 0) {
-            hasMore = false;
-            break;
-          }
+          allStoriesData = [...allStoriesData, ...(res.data.data || [])];
 
-          allStoriesData = [...allStoriesData, ...stories];
-
-          // Перевіряємо чи є ще сторінки
-          const totalPages = res.data.pagination?.totalPages || 1;
-          if (page >= totalPages) {
-            hasMore = false;
-          } else {
-            page++;
-          }
+          const totalPages = res.data.pagination?.totalPages ?? 1;
+          if (page >= totalPages) hasMorePages = false;
+          else page++;
         }
 
-        // Встановлюємо isSaved=true для всіх історій
-        const storiesWithSavedFlag = allStoriesData.map((story) => ({
-          ...story,
-          isSaved: true,
-        }));
-        setAllStories(storiesWithSavedFlag);
+        setAllStories(allStoriesData.map((s) => ({ ...s, isSaved: true })));
         setError(null);
-      } catch (err) {
-        console.error("Failed to load saved stories:", err);
-        setError("Не вдалося завантажити збережені історії");
+      } catch (err: unknown) {
+        let status: number | undefined;
+
+        if (axios.isAxiosError(err)) {
+          status = err.response?.status;
+        }
+
+        setError(
+          status === 401
+            ? "Увійдіть, щоб переглянути ваші історії"
+            : "Не вдалося завантажити ваші історії",
+        );
+
         setAllStories([]);
       } finally {
         setLoading(false);
       }
     };
 
-    // Завантажуємо лише один раз, коли користувач залогінений
-    if (isAuthenticated && !hasLoadedRef.current) {
-      hasLoadedRef.current = true;
-      fetchSavedStories();
-      prefetchOwnStories();
-    } else if (!isAuthenticated) {
-      // Скидаємо flag коли користувач вийшов
-      hasLoadedRef.current = false;
-      setLoading(false);
-      setAllStories([]);
-    }
+    fetchSavedStories();
+    prefetchOwnStories();
   }, [isAuthenticated]);
 
   const handleShowMore = () => {

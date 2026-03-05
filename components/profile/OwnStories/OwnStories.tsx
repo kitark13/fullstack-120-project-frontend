@@ -7,6 +7,7 @@ import css from "./OwnStories.module.css";
 import { api } from "@/lib/api/api";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -26,7 +27,39 @@ export default function OwnStories() {
     }
   };
 
+  // useEffect(() => {
+  //   const fetchOwnStories = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const res = await api.get<{ data: Story[] }>("/stories/my");
+  //       setAllStories(res.data.data || []);
+  //       setDisplayCount(ITEMS_PER_PAGE);
+  //       setError(null);
+  //     } catch (err) {
+  //       console.error("Failed to load own stories:", err);
+  //       setError("Не вдалося завантажити ваші історії");
+  //       setAllStories([]);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   if (isAuthenticated) {
+  //     fetchOwnStories();
+  //     prefetchSavedStories();
+  //   } else {
+  //     setLoading(false);
+  //     setAllStories([]);
+  //   }
+  // }, [isAuthenticated]);
+
   useEffect(() => {
+    if (!isAuthenticated) {
+      setLoading(false);
+      setAllStories([]);
+      return;
+    }
+
     const fetchOwnStories = async () => {
       try {
         setLoading(true);
@@ -34,22 +67,27 @@ export default function OwnStories() {
         setAllStories(res.data.data || []);
         setDisplayCount(ITEMS_PER_PAGE);
         setError(null);
-      } catch (err) {
-        console.error("Failed to load own stories:", err);
-        setError("Не вдалося завантажити ваші історії");
+      } catch (err: unknown) {
+        let status: number | undefined;
+
+        if (axios.isAxiosError(err)) {
+          status = err.response?.status;
+        }
+
+        setError(
+          status === 401
+            ? "Увійдіть, щоб переглянути ваші історії"
+            : "Не вдалося завантажити ваші історії",
+        );
+
         setAllStories([]);
       } finally {
         setLoading(false);
       }
     };
 
-    if (isAuthenticated) {
-      fetchOwnStories();
-      prefetchSavedStories();
-    } else {
-      setLoading(false);
-      setAllStories([]);
-    }
+    fetchOwnStories();
+    prefetchSavedStories();
   }, [isAuthenticated]);
 
   const handleShowMore = () => {
@@ -158,18 +196,9 @@ function OwnStoryCard({
             Переглянути статтю
           </Link>
 
-          <Link
-            className={css.editBtn}
-            title="Редагувати"
-            href={`/stories/${story._id}/edit`}
-          >
-            <svg
-              width={20}
-              height={20}
-              className={css.editIcon}
-              fill="currentColor"
-            >
-              <use href="/sprite-final-opt.svg#icon-edit" />
+          <Link className={css.editBtn} href={`/stories/${story._id}/edit`}>
+            <svg width={24} height={24}>
+              <use href="/sprite-final-opt.svg#icon-pencil" />
             </svg>
           </Link>
         </div>

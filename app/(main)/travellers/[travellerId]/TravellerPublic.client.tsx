@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import styles from './TravellerPublicClient.module.css';
-import { TravellersStoriesItem } from '@/components/stories/TravellersStoriesItem/TravellersStoriesItem';
-import Button from '@/components/common/Button/Button';
-import Link from 'next/link';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { getStoriesTraveller } from '@/lib/api/clientApi';
-import useAuthStore from '@/lib/store/authStore';
-import { useEffect, useState } from 'react';
-import TravellerInfo from '@/components/travellers/TravellerInfo/TravellerInfo';
+import styles from "./TravellerPublicClient.module.css";
+import { TravellersStoriesItem } from "@/components/stories/TravellersStoriesItem/TravellersStoriesItem";
+import Button from "@/components/common/Button/Button";
+import Link from "next/link";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { getStoriesTraveller } from "@/lib/api/clientApi";
+import useAuthStore from "@/lib/store/authStore";
+import { useEffect, useState } from "react";
+import TravellerInfo from "@/components/travellers/TravellerInfo/TravellerInfo";
 
 interface Props {
   travellerId: string;
@@ -16,7 +16,7 @@ interface Props {
 
 export default function TravellerPublicClient({ travellerId }: Props) {
   const [perPage, setPerPage] = useState<number | undefined>(undefined);
-  const userAuth = useAuthStore(state => state.user);
+  const userAuth = useAuthStore((state) => state.user);
   const userId = userAuth?._id || null;
   const isAuthenticated = !!userId;
 
@@ -33,12 +33,12 @@ export default function TravellerPublicClient({ travellerId }: Props) {
     };
 
     setSize();
-    window.addEventListener('resize', setSize);
-    return () => window.removeEventListener('resize', setSize);
+    window.addEventListener("resize", setSize);
+    return () => window.removeEventListener("resize", setSize);
   }, []);
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: ['traveller-stories', travellerId, perPage],
+      queryKey: ["traveller-stories", travellerId, perPage],
 
       queryFn: ({ pageParam = 1 }) =>
         getStoriesTraveller({ travellerId, page: pageParam, perPage }),
@@ -46,16 +46,15 @@ export default function TravellerPublicClient({ travellerId }: Props) {
       initialPageParam: 1,
       refetchOnWindowFocus: false,
 
-      getNextPageParam: lastPage => {
+      getNextPageParam: (lastPage) => {
         const currentPage = Number(lastPage.pagination.page);
         const totalPages = Number(lastPage.pagination.totalPages);
-        console.log('aaaaaaaaaa', lastPage.pagination);
 
         return currentPage < totalPages ? currentPage + 1 : undefined;
       },
-      select: data => ({
+      select: (data) => ({
         ...data,
-        stories: data.pages.flatMap(page => page.stories),
+        stories: data.pages.flatMap((page) => page.stories),
         user: data.pages[0]?.user,
       }),
       enabled: perPage !== undefined,
@@ -64,12 +63,12 @@ export default function TravellerPublicClient({ travellerId }: Props) {
   const stories = data?.stories ?? [];
   const user = data?.user;
 
-  const storiesWithUser = stories.map(story => ({
+  const storiesWithUser = stories.map((story) => ({
     ...story,
     ownerId: {
-      _id: user?._id ?? '',
-      name: user?.name ?? '',
-      avatarUrl: user?.avatarUrl ?? '',
+      _id: user?._id ?? "",
+      name: user?.name ?? "",
+      avatarUrl: user?.avatarUrl ?? "",
     }, // додаємо обʼєкт user до кожної історії
     isSaved: isAuthenticated
       ? user?.savedStories?.includes(story._id) || false
@@ -78,26 +77,11 @@ export default function TravellerPublicClient({ travellerId }: Props) {
 
   return (
     <section className={styles.stories_traveller}>
-      <div className='container'>
+      <div className="container">
         {user && (
           <>
-            {' '}
+            {" "}
             <TravellerInfo user={user} />
-            {/* <div className={styles.traveller_container}>
-              <Image
-                className={styles.traveller_avatar}
-                src={user?.avatarUrl}
-                alt='Avatar'
-                width={199}
-                height={199}
-              />
-              <div className={styles.traveller_data}>
-                <h2 className={styles.traveller_name}>{user.name}</h2>
-                <p className={styles.traveller_description}>
-                  {user.description}
-                </p>
-              </div>
-            </div> */}
             <div className={styles.traveller_container_stories}>
               <h2 className={styles.traveller_container_title}>
                 Історії Мандрівника
@@ -108,18 +92,15 @@ export default function TravellerPublicClient({ travellerId }: Props) {
                   <p className={styles.empty_text}>
                     Цей користувач ще не публікував історій
                   </p>
-                  <Link href='/travellers'>
-                    <Button
-                      variant='primary'
-                      size='large'
-                    >
+                  <Link href="/travellers">
+                    <Button variant="primary" size="large">
                       Назад до мандрівників
                     </Button>
                   </Link>
                 </div>
               ) : (
                 <ul className={styles.traveller_stories_list}>
-                  {storiesWithUser.map(story => (
+                  {storiesWithUser.map((story) => (
                     <TravellersStoriesItem
                       key={story._id}
                       isAuthenticated={isAuthenticated}
@@ -129,14 +110,14 @@ export default function TravellerPublicClient({ travellerId }: Props) {
                 </ul>
               )}
               {hasNextPage && (
-                <div style={{ textAlign: 'center', marginTop: '40px' }}>
+                <div style={{ textAlign: "center", marginTop: "40px" }}>
                   <Button
                     onClick={() => fetchNextPage()}
                     disabled={isFetchingNextPage}
-                    variant='primary'
-                    size='large'
+                    variant="primary"
+                    size="large"
                   >
-                    {isFetchingNextPage ? 'Завантаження...' : 'Показати ще'}
+                    {isFetchingNextPage ? "Завантаження..." : "Показати ще"}
                   </Button>
                 </div>
               )}

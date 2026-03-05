@@ -27,6 +27,7 @@ export default async function StoryPage({ params }: Props) {
       />
       <section className={styles.popularStories}>
         <div className="container">
+          <h2 className={styles.storiesTitle}>Популярні історії</h2>
           <PopularStories />
         </div>
       </section>

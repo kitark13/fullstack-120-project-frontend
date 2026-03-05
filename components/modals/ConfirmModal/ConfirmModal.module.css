@@ -16,7 +16,7 @@
   border-radius: 24px;
   padding: 64px 20px 20px 20px;
   width: 335px;
-  height: 338px;
+ 
   max-width: 768px;
   position: relative;
   animation: modalScale 300ms ease-out forwards;
@@ -146,7 +146,7 @@
   .modal {
     padding: 64px 32px;
     width: 704px;
-    height: 310px;
+    
     max-width: 768px;
   }
   .btnClose {

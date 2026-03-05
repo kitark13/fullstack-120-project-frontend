@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { TravellersStoriesItem } from '@/components/stories/TravellersStoriesItem/TravellersStoriesItem';
-import styles from './PopularStories.module.css';
-import { Story } from '@/types/index';
-import { useEffect, useState } from 'react';
-import useAuthStore from '@/lib/store/authStore';
+import { TravellersStoriesItem } from "@/components/stories/TravellersStoriesItem/TravellersStoriesItem";
+import styles from "./PopularStories.module.css";
+import { Story } from "@/types/index";
+import { useEffect, useState } from "react";
+import useAuthStore from "@/lib/store/authStore";
 
 interface PopularStoriesClientProps {
   stories: Story[];
@@ -26,7 +26,7 @@ export function PopularStoriesClient({ stories }: PopularStoriesClientProps) {
 
   useEffect(() => {
     const updateCount = () => {
-      if (window.innerWidth < 1024 && window.innerWidth >= 768) {
+      if (window.innerWidth < 1440 && window.innerWidth >= 768) {
         setVisibleStories(storiesWithFlag);
       } else {
         setVisibleStories(storiesWithFlag.slice(0, 3));
@@ -34,8 +34,8 @@ export function PopularStoriesClient({ stories }: PopularStoriesClientProps) {
     };
 
     updateCount();
-    window.addEventListener('resize', updateCount);
-    return () => window.removeEventListener('resize', updateCount);
+    window.addEventListener("resize", updateCount);
+    return () => window.removeEventListener("resize", updateCount);
   }, [storiesWithFlag]);
 
   return (

@@ -121,6 +121,7 @@ export default function EditProfileModal({
       }
 
       onClose();
+      window.location.reload();
     } catch (err) {
       setError("Помилка при оновленні профілю");
       console.error(err);

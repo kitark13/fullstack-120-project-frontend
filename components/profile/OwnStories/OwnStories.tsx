@@ -198,7 +198,7 @@ function OwnStoryCard({
 
           <Link className={css.editBtn} href={`/stories/${story._id}/edit`}>
             <svg width={24} height={24}>
-              <use href="/sprite-final-opt.svg#icon-pencil" />
+              <use href="/sprite-final-opt.svg#icon-edit" />
             </svg>
           </Link>
         </div>

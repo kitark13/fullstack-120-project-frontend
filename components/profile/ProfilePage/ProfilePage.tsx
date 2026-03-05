@@ -21,7 +21,7 @@ export default function ProfilePage() {
           title="Редагувати профіль"
         >
           <svg width={24} height={24}>
-            <use href="/sprite-final-opt.svg#icon-pencil" />
+            <use href="/sprite-final-opt.svg#icon-edit" />
           </svg>
           <span>Редагувати профіль</span>
         </button>

@@ -8,6 +8,9 @@ export type AuthState = {
   setUser: (user: User | null) => void;
   clearIsAuthenticated: () => void;
   logout: () => Promise<void>;
+
+  addSavedStory: (storyId: string) => void;
+  removeSavedStory: (storyId: string) => void;
 };
 
 const useAuthStore = create<AuthState>()((set) => ({
@@ -24,6 +27,34 @@ const useAuthStore = create<AuthState>()((set) => ({
       set({ user: null, isAuthenticated: false });
     }
   },
+
+  addSavedStory: (storyId: string) =>
+    set((state) => {
+      if (!state.user) return state;
+
+      if (state.user.savedStories?.includes(storyId)) {
+        return state;
+      }
+
+      return {
+        user: {
+          ...state.user,
+          savedStories: [...(state.user.savedStories || []), storyId],
+        },
+      };
+    }),
+
+  removeSavedStory: (storyId: string) =>
+    set((state) => {
+      if (!state.user) return state;
+
+      return {
+        user: {
+          ...state.user,
+          savedStories: state.user.savedStories?.filter((id) => id !== storyId),
+        },
+      };
+    }),
 }));
 
 export default useAuthStore;

@@ -1,64 +1,26 @@
 "use client";
 
-import Button from "@/components/common/Button/Button";
-import { addToFavorite, removeFromFavorite } from "@/lib/api/clientApi";
-import useAuthStore from "@/lib/store/authStore";
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Button from "@/components/common/Button/Button";
 import AuthNavModal from "@/components/modals/AuthNavModal/AuthNavModal";
+import { useToggleSavedStory } from "@/lib/hooks/useToggleSavedStory";
 
 interface SaveButtonProps {
   storyId: string;
-  isSaved: boolean;
-  setIsSaved: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function SaveButton({
-  storyId,
-  isSaved,
-  setIsSaved,
-}: SaveButtonProps) {
-  const router = useRouter();
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+export default function SaveButton({ storyId }: SaveButtonProps) {
+  const { isSaved, isLoading, toggle } = useToggleSavedStory(storyId);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
 
-  const mutation = useMutation({
-    mutationFn: (shouldSave: boolean) =>
-      shouldSave ? addToFavorite(storyId) : removeFromFavorite(storyId),
+  const handleClick = async () => {
+    const success = await toggle();
 
-    onMutate: (shouldSave) => {
-      setIsSaved(shouldSave);
-    },
-
-    onError: (_, shouldSave) => {
-      setIsSaved(!shouldSave);
-      alert("Помилка. Спробуйте ще раз.");
-    },
-
-    onSuccess: () => {
-      router.refresh();
-    },
-  });
-
-  const handleClick = () => {
-    if (!isAuthenticated) {
+    if (!success) {
       setIsModalOpen(true);
-      return;
     }
-
-    const shouldSave = !isSaved;
-    mutation.mutate(shouldSave);
-  };
-
-  const handleLogIn = () => {
-    setIsModalOpen(false);
-    router.push("/auth/login");
-  };
-
-  const handleRegister = () => {
-    setIsModalOpen(false);
-    router.push("/auth/register");
   };
 
   return (
@@ -67,17 +29,26 @@ export default function SaveButton({
         type="button"
         variant={isSaved ? "saved" : "primary"}
         onClick={handleClick}
-        disabled={mutation.isPending}
+        disabled={isLoading}
       >
-        {mutation.isPending ? "..." : isSaved ? "Збережено" : "Зберегти"}
+        {isLoading ? "..." : isSaved ? "Збережено" : "Зберегти"}
       </Button>
+
       <AuthNavModal
         isOpen={isModalOpen}
-        onLogIn={handleLogIn}
-        onRegister={handleRegister}
+        onLogIn={() => {
+          setIsModalOpen(false);
+          router.push("/auth/login");
+        }}
+        onRegister={() => {
+          setIsModalOpen(false);
+          router.push("/auth/register");
+        }}
         onClose={() => setIsModalOpen(false)}
-        title="Авторизація"
-        message="Щоб зберегти статтю у вибране, вам необхідно увійти в систему або зареєструватися."
+        title="Помилка під час збереження"
+        message="Щоб зберегти статтю вам треба увійти або зареєструватися"
+        LoginText="Увійти"
+        RegisterText="Зареєструватись"
       />
     </>
   );
